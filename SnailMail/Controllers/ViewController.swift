@@ -11,19 +11,19 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var shippingImageView: UIImageView!
-    @IBOutlet weak var shippingTextView: UITextView!
-    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var camButton: UIButton!
+    @IBOutlet weak var albumButton: UIButton!
     
     var frameSublayer = CALayer()
     var scannedText: String = "Detected text can be edited here." {
         didSet {
-            shippingTextView.text = scannedText
+            textView.text = scannedText
         }
     }
-    
     let processor = ScaledElementProcessor()
-    
   
 //MARK: LifeCycle
     override func viewDidLoad() {
@@ -31,9 +31,9 @@ class ViewController: UIViewController {
         // Notifications to slide the keyboard up
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        shippingImageView.layer.addSublayer(frameSublayer)
+        imageView.layer.addSublayer(frameSublayer)
         
-        displayDetectedText(in: shippingImageView)
+        displayDetectedText(in: imageView)
     }
     
 //MARK: Private methods
@@ -44,7 +44,6 @@ class ViewController: UIViewController {
                 self.frameSublayer.addSublayer(element.shapeLayer) //this controller has a frameSublayer property that is attached to the imageView. Here, you add each element’s shape layer to the sublayer, so that iOS will automatically draw the shape on the image
             }
             self.scannedText = text
-        // 3
             completion?()
         }
     }
@@ -59,12 +58,12 @@ class ViewController: UIViewController {
 // MARK: Touch handling to dismiss keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let evt = event, let tchs = evt.touches(for: view), tchs.count > 0 {
-            shippingTextView.resignFirstResponder()
+            textView.resignFirstResponder()
         }
     }
   
 // MARK: Actions
-    @IBAction func cameraButtonTapped(_ sender: Any) {
+    @IBAction func cameraButtonTapped(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             presentImagePickerController(withSourceType: .camera)
         } else {
@@ -74,16 +73,15 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func libraryButtonTapped(_ sender: Any) {
+    @IBAction func albumButtonTapped(_ sender: UIButton) {
         presentImagePickerController(withSourceType: .photoLibrary)
     }
     
-  
-    @IBAction func shareButtonTapped(_ sender: Any) { //creates a UIActivityVC that contains the scanned text and image then present it and let the user do the rest
-        let vc = UIActivityViewController(activityItems: [scannedText, shippingImageView.image!], applicationActivities: [])
+    @IBAction func shareButtonTapped(_ sender: UIBarButtonItem) { //creates a UIActivityVC that contains the scanned text and image then present it and let the user do the rest
+        let vc = UIActivityViewController(activityItems: [scannedText, imageView.image!], applicationActivities: [])
         present(vc, animated: true, completion: nil)
     }
-  
+
 // MARK: Keyboard slide up
     @objc func keyboardWillShow(notification: NSNotification) { //makes the view go up by keyboard's height
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -117,8 +115,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let fixedImage = pickedImage.fixOrientation() //newly selected image is rotated back to the up position
-            shippingImageView.image = fixedImage
-            displayDetectedText(in: shippingImageView) //run our converter after getting an image
+            imageView.image = fixedImage
+            displayDetectedText(in: imageView) //run our converter after getting an image
         }
         dismiss(animated: true, completion: nil)
     }
