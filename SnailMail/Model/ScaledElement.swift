@@ -6,4 +6,10 @@
 //  Copyright © 2020 SamuelFolledo. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct ScaledElement { //a struct that will group the frame and CAShapeLayer to the controller
+    let frame: CGRect
+    let shapeLayer: CALayer
+}
+
