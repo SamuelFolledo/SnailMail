@@ -14,6 +14,9 @@
 		33C9644223C3D6D100141B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33C9644123C3D6D100141B0A /* Assets.xcassets */; };
 		33C9644523C3D6D100141B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33C9644323C3D6D100141B0A /* LaunchScreen.storyboard */; };
 		33C9644D23C3DF8100141B0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33C9644C23C3DF8100141B0A /* GoogleService-Info.plist */; };
+		33C9645223C3E14900141B0A /* ScaledElementProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9645123C3E14900141B0A /* ScaledElementProcessor.swift */; };
+		33C9645423C3E15500141B0A /* ScaledElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9645323C3E15500141B0A /* ScaledElement.swift */; };
+		33C9645623C3E16C00141B0A /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9645523C3E16C00141B0A /* UIImage+extensions.swift */; };
 		4A163C11411DBCAE97F8A14D /* Pods_SnailMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FD0AEB3FAD59EFF6E37B89 /* Pods_SnailMail.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,9 @@
 		33C9644423C3D6D100141B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33C9644623C3D6D100141B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33C9644C23C3DF8100141B0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33C9645123C3E14900141B0A /* ScaledElementProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledElementProcessor.swift; sourceTree = "<group>"; };
+		33C9645323C3E15500141B0A /* ScaledElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledElement.swift; sourceTree = "<group>"; };
+		33C9645523C3E16C00141B0A /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		731A7AC1DCBF795B59B8159F /* Pods-SnailMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnailMail.debug.xcconfig"; path = "Target Support Files/Pods-SnailMail/Pods-SnailMail.debug.xcconfig"; sourceTree = "<group>"; };
 		82A5BF2FDCA75EABFB40D534 /* Pods-SnailMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnailMail.release.xcconfig"; path = "Target Support Files/Pods-SnailMail/Pods-SnailMail.release.xcconfig"; sourceTree = "<group>"; };
 		92FD0AEB3FAD59EFF6E37B89 /* Pods_SnailMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnailMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,14 +73,41 @@
 			children = (
 				33C9643823C3D6CD00141B0A /* AppDelegate.swift */,
 				33C9643A23C3D6CD00141B0A /* SceneDelegate.swift */,
-				33C9643C23C3D6CD00141B0A /* ViewController.swift */,
 				33C9643E23C3D6CD00141B0A /* Main.storyboard */,
+				33C9644E23C3E0F600141B0A /* Controllers */,
+				33C9644F23C3E10100141B0A /* Model */,
+				33C9645023C3E10900141B0A /* Helper */,
 				33C9644123C3D6D100141B0A /* Assets.xcassets */,
 				33C9644323C3D6D100141B0A /* LaunchScreen.storyboard */,
 				33C9644623C3D6D100141B0A /* Info.plist */,
 				33C9644C23C3DF8100141B0A /* GoogleService-Info.plist */,
 			);
 			path = SnailMail;
+			sourceTree = "<group>";
+		};
+		33C9644E23C3E0F600141B0A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				33C9643C23C3D6CD00141B0A /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		33C9644F23C3E10100141B0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				33C9645123C3E14900141B0A /* ScaledElementProcessor.swift */,
+				33C9645323C3E15500141B0A /* ScaledElement.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		33C9645023C3E10900141B0A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				33C9645523C3E16C00141B0A /* UIImage+extensions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		641471742A32207F33594924 /* Frameworks */ = {
@@ -228,9 +261,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33C9645423C3E15500141B0A /* ScaledElement.swift in Sources */,
 				33C9643D23C3D6CD00141B0A /* ViewController.swift in Sources */,
+				33C9645223C3E14900141B0A /* ScaledElementProcessor.swift in Sources */,
 				33C9643923C3D6CD00141B0A /* AppDelegate.swift in Sources */,
 				33C9643B23C3D6CD00141B0A /* SceneDelegate.swift in Sources */,
+				33C9645623C3E16C00141B0A /* UIImage+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
