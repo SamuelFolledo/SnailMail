@@ -13,6 +13,7 @@
 		33C9644023C3D6CD00141B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33C9643E23C3D6CD00141B0A /* Main.storyboard */; };
 		33C9644223C3D6D100141B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33C9644123C3D6D100141B0A /* Assets.xcassets */; };
 		33C9644523C3D6D100141B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33C9644323C3D6D100141B0A /* LaunchScreen.storyboard */; };
+		4A163C11411DBCAE97F8A14D /* Pods_SnailMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FD0AEB3FAD59EFF6E37B89 /* Pods_SnailMail.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		33C9644123C3D6D100141B0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33C9644423C3D6D100141B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33C9644623C3D6D100141B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		731A7AC1DCBF795B59B8159F /* Pods-SnailMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnailMail.debug.xcconfig"; path = "Target Support Files/Pods-SnailMail/Pods-SnailMail.debug.xcconfig"; sourceTree = "<group>"; };
+		82A5BF2FDCA75EABFB40D534 /* Pods-SnailMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnailMail.release.xcconfig"; path = "Target Support Files/Pods-SnailMail/Pods-SnailMail.release.xcconfig"; sourceTree = "<group>"; };
+		92FD0AEB3FAD59EFF6E37B89 /* Pods_SnailMail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnailMail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A163C11411DBCAE97F8A14D /* Pods_SnailMail.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				33C9643723C3D6CD00141B0A /* SnailMail */,
 				33C9643623C3D6CD00141B0A /* Products */,
+				6B2285867B3D8E6742552257 /* Pods */,
+				641471742A32207F33594924 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = SnailMail;
 			sourceTree = "<group>";
 		};
+		641471742A32207F33594924 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92FD0AEB3FAD59EFF6E37B89 /* Pods_SnailMail.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6B2285867B3D8E6742552257 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				731A7AC1DCBF795B59B8159F /* Pods-SnailMail.debug.xcconfig */,
+				82A5BF2FDCA75EABFB40D534 /* Pods-SnailMail.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 33C9644923C3D6D100141B0A /* Build configuration list for PBXNativeTarget "SnailMail" */;
 			buildPhases = (
+				93B958DB8C236CE033311D42 /* [CP] Check Pods Manifest.lock */,
 				33C9643123C3D6CD00141B0A /* Sources */,
 				33C9643223C3D6CD00141B0A /* Frameworks */,
 				33C9643323C3D6CD00141B0A /* Resources */,
+				993AC6D99D020A6C8EFC54D5 /* [CP] Embed Pods Frameworks */,
+				521A35EAD1BD5120466D4BF0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,6 +160,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		521A35EAD1BD5120466D4BF0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnailMail/Pods-SnailMail-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnailMail/Pods-SnailMail-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnailMail/Pods-SnailMail-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93B958DB8C236CE033311D42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SnailMail-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		993AC6D99D020A6C8EFC54D5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnailMail/Pods-SnailMail-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnailMail/Pods-SnailMail-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnailMail/Pods-SnailMail-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		33C9643123C3D6CD00141B0A /* Sources */ = {
@@ -282,6 +369,7 @@
 		};
 		33C9644A23C3D6D100141B0A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 731A7AC1DCBF795B59B8159F /* Pods-SnailMail.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +388,7 @@
 		};
 		33C9644B23C3D6D100141B0A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A5BF2FDCA75EABFB40D534 /* Pods-SnailMail.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
