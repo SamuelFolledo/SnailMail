@@ -32,10 +32,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sRA-sK-W2c">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="93.5"/>
                                         <state key="normal" title="Button" image="menu"/>
+                                        <connections>
+                                            <action selector="albumButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xRq-rm-5yU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RE6-4X-4I1">
                                         <rect key="frame" x="200" y="0.0" width="175" height="93.5"/>
                                         <state key="normal" image="camera"/>
+                                        <connections>
+                                            <action selector="cameraButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ar6-ae-VxL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -59,8 +65,19 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="SnailMail" id="6sc-Rs-iDl">
-                        <barButtonItem key="rightBarButtonItem" image="share" id="Df5-St-lXq"/>
+                        <barButtonItem key="rightBarButtonItem" image="share" id="Df5-St-lXq">
+                            <connections>
+                                <action selector="shareButtonTapped:" destination="BYZ-38-t0r" id="Tl8-F9-0l7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="albumButton" destination="sRA-sK-W2c" id="6UM-21-7l4"/>
+                        <outlet property="camButton" destination="RE6-4X-4I1" id="bpi-FH-aMK"/>
+                        <outlet property="imageView" destination="Iyv-CO-MvV" id="WZN-yh-0KA"/>
+                        <outlet property="shareButton" destination="Df5-St-lXq" id="4u4-mU-hZE"/>
+                        <outlet property="textView" destination="Miy-ah-N7N" id="pQw-rC-IWl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
