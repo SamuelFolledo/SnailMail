@@ -73,6 +73,21 @@ func updateCurrentMail(mail: Mail, withValues values: [String : Any], withBlock:
     }
 }
 
+//MARK: Mail Delete
+func deleteMail(objectId: String, completion: @escaping(_ error: Error?) -> Void) { //delete the current user
+    let mailRef = firDatabase.child(kMAIL).queryOrdered(byChild: kOBJECTID).queryEqual(toValue: objectId).queryLimited(toFirst: 1)
+    mailRef.observeSingleEvent(of: .value, with: { (snapshot) in //delete from Database
+        if snapshot.exists() { //snapshot has uid and all its user's values
+            firDatabase.child(kMAIL).child(objectId).removeValue { (error, ref) in
+                if let error = error {
+                    completion(error)
+                }
+                completion(nil)
+            }
+        }
+    }, withCancel: nil)
+}
+
 //MARK: Mail Helper - take a Mail class and returns NSDictionary
 func mailDictionaryFrom(mail: Mail) -> NSDictionary {
     let createdAt = Service.dateFormatter().string(from: mail.createdAt)
