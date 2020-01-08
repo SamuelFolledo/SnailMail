@@ -1,13 +1,13 @@
-from metaphone import doublemetaphone
-import re   
-from unidecode import unidecode
 import os
+import re #regex
+import requests
+from dotenv import load_dotenv #where the bot token is stored
+from unidecode import unidecode #removes accented characters
+from metaphone import doublemetaphone #converts a name into phonetics, allows for fuzzy name searching
 
 def insertName(name:str = "Mr. Sámuel Falledo"):
-
     #lowercase
-    # doens't seem to be needed
-    name = name.lower()
+    name = name.lower() #doens't seem to be needed
 
     #remove accented letters
     name = unidecode(name)
@@ -30,20 +30,26 @@ def insertName(name:str = "Mr. Sámuel Falledo"):
     nameTuple = doublemetaphone(name)
 
     #check various metaphone tuple matches for name in database, return uID or error  
-    uID = None 
+    uID = '@UMCUQDCEN' 
     # database lookup and return uID @AAAAAAAA
 
     #if uID found, send slack message.
     if uID == None:
         #throw exception
         pass
-    else:
-        url = "https://slack.com/api/chat.postMessage"
-        token = os.getenv("SLACK_BOT_TUT_TOKEN")
-        channel = uID 
-        text = "You've got mail in the 851 California St lobby :love_letter:"
-        buildhttp = url+"?token="+token+"&channel="+channel+"&text="+text
+    else: 
         #request url
+        load_dotenv()
+        token = os.getenv("BOT_USER_OAUTH_ACCESS_TOKEN")
+        channel = uID
+        text = "You've got mail in the 851 California St lobby :love_letter:"\
+            
+        pload = {'token':token,'channel':channel,'text':text}
+        r = requests.post('https://slack.com/api/chat.postMessage',data = pload)
+        r_dictionary= r.json()
+        #possible return that message sent successfully
+        print (r_dictionary['ok'])
+        #print (r_dictionary) #debug the dictionary output
 
     #debug show results
     print (name)
