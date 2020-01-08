@@ -103,23 +103,31 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </sceneKitView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-N3-NQm">
-                                <rect key="frame" x="169" y="579.5" width="37.5" height="37.5"/>
+                                <rect key="frame" x="150" y="542" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dlV-N3-NQm" secondAttribute="height" id="EFz-L4-OF4"/>
                                 </constraints>
-                                <state key="normal" image="circle.fill" catalog="system"/>
+                                <state key="normal" image="blueCircle"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bj2-KK-4d8">
+                                <rect key="frame" x="20" y="20" width="44" height="32"/>
+                                <state key="normal" image="menu"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Mea-CA-IpI" firstAttribute="bottom" secondItem="dlV-N3-NQm" secondAttribute="bottom" constant="50" id="1zh-ZY-TX2"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="centerX" secondItem="Mea-CA-IpI" secondAttribute="centerX" id="3EN-2k-edy"/>
+                            <constraint firstItem="Bj2-KK-4d8" firstAttribute="top" secondItem="Mea-CA-IpI" secondAttribute="top" constant="20" id="CNx-r3-az8"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="height" secondItem="Mea-CA-IpI" secondAttribute="height" id="EtQ-7C-K49"/>
                             <constraint firstItem="dlV-N3-NQm" firstAttribute="centerX" secondItem="L95-ek-nyg" secondAttribute="centerX" id="Uqe-In-R6g"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="top" secondItem="Mea-CA-IpI" secondAttribute="top" id="dzr-MD-RWF"/>
-                            <constraint firstItem="dlV-N3-NQm" firstAttribute="width" secondItem="L95-ek-nyg" secondAttribute="width" multiplier="0.1" id="k3x-ov-YGi"/>
+                            <constraint firstItem="Bj2-KK-4d8" firstAttribute="width" secondItem="dlV-N3-NQm" secondAttribute="width" multiplier="0.586667" id="hrV-1j-TPh"/>
+                            <constraint firstItem="dlV-N3-NQm" firstAttribute="width" secondItem="L95-ek-nyg" secondAttribute="width" multiplier="0.2" id="k3x-ov-YGi"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="width" secondItem="Mea-CA-IpI" secondAttribute="width" id="nkJ-QK-l83"/>
                             <constraint firstItem="Mea-CA-IpI" firstAttribute="bottom" secondItem="L95-ek-nyg" secondAttribute="bottom" id="qWV-af-ghs"/>
+                            <constraint firstItem="Bj2-KK-4d8" firstAttribute="leading" secondItem="Mea-CA-IpI" secondAttribute="leading" constant="20" id="qbR-6L-yDY"/>
+                            <constraint firstItem="Bj2-KK-4d8" firstAttribute="height" secondItem="dlV-N3-NQm" secondAttribute="height" multiplier="0.426667" id="uB1-Ci-WfA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mea-CA-IpI"/>
                     </view>
@@ -153,8 +161,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="blueCircle" width="768" height="768"/>
         <image name="camera" width="58" height="46"/>
-        <image name="circle.fill" catalog="system" width="64" height="60"/>
         <image name="menu" width="44" height="32"/>
         <image name="scanned-text" width="654" height="999"/>
         <image name="share" width="40" height="56"/>
