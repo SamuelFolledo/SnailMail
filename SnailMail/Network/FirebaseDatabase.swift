@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: Create Mail
-func saveMailToDatabase(text: String, completion: @escaping (_ error: String?) -> Void) {
+func saveMail(text: String, completion: @escaping (_ error: String?) -> Void) {
     saveDataInDatabase(data: [kSCANNEDTEXT: text]) { (error) in
         if let error = error {
             completion(error)

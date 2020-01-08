@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     var scannedText: String = "Detected text can be edited here." {
         didSet {
             textView.text = scannedText
-            saveMailToDatabase(text: scannedText) { (error) in
+            saveMail(text: scannedText) { (error) in
                 if let error = error {
                     Service.presentAlert(on: self, title: "Error", message: error)
                     return
