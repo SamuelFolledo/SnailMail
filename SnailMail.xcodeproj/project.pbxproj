@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		333F486723C67512005DED20 /* ScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486623C67512005DED20 /* ScannerVC.swift */; };
+		333F486923C67548005DED20 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486823C67548005DED20 /* SettingsVC.swift */; };
+		333F486B23C67563005DED20 /* MailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486A23C67563005DED20 /* MailsTableVC.swift */; };
 		335E485023C562C800C401B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335E484F23C562C800C401B2 /* GoogleService-Info.plist */; };
 		335E485223C568CD00C401B2 /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485123C568CD00C401B2 /* FirebaseDatabase.swift */; };
 		335E485523C56FD700C401B2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485423C56FD700C401B2 /* Service.swift */; };
@@ -25,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		333F486623C67512005DED20 /* ScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerVC.swift; sourceTree = "<group>"; };
+		333F486823C67548005DED20 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		333F486A23C67563005DED20 /* MailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailsTableVC.swift; sourceTree = "<group>"; };
 		335E484F23C562C800C401B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		335E485123C568CD00C401B2 /* FirebaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabase.swift; sourceTree = "<group>"; };
 		335E485423C56FD700C401B2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -106,6 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				33C9643C23C3D6CD00141B0A /* ViewController.swift */,
+				333F486623C67512005DED20 /* ScannerVC.swift */,
+				333F486823C67548005DED20 /* SettingsVC.swift */,
+				333F486A23C67563005DED20 /* MailsTableVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -286,10 +295,13 @@
 				335E485523C56FD700C401B2 /* Service.swift in Sources */,
 				335E485223C568CD00C401B2 /* FirebaseDatabase.swift in Sources */,
 				33C9643D23C3D6CD00141B0A /* ViewController.swift in Sources */,
+				333F486923C67548005DED20 /* SettingsVC.swift in Sources */,
 				335E485923C580CC00C401B2 /* Constants.swift in Sources */,
 				33C9645223C3E14900141B0A /* ScaledElementProcessor.swift in Sources */,
 				33C9643923C3D6CD00141B0A /* AppDelegate.swift in Sources */,
 				33C9643B23C3D6CD00141B0A /* SceneDelegate.swift in Sources */,
+				333F486723C67512005DED20 /* ScannerVC.swift in Sources */,
+				333F486B23C67563005DED20 /* MailsTableVC.swift in Sources */,
 				33C9645623C3E16C00141B0A /* UIImage+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

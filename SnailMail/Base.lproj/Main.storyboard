@@ -65,6 +65,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="SnailMail" id="6sc-Rs-iDl">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="7hK-vJ-w8d">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dJ9-Ht-GGH">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <connections>
+                                <segue destination="yja-ZF-KDz" kind="show" id="laB-ie-C21"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="share" id="Df5-St-lXq">
                             <connections>
                                 <action selector="shareButtonTapped:" destination="BYZ-38-t0r" id="Tl8-F9-0l7"/>
@@ -82,6 +92,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.2" y="79.610194902548727"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="irX-o0-b1o">
+            <objects>
+                <viewController id="yja-ZF-KDz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HAU-XV-XxF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L95-ek-nyg">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                            </sceneKitView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-N3-NQm">
+                                <rect key="frame" x="164" y="592" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="L95-ek-nyg" firstAttribute="centerX" secondItem="Mea-CA-IpI" secondAttribute="centerX" id="3EN-2k-edy"/>
+                            <constraint firstItem="L95-ek-nyg" firstAttribute="height" secondItem="Mea-CA-IpI" secondAttribute="height" id="EtQ-7C-K49"/>
+                            <constraint firstItem="L95-ek-nyg" firstAttribute="top" secondItem="Mea-CA-IpI" secondAttribute="top" id="dzr-MD-RWF"/>
+                            <constraint firstItem="L95-ek-nyg" firstAttribute="width" secondItem="Mea-CA-IpI" secondAttribute="width" id="nkJ-QK-l83"/>
+                            <constraint firstItem="Mea-CA-IpI" firstAttribute="bottom" secondItem="L95-ek-nyg" secondAttribute="bottom" id="qWV-af-ghs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Mea-CA-IpI"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8k5-qI-hSo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Pc-yb-9Fh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2071" y="80"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oJ8-Tc-DLT">
