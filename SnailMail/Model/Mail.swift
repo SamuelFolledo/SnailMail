@@ -15,8 +15,7 @@ class Mail {
     let updatedAt: Date
     let scannedText: String
     
-    
-    init(_objectId: String, _createdAt: Date, _updatedAt: Date, _scannedText: String = "") {
+    init(_objectId: String, _createdAt: Date, _updatedAt: Date, _scannedText: String) {
         objectId = _objectId
         createdAt = _createdAt
         updatedAt = _updatedAt
@@ -42,10 +41,10 @@ class Mail {
 } //end of class
 
 //------------------------------------------------------------------
-//MARK: Helper fuctions
+
+//MARK: Read Mail - take a Mail objectId and returns Mail
 func fetchMailWith(mailId: String, completion: @escaping (_ mail: Mail?) -> Void) { //fetch with objectId!
     let ref = firDatabase.child(kMAIL).queryOrdered(byChild: kOBJECTID).queryEqual(toValue: mailId)
-    
     ref.observeSingleEvent(of: .value, with: { (snapshot) in // observe one value only. //.value = Any data changes at a location or, recursively, at any child node.
         if snapshot.exists() {
             let mailDictionary = ((snapshot.value as! NSDictionary).allValues as NSArray).firstObject! as! NSDictionary //convert snapshot to NSDictionary
@@ -57,15 +56,7 @@ func fetchMailWith(mailId: String, completion: @escaping (_ mail: Mail?) -> Void
     }, withCancel: nil)
 }
 
-func mailDictionaryFrom(mail: Mail) -> NSDictionary { //take a mail and return an NSDictionary
-    let createdAt = Service.dateFormatter().string(from: mail.createdAt)
-    let updatedAt = Service.dateFormatter().string(from: mail.updatedAt)
-    return NSDictionary(
-        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText],
-                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying]) //how you create an NSDictionary
-}
-
-//method for updating our mails in Firebase with any values we want
+//MARK: Update Mail
 func updateCurrentMail(mail: Mail, withValues values: [String : Any], withBlock: @escaping(_ success: Bool) -> Void) { //will pass a dictionary with an Any value, with running a background thread escaping, pass success type boolean, so we can return if user was updated successfully, no return here so void
     if UserDefaults.standard.object(forKey: mail.objectId) != nil {
         let mailObject = mailDictionaryFrom(mail: mail).mutableCopy() as! NSMutableDictionary //this makes the normal dictionary a mutable dictionary and specify it as NSMutableDictionary
@@ -82,5 +73,13 @@ func updateCurrentMail(mail: Mail, withValues values: [String : Any], withBlock:
             
         }
     }
-    
+}
+
+//MARK: Mail Helper - take a Mail class and returns NSDictionary
+func mailDictionaryFrom(mail: Mail) -> NSDictionary {
+    let createdAt = Service.dateFormatter().string(from: mail.createdAt)
+    let updatedAt = Service.dateFormatter().string(from: mail.updatedAt)
+    return NSDictionary(
+        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText],
+                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying]) //how you create an NSDictionary
 }
