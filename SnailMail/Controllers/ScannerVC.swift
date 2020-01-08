@@ -84,6 +84,13 @@ class ScannerVC: UIViewController {
     }
     
 //MARK: IBActions
+    @IBAction func mailsButtonTapped(_ sender: Any) {
+        print("All mails coming soon")
+    }
+    
+    @IBAction func takePicButtonTapped(_ sender: Any) {
+        
+    }
     
 //MARK: Helpers
     
