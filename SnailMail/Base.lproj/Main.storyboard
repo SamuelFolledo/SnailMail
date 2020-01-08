@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="1047.2" y="79.610194902548727"/>
         </scene>
-        <!--View Controller-->
+        <!--ScannerVC-->
         <scene sceneID="irX-o0-b1o">
             <objects>
-                <viewController id="yja-ZF-KDz" sceneMemberID="viewController">
+                <viewController id="yja-ZF-KDz" customClass="ScannerVC" customModule="SnailMail" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HAU-XV-XxF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,6 +121,10 @@
                         <viewLayoutGuide key="safeArea" id="Mea-CA-IpI"/>
                     </view>
                     <navigationItem key="navigationItem" id="8k5-qI-hSo"/>
+                    <connections>
+                        <outlet property="scannerView" destination="L95-ek-nyg" id="Oqq-jm-lGQ"/>
+                        <outlet property="takePicButton" destination="dlV-N3-NQm" id="KD1-Rt-MhI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pc-yb-9Fh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
