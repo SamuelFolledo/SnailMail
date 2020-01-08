@@ -38,8 +38,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         imageView.layer.addSublayer(frameSublayer)
-        
-        displayDetectedText(in: imageView)
+//        displayDetectedText(in: imageView) //commented out to not upload the default image
     }
     
 //MARK: Private methods
