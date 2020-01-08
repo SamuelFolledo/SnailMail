@@ -65,13 +65,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="SnailMail" id="6sc-Rs-iDl">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="7hK-vJ-w8d">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dJ9-Ht-GGH">
-                                <rect key="frame" x="16" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="share" id="Df5-St-lXq">
                             <connections>
                                 <action selector="shareButtonTapped:" destination="BYZ-38-t0r" id="Tl8-F9-0l7"/>
