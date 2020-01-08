@@ -21,6 +21,12 @@ class ViewController: UIViewController {
     var scannedText: String = "Detected text can be edited here." {
         didSet {
             textView.text = scannedText
+            saveNameToDatabase(text: scannedText) { (error) in
+                if let error = error {
+                    Service.presentAlert(on: self, title: "Error", message: error)
+                    return
+                }
+            }
         }
     }
     let processor = ScaledElementProcessor()
@@ -32,8 +38,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         imageView.layer.addSublayer(frameSublayer)
-        
-        displayDetectedText(in: imageView)
+//        displayDetectedText(in: imageView) //commented out to not upload the default image
     }
     
 //MARK: Private methods
@@ -43,7 +48,9 @@ class ViewController: UIViewController {
             elements.forEach() { element in
                 self.frameSublayer.addSublayer(element.shapeLayer) //this controller has a frameSublayer property that is attached to the imageView. Here, you add each element’s shape layer to the sublayer, so that iOS will automatically draw the shape on the image
             }
-            self.scannedText = text
+            if self.scannedText != text { //to avoid duplicates
+                self.scannedText = text
+            }
             completion?()
         }
     }
@@ -92,12 +99,9 @@ class ViewController: UIViewController {
     }
   
     @objc func keyboardWillHide(notification: NSNotification) { //put the view back to 0
-        //if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
         if view.frame.origin.y != 0 {
-            //view.frame.origin.y += keyboardSize.height
             view.frame.origin.y = 0
         }
-        //}
     }
 }
 
