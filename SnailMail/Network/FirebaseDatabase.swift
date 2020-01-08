@@ -5,13 +5,7 @@
 //  Created by Macbook Pro 15 on 1/7/20.
 //  Copyright © 2020 SamuelFolledo. All rights reserved.
 //
-
-import FirebaseDatabase
-
-public let firDatabase = Database.database().reference()
-public let kMAIL: String = "mail"
-public let kSCANNEDTEXT: String = "scannedText"
-public let kKEY: String = "key"
+import Foundation
 
 func saveNameToDatabase(text: String, completion: @escaping (_ error: String?) -> Void) {
     saveDataInDatabase(data: [kSCANNEDTEXT: text]) { (error) in
