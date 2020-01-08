@@ -167,4 +167,5 @@
         <image name="scanned-text" width="654" height="999"/>
         <image name="share" width="40" height="56"/>
     </resources>
+    <color key="tintColor" red="0.26010626549999999" green="0.39904129510000003" blue="0.69025290009999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
