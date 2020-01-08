@@ -21,6 +21,12 @@ class ViewController: UIViewController {
     var scannedText: String = "Detected text can be edited here." {
         didSet {
             textView.text = scannedText
+            saveNameToDatabase(name: scannedText) { (error) in
+                if let error = error {
+                    Service.presentAlert(on: self, title: "Error", message: error)
+                    return
+                }
+            }
         }
     }
     let processor = ScaledElementProcessor()
@@ -43,9 +49,9 @@ class ViewController: UIViewController {
             elements.forEach() { element in
                 self.frameSublayer.addSublayer(element.shapeLayer) //this controller has a frameSublayer property that is attached to the imageView. Here, you add each element’s shape layer to the sublayer, so that iOS will automatically draw the shape on the image
             }
-            self.scannedText = text
-            print("SCANNED TEXT = \(text)")
-            print("ELEMENTS = \(elements)")
+            if self.scannedText != text { //to avoid duplicates
+                self.scannedText = text
+            }
             completion?()
         }
     }
@@ -94,12 +100,9 @@ class ViewController: UIViewController {
     }
   
     @objc func keyboardWillHide(notification: NSNotification) { //put the view back to 0
-        //if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
         if view.frame.origin.y != 0 {
-            //view.frame.origin.y += keyboardSize.height
             view.frame.origin.y = 0
         }
-        //}
     }
 }
 

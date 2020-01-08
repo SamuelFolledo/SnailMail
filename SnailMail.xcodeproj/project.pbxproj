@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		335E485023C562C800C401B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335E484F23C562C800C401B2 /* GoogleService-Info.plist */; };
 		335E485223C568CD00C401B2 /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485123C568CD00C401B2 /* FirebaseDatabase.swift */; };
+		335E485523C56FD700C401B2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485423C56FD700C401B2 /* Service.swift */; };
 		33C9643923C3D6CD00141B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9643823C3D6CD00141B0A /* AppDelegate.swift */; };
 		33C9643B23C3D6CD00141B0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9643A23C3D6CD00141B0A /* SceneDelegate.swift */; };
 		33C9643D23C3D6CD00141B0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9643C23C3D6CD00141B0A /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		335E484F23C562C800C401B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		335E485123C568CD00C401B2 /* FirebaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabase.swift; sourceTree = "<group>"; };
+		335E485423C56FD700C401B2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		33C9643523C3D6CD00141B0A /* SnailMail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnailMail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33C9643823C3D6CD00141B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33C9643A23C3D6CD00141B0A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				33C9645523C3E16C00141B0A /* UIImage+extensions.swift */,
+				335E485423C56FD700C401B2 /* Service.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33C9645423C3E15500141B0A /* ScaledElement.swift in Sources */,
+				335E485523C56FD700C401B2 /* Service.swift in Sources */,
 				335E485223C568CD00C401B2 /* FirebaseDatabase.swift in Sources */,
 				33C9643D23C3D6CD00141B0A /* ViewController.swift in Sources */,
 				33C9645223C3E14900141B0A /* ScaledElementProcessor.swift in Sources */,
