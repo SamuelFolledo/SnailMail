@@ -31,7 +31,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sRA-sK-W2c">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="93.5"/>
-                                        <state key="normal" title="Button" image="menu"/>
+                                        <state key="normal" image="menu"/>
                                         <connections>
                                             <action selector="albumButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xRq-rm-5yU"/>
                                         </connections>
