@@ -17,6 +17,7 @@ class ScannerVC: UIViewController {
     let scene = SCNScene() //scene for scannerView
 //    let cameraNode = SCNNode()
 //    let targetNode = SCNNode(geometry: SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0))
+    let stillImageOutput = AVCaptureStillImageOutput()
     
 //MARK: IBOutlets
     @IBOutlet weak var scannerView: SCNView!
@@ -89,11 +90,28 @@ class ScannerVC: UIViewController {
     }
     
     @IBAction func takePicButtonTapped(_ sender: Any) {
-        
+        if let videoConnection = stillImageOutput.connection(with: .video) {
+            stillImageOutput.captureStillImageAsynchronously(from: videoConnection) { (imageDataSampleBuffer, error) in
+                if let error = error {
+                    Service.presentAlert(on: self, title: "Error Taking Picture", message: error.localizedDescription)
+                    return
+                }
+                if imageDataSampleBuffer != nil {
+                    let ciImage: CIImage = CIImage(cvPixelBuffer: imageDataSampleBuffer as! CVPixelBuffer)
+                    let image: UIImage = self.convert(cmage: ciImage) //convert ciImage to a UIImage
+//                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil) //to save to photosAlbum
+                }
+            }
+        }
     }
     
 //MARK: Helpers
-    
+    fileprivate func convert(cmage:CIImage) -> UIImage { // Convert CIImage to CGImage
+         let context:CIContext = CIContext.init(options: nil)
+         let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
+         let image:UIImage = UIImage.init(cgImage: cgImage)
+         return image
+    }
 }
 
 //MARK: Extensions
