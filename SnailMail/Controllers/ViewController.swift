@@ -44,6 +44,8 @@ class ViewController: UIViewController {
                 self.frameSublayer.addSublayer(element.shapeLayer) //this controller has a frameSublayer property that is attached to the imageView. Here, you add each element’s shape layer to the sublayer, so that iOS will automatically draw the shape on the image
             }
             self.scannedText = text
+            print("SCANNED TEXT = \(text)")
+            print("ELEMENTS = \(elements)")
             completion?()
         }
     }
