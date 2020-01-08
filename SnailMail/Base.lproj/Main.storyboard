@@ -104,17 +104,22 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L95-ek-nyg">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </sceneKitView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-N3-NQm">
-                                <rect key="frame" x="164" y="592" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlV-N3-NQm">
+                                <rect key="frame" x="169" y="579.5" width="37.5" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dlV-N3-NQm" secondAttribute="height" id="EFz-L4-OF4"/>
+                                </constraints>
+                                <state key="normal" image="circle.fill" catalog="system"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Mea-CA-IpI" firstAttribute="bottom" secondItem="dlV-N3-NQm" secondAttribute="bottom" constant="50" id="1zh-ZY-TX2"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="centerX" secondItem="Mea-CA-IpI" secondAttribute="centerX" id="3EN-2k-edy"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="height" secondItem="Mea-CA-IpI" secondAttribute="height" id="EtQ-7C-K49"/>
+                            <constraint firstItem="dlV-N3-NQm" firstAttribute="centerX" secondItem="L95-ek-nyg" secondAttribute="centerX" id="Uqe-In-R6g"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="top" secondItem="Mea-CA-IpI" secondAttribute="top" id="dzr-MD-RWF"/>
+                            <constraint firstItem="dlV-N3-NQm" firstAttribute="width" secondItem="L95-ek-nyg" secondAttribute="width" multiplier="0.1" id="k3x-ov-YGi"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="width" secondItem="Mea-CA-IpI" secondAttribute="width" id="nkJ-QK-l83"/>
                             <constraint firstItem="Mea-CA-IpI" firstAttribute="bottom" secondItem="L95-ek-nyg" secondAttribute="bottom" id="qWV-af-ghs"/>
                         </constraints>
@@ -151,6 +156,7 @@
     </scenes>
     <resources>
         <image name="camera" width="58" height="46"/>
+        <image name="circle.fill" catalog="system" width="64" height="60"/>
         <image name="menu" width="44" height="32"/>
         <image name="scanned-text" width="654" height="999"/>
         <image name="share" width="40" height="56"/>
