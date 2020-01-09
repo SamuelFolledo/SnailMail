@@ -136,7 +136,6 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                 self.view.addSubview(popUpVC.view)
                 popUpVC.didMove(toParent: self)
             }
-//            displayDetectedText(image: image)
 //            self.images.append(image)
         } else {
             print("some error here")
