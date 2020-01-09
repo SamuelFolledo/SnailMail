@@ -8,7 +8,7 @@
 
 import UIKit
 import SceneKit //for scannerView
-import AVFoundation //for camera
+import AVFoundation //for scannerView
 
 class ScannerVC: UIViewController {
 //MARK: Properties
@@ -20,6 +20,19 @@ class ScannerVC: UIViewController {
 //    let targetNode = SCNNode(geometry: SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0))
     var mails: [String:Mail] = [:]
     var images: [UIImage] = []
+    var frameSublayer = CALayer()
+    var scannedText: String = "Detected text can be edited here." {
+        didSet {
+            print("\(kSCANNEDTEXT) = \(scannedText)")
+            saveMail(text: scannedText) { (error) in
+                if let error = error {
+                    Service.presentAlert(on: self, title: "Error", message: error)
+                    return
+                }
+            }
+        }
+    }
+    let processor = ScaledElementProcessor()
     
 //MARK: IBOutlets
     @IBOutlet weak var scannerView: SCNView!
@@ -39,6 +52,24 @@ class ScannerVC: UIViewController {
 //MARK: Private Methods
     fileprivate func setupViews() {
         view.backgroundColor = .black
+        scannerView.layer.addSublayer(frameSublayer)
+    }
+    
+    fileprivate func displayDetectedText(image: UIImage, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
+        removeFrames() //remove the frames before processing a new image
+        processor.processImage(image) { text in
+            if self.scannedText != text { //to avoid duplicates
+                self.scannedText = text
+            }
+            completion?()
+        }
+    }
+    
+    fileprivate func removeFrames() { //method that will remove sublayers, the boxes on each words
+        guard let sublayers = frameSublayer.sublayers else { return }
+        for sublayer in sublayers {
+            sublayer.removeFromSuperlayer()
+        }
     }
     
     fileprivate func startCamera() { //start running the rear camera full screen
@@ -93,18 +124,16 @@ class ScannerVC: UIViewController {
 //MARK: Extensions
 extension ScannerVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-
         if let error = error {
             print("error occured : \(error.localizedDescription)")
         }
-
         if let dataImage = photo.fileDataRepresentation() {
-            print(UIImage(data: dataImage)?.size as Any)
-
+//            print(UIImage(data: dataImage)?.size as Any)
             let dataProvider = CGDataProvider(data: dataImage as CFData)
             let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
-            self.images.append(image)
+            displayDetectedText(image: image)
+//            self.images.append(image)
         } else {
             print("some error here")
         }
