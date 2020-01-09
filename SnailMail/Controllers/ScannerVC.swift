@@ -36,7 +36,8 @@ class ScannerVC: UIViewController {
     
 //MARK: IBOutlets
     @IBOutlet weak var scannerView: SCNView!
-    @IBOutlet weak var takePicButton: UIButton!
+    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var mailCountLabel: UILabel!
     
 //MARK: App Life Cycle
     override func viewDidLoad() {
@@ -101,11 +102,15 @@ class ScannerVC: UIViewController {
     }
     
 //MARK: IBActions
-    @IBAction func mailsButtonTapped(_ sender: Any) {
+    @IBAction func mailButtonTapped(_ sender: Any) {
         print("All mails coming soon")
     }
     
-    @IBAction func takePicButtonTapped(_ sender: Any) {
+    @IBAction func menuButtonTapped(_ sender: Any) {
+        captureImage()
+    }
+    
+    @IBAction func cameraButtonTapped(_ sender: Any) {
         captureImage()
     }
     
