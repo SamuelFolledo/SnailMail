@@ -18,8 +18,16 @@ class PopUpVC: UIViewController {
 //MARK: Properties
     var hasKeyboard: Bool = false
     var delegate: ScannerMailProtocol!
-    var mailImage: UIImage = kBLANKIMAGE
-    var mailName: String = ""
+    var mailImage: UIImage = kBLANKIMAGE {
+        didSet {
+            imageView.image = mailImage
+        }
+    }
+    var mailName: String = "" {
+        didSet {
+            textField.text = mailName
+        }
+    }
     
 //MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
