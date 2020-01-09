@@ -91,6 +91,7 @@
                         <outlet property="imageView" destination="0x2-Dg-OyQ" id="RiT-EM-qeA"/>
                         <outlet property="retakeButton" destination="qIu-Gu-uh6" id="sj9-rn-OiF"/>
                         <outlet property="sendButton" destination="3hr-qi-kSK" id="Hsp-w4-4BE"/>
+                        <outlet property="textField" destination="I6S-3V-u7q" id="C7q-Qj-6ar"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="leu-Hf-1DQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

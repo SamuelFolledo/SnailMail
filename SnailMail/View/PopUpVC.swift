@@ -13,7 +13,7 @@ class PopUpVC: UIViewController {
     var hasKeyboard: Bool = false
 //MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textField: UnderlinedTextField!
     @IBOutlet weak var retakeButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
     
