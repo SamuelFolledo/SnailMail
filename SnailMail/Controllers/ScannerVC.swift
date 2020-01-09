@@ -17,17 +17,12 @@ class ScannerVC: UIViewController {
     var cameraImageOutput: AVCapturePhotoOutput!
     let scene = SCNScene() //scene for scannerView
     var mails: [String:Mail] = [:]
+    var capturedImage: UIImage? = nil
     var images: [UIImage] = []
     var frameSublayer = CALayer()
     var scannedText: String = "Detected text can be edited here." {
         didSet {
             print("\(kSCANNEDTEXT) = \(scannedText)")
-            saveMail(text: scannedText) { (error) in
-                if let error = error {
-                    Service.presentAlert(on: self, title: "Error", message: error)
-                    return
-                }
-            }
         }
     }
     let processor = ScaledElementProcessor()
@@ -92,8 +87,8 @@ class ScannerVC: UIViewController {
         let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [
             kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
-            kCVPixelBufferWidthKey as String: 160,
-            kCVPixelBufferHeightKey as String: 160
+            kCVPixelBufferWidthKey as String: 1600,
+            kCVPixelBufferHeightKey as String: 1600
         ]
         settings.previewPhotoFormat = previewFormat
         cameraImageOutput.capturePhoto(with: settings, delegate: self)
@@ -129,14 +124,20 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             displayDetectedText(image: image) {
-                let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
-                popUpVC.delegate = self
-                popUpVC.mailImage = image
-                popUpVC.mailName = self.scannedText
-                self.addChild(popUpVC)
-                popUpVC.view.frame = self.view.frame
-                self.view.addSubview(popUpVC.view)
-                popUpVC.didMove(toParent: self)
+                saveMail(text: self.scannedText) { (mail, error) in
+                    if let error = error {
+                        Service.presentAlert(on: self, title: "Error", message: error)
+                        return
+                    }
+                    let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
+                    popUpVC.delegate = self
+                    popUpVC.mailImage = image
+                    popUpVC.mail = mail
+                    self.addChild(popUpVC)
+                    popUpVC.view.frame = self.view.frame
+                    self.view.addSubview(popUpVC.view)
+                    popUpVC.didMove(toParent: self)
+                }
             }
 //            self.images.append(image)
         } else {
