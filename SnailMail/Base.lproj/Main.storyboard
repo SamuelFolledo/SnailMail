@@ -162,7 +162,7 @@
     <resources>
         <image name="blueCircle" width="768" height="768"/>
         <image name="camera" width="58" height="46"/>
-        <image name="menu" width="44" height="32"/>
+        <image name="menu" width="128" height="128"/>
         <image name="scanned-text" width="654" height="999"/>
         <image name="share" width="40" height="56"/>
     </resources>
