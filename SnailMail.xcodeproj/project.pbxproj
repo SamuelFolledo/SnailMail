@@ -25,7 +25,7 @@
 		33C9645423C3E15500141B0A /* ScaledElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9645323C3E15500141B0A /* ScaledElement.swift */; };
 		33C9645623C3E16C00141B0A /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9645523C3E16C00141B0A /* UIImage+extensions.swift */; };
 		33EDFBB523C6C26E00EA2AE2 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33EDFBB423C6C26E00EA2AE2 /* PopUp.storyboard */; };
-		33EDFBB723C6C80100EA2AE2 /* MenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EDFBB623C6C80100EA2AE2 /* MenuTableVC.swift */; };
+		33EDFBB723C6C80100EA2AE2 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EDFBB623C6C80100EA2AE2 /* MenuVC.swift */; };
 		33EDFBB923C6C81500EA2AE2 /* PopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EDFBB823C6C81500EA2AE2 /* PopUpVC.swift */; };
 		4A163C11411DBCAE97F8A14D /* Pods_SnailMail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FD0AEB3FAD59EFF6E37B89 /* Pods_SnailMail.framework */; };
 /* End PBXBuildFile section */
@@ -51,7 +51,7 @@
 		33C9645323C3E15500141B0A /* ScaledElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledElement.swift; sourceTree = "<group>"; };
 		33C9645523C3E16C00141B0A /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		33EDFBB423C6C26E00EA2AE2 /* PopUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopUp.storyboard; sourceTree = "<group>"; };
-		33EDFBB623C6C80100EA2AE2 /* MenuTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableVC.swift; sourceTree = "<group>"; };
+		33EDFBB623C6C80100EA2AE2 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		33EDFBB823C6C81500EA2AE2 /* PopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpVC.swift; sourceTree = "<group>"; };
 		731A7AC1DCBF795B59B8159F /* Pods-SnailMail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnailMail.debug.xcconfig"; path = "Target Support Files/Pods-SnailMail/Pods-SnailMail.debug.xcconfig"; sourceTree = "<group>"; };
 		82A5BF2FDCA75EABFB40D534 /* Pods-SnailMail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnailMail.release.xcconfig"; path = "Target Support Files/Pods-SnailMail/Pods-SnailMail.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,9 +120,9 @@
 			children = (
 				33C9643C23C3D6CD00141B0A /* ViewController.swift */,
 				333F486623C67512005DED20 /* ScannerVC.swift */,
-				33EDFBB623C6C80100EA2AE2 /* MenuTableVC.swift */,
-				333F486823C67548005DED20 /* SettingsVC.swift */,
+				33EDFBB623C6C80100EA2AE2 /* MenuVC.swift */,
 				333F486A23C67563005DED20 /* MailsTableVC.swift */,
+				333F486823C67548005DED20 /* SettingsVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 				333F486923C67548005DED20 /* SettingsVC.swift in Sources */,
 				335E485923C580CC00C401B2 /* Constants.swift in Sources */,
 				33C9645223C3E14900141B0A /* ScaledElementProcessor.swift in Sources */,
-				33EDFBB723C6C80100EA2AE2 /* MenuTableVC.swift in Sources */,
+				33EDFBB723C6C80100EA2AE2 /* MenuVC.swift in Sources */,
 				33C9643923C3D6CD00141B0A /* AppDelegate.swift in Sources */,
 				33C9643B23C3D6CD00141B0A /* SceneDelegate.swift in Sources */,
 				333F486723C67512005DED20 /* ScannerVC.swift in Sources */,
