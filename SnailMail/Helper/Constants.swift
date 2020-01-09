@@ -23,4 +23,4 @@ public let kNAME: String = "name"
 public let dateFormat = "yyyyMMddHHmmss"
 
 //Image constant
-let kBLANKIMAGE: UIImage = UIImage(named: "blankImage")
+let kBLANKIMAGE: UIImage = UIImage(named: "blankImage")!
