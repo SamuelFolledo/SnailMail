@@ -109,6 +109,7 @@ class ScannerVC: UIViewController {
     }
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
+        cameraButton.isEnabled = false
         captureImage()
     }
     
@@ -145,15 +146,18 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
 }
 
 extension ScannerVC: ScannerMailProtocol {
-    func didRetakeMail(mail: Mail) {
-        print("deleting mail = \(mail)")
+    func didRetakeMail() {
+        print("delete mail")
+        cameraButton.isEnabled = true
     }
     
-    func didSendMail(mail: Mail) {
-        print("sent mail = \(mail)")
+    func didSendMail() {
+        print("send mail")
+        cameraButton.isEnabled = true
     }
     
-    func editName(name: String) {
-        print("mail sent is = \(name)")
+    func didUpdateMail(name: String) {
+        print("updated mail's name = \(name)")
+        cameraButton.isEnabled = true
     }
 }

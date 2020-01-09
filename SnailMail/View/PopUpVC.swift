@@ -9,9 +9,9 @@
 import UIKit
 
 protocol ScannerMailProtocol {
-    func editName(name: String)
-    func didRetakeMail(mail: Mail)
-    func didSendMail(mail: Mail)
+    func didUpdateMail(name: String)
+    func didRetakeMail()
+    func didSendMail()
 }
 
 class PopUpVC: UIViewController {
@@ -51,7 +51,7 @@ class PopUpVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(PopUpVC.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    fileprivate func showAnimate() {
+    fileprivate func showAnimate() { //show popup with animation
         view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         view.alpha = 0.0;
         UIView.animate(withDuration: 0.25, animations: {
@@ -60,7 +60,7 @@ class PopUpVC: UIViewController {
         });
     }
     
-    fileprivate func removeAnimate() {
+    fileprivate func dismissPopup() { //dismiss popup with animation
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
@@ -74,15 +74,19 @@ class PopUpVC: UIViewController {
 //MARK: IBActions
     @IBAction func sendButtonTapped(_ sender: Any) {
         guard let text = textField.text else { return }
+        print("\(text) and \(mailName)")
         if text != "" {
             if let delegate = delegate {
-                delegate.editName(name: text)
+                delegate.didUpdateMail(name: text)
             }
         }
         dismissPopup()
     }
     
     @IBAction func retakeButtonTapped(_ sender: Any) {
+        if let delegate = delegate {
+            delegate.didRetakeMail()
+        }
         dismissPopup()
     }
     
@@ -91,12 +95,11 @@ class PopUpVC: UIViewController {
         if hasKeyboard {
             self.view.endEditing(false)
         } else {
+            if let delegate = delegate {
+                delegate.didRetakeMail()
+            }
             dismissPopup()
         }
-    }
-    
-    fileprivate func dismissPopup() {
-        self.removeAnimate()
     }
     
     @objc func keyboardWillShow(notification: NSNotification) { //makes the view go up by keyboard's height
