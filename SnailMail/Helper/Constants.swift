@@ -21,3 +21,6 @@ public let kNAME: String = "name"
 
 //Service Constant
 public let dateFormat = "yyyyMMddHHmmss"
+
+//Image constant
+let kBLANKIMAGE: UIImage = UIImage(named: "blankImage")
