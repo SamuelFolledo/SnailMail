@@ -16,8 +16,6 @@ class ScannerVC: UIViewController {
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer! //preview layer
     var cameraImageOutput: AVCapturePhotoOutput!
     let scene = SCNScene() //scene for scannerView
-//    let cameraNode = SCNNode()
-//    let targetNode = SCNNode(geometry: SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0))
     var mails: [String:Mail] = [:]
     var images: [UIImage] = []
     var frameSublayer = CALayer()
@@ -130,7 +128,8 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             displayDetectedText(image: image) {
-                let popUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
+                let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
+                popUpVC.delegate = self
                 self.addChild(popUpVC)
                 popUpVC.view.frame = self.view.frame
                 self.view.addSubview(popUpVC.view)
@@ -140,5 +139,19 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
         } else {
             print("some error here")
         }
+    }
+}
+
+extension ScannerVC: ScannerMailProtocol {
+    func didRetakeMail(mail: Mail) {
+        print("deleting mail = \(mail)")
+    }
+    
+    func didSendMail(mail: Mail) {
+        print("sent mail = \(mail)")
+    }
+    
+    func editName(name: String) {
+        print("mail sent is = \(name)")
     }
 }

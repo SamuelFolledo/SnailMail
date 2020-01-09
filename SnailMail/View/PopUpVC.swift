@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol ScannerMailProtocol {
+    func editName(name: String)
+    func didRetakeMail(mail: Mail)
+    func didSendMail(mail: Mail)
+}
+
 class PopUpVC: UIViewController {
 //MARK: Properties
     var hasKeyboard: Bool = false
+    var delegate: ScannerMailProtocol!
+    
 //MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UnderlinedTextField!
@@ -61,7 +69,13 @@ class PopUpVC: UIViewController {
     
 //MARK: IBActions
     @IBAction func sendButtonTapped(_ sender: Any) {
-        
+        guard let text = textField.text else { return }
+        if text != "" {
+            if let delegate = delegate {
+                delegate.editName(name: text)
+            }
+        }
+        dismissPopup()
     }
     
     @IBAction func retakeButtonTapped(_ sender: Any) {
@@ -79,7 +93,6 @@ class PopUpVC: UIViewController {
     
     fileprivate func dismissPopup() {
         self.removeAnimate()
-        self.view.removeFromSuperview()
     }
     
     @objc func keyboardWillShow(notification: NSNotification) { //makes the view go up by keyboard's height
