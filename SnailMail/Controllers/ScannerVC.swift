@@ -107,7 +107,7 @@ class ScannerVC: UIViewController {
     }
     
     @IBAction func menuButtonTapped(_ sender: Any) {
-        captureImage()
+        print("Menu coming soon")
     }
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
@@ -129,7 +129,14 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let dataProvider = CGDataProvider(data: dataImage as CFData)
             let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
-            displayDetectedText(image: image)
+            displayDetectedText(image: image) {
+                let popUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
+                self.addChild(popUpVC)
+                popUpVC.view.frame = self.view.frame
+                self.view.addSubview(popUpVC.view)
+                popUpVC.didMove(toParent: self)
+            }
+//            displayDetectedText(image: image)
 //            self.images.append(image)
         } else {
             print("some error here")
