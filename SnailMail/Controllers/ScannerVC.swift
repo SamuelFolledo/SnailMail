@@ -56,19 +56,11 @@ class ScannerVC: UIViewController {
     }
     
     fileprivate func displayDetectedText(image: UIImage, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
-        removeFrames() //remove the frames before processing a new image
         processor.processImage(image) { text in
             if self.scannedText != text { //to avoid duplicates
                 self.scannedText = text
             }
             completion?()
-        }
-    }
-    
-    fileprivate func removeFrames() { //method that will remove sublayers, the boxes on each words
-        guard let sublayers = frameSublayer.sublayers else { return }
-        for sublayer in sublayers {
-            sublayer.removeFromSuperlayer()
         }
     }
     
