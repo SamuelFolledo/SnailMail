@@ -37,6 +37,7 @@ class PopUpVC: UIViewController {
         setupViews()
         imageView.image = mailImage
         displayDetectedText(in: imageView)
+        imageView.layer.addSublayer(frameSublayer) //for drawing squares
 //        textField.text = mailName
 //        processor.process(in: imageView) { text, elements in
 //            elements.forEach() { element in
@@ -63,6 +64,7 @@ class PopUpVC: UIViewController {
             elements.forEach() { element in
                 self.frameSublayer.addSublayer(element.shapeLayer) //this controller has a frameSublayer property that is attached to the imageView. Here, you add each element’s shape layer to the sublayer, so that iOS will automatically draw the shape on the image
             }
+            print("Final processed Text = \(text)")
             self.textField.text = text
         // 3
             completion?()
