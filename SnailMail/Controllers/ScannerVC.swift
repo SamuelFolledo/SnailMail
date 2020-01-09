@@ -147,12 +147,18 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
 }
 
 extension ScannerVC: ScannerMailProtocol {
-    func didRetakeMail() {
+    func didRetakeMail(mail: Mail) {
         print("delete mail")
+        deleteMail(objectId: mail.objectId) { (error) in
+            if let error = error {
+                Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
+                return
+            }
+        }
         cameraButton.isEnabled = true
     }
     
-    func didSendMail() {
+    func didSendMail(mail: Mail) {
         print("send mail")
         cameraButton.isEnabled = true
     }
