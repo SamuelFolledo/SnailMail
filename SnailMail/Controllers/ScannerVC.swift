@@ -130,6 +130,8 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             displayDetectedText(image: image) {
                 let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
                 popUpVC.delegate = self
+                popUpVC.mailImage = image
+                popUpVC.mailName = self.scannedText
                 self.addChild(popUpVC)
                 popUpVC.view.frame = self.view.frame
                 self.view.addSubview(popUpVC.view)
