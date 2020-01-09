@@ -30,6 +30,8 @@ class PopUpVC: UIViewController {
         self.view.addGestureRecognizer(tap)
         showAnimate()
         setupKeyboardNotifications()
+        retakeButton.isPopupButton()
+        sendButton.isPopupButton()
     }
     
     fileprivate func setupKeyboardNotifications() {
