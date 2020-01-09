@@ -16,6 +16,20 @@ class ScaledElementProcessor {
       textRecognizer = vision.onDeviceTextRecognizer() //textRecognizer is the main object you can use to detect text in images. Used to recognize the text contained in the image currently displayed by the UIImageView
     }
     
+    func processImage(_ image: UIImage, callback: @escaping (_ text: String) -> Void) { //takes an image and process the texts inside the image //added also an array of shape layers
+        let visionImage = VisionImage(image: image) //ML Kit uses a special VisionImage type. It’s useful because it can contain specific metadata for ML Kit to process the image, such as the image’s orientation
+        textRecognizer.process(visionImage) { result, error in //The textRecognizer has a process method that takes in the VisionImage, and it returns an array of text results in the form of a parameter passed to a closure.
+            guard error == nil,
+                let result = result,
+                !result.text.isEmpty
+                else { //The result could be nil, and, in that case, you’ll want to return an empty string for the callback.
+                    callback("")
+                    return
+            }
+            callback(result.text)
+        }
+    }
+    
 //    func process(in imageView: UIImageView, callback: @escaping (_ text: String) -> Void) {
     func process(in imageView: UIImageView, callback: @escaping (_ text: String, _ scaledElements: [ScaledElement]) -> Void) { //added also an array of shape layers
         guard let image = imageView.image else { return } //check for image, else return or throw an error
