@@ -18,7 +18,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1B-ka-eWp">
                                 <rect key="frame" x="56.5" y="150" width="262.5" height="267"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blankImages" translatesAutoresizingMaskIntoConstraints="NO" id="0x2-Dg-OyQ">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blankImage" translatesAutoresizingMaskIntoConstraints="NO" id="0x2-Dg-OyQ">
                                         <rect key="frame" x="10.5" y="8" width="241.5" height="133.5"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify recipient's name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drT-xV-8gH">
@@ -100,6 +100,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="blankImages" width="300" height="300"/>
+        <image name="blankImage" width="300" height="300"/>
     </resources>
 </document>
