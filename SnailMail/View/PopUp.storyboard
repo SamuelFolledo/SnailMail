@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Pop UpVC-->
         <scene sceneID="O1J-rh-WH3">
             <objects>
-                <viewController storyboardIdentifier="mailPopUpView" id="HJJ-i3-Qfv" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mailPopUpView" id="HJJ-i3-Qfv" customClass="PopUpVC" customModule="SnailMail" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S2P-uo-3z7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,12 +36,18 @@
                                                 <state key="normal" title="Retake">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="retakeButtonTapped:" destination="HJJ-i3-Qfv" eventType="touchUpInside" id="2uT-r8-LaU"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hr-qi-kSK">
                                                 <rect key="frame" x="130.5" y="0.0" width="111" height="51"/>
                                                 <state key="normal" title="Send">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="sendButtonTapped:" destination="HJJ-i3-Qfv" eventType="touchUpInside" id="KS7-dB-hTg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -72,6 +78,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gKt-5C-f56"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="0x2-Dg-OyQ" id="RiT-EM-qeA"/>
+                        <outlet property="retakeButton" destination="qIu-Gu-uh6" id="sj9-rn-OiF"/>
+                        <outlet property="sendButton" destination="3hr-qi-kSK" id="Hsp-w4-4BE"/>
+                        <outlet property="textView" destination="La9-bI-Q9n" id="ZMF-RA-C6B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="leu-Hf-1DQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

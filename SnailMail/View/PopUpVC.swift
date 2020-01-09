@@ -13,6 +13,14 @@ class PopUpVC: UIViewController {
     
 //MARK: IBOutlets
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var textView: UITextView!
+    
+    @IBOutlet weak var retakeButton: UIButton!
+    
+    @IBOutlet weak var sendButton: UIButton!
+    
 //MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +33,13 @@ class PopUpVC: UIViewController {
     }
     
 //MARK: IBActions
+    @IBAction func sendButtonTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func retakeButtonTapped(_ sender: Any) {
+        
+    }
     
 //MARK: Helpers
     
