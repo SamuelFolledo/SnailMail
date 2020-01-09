@@ -101,6 +101,9 @@
                                     <constraint firstAttribute="width" secondItem="dlV-N3-NQm" secondAttribute="height" id="EFz-L4-OF4"/>
                                 </constraints>
                                 <state key="normal" image="blueCircle"/>
+                                <connections>
+                                    <action selector="cameraButtonTapped:" destination="yja-ZF-KDz" eventType="touchUpInside" id="6aC-GT-w0B"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bj2-KK-4d8">
                                 <rect key="frame" x="20" y="20" width="40" height="40"/>
@@ -152,7 +155,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8k5-qI-hSo"/>
                     <connections>
-                        <outlet property="cameraButton" destination="dlV-N3-NQm" id="764-5f-BP7"/>
+                        <outlet property="cameraButton" destination="dlV-N3-NQm" id="PYz-Qp-SOB"/>
                         <outlet property="mailCountLabel" destination="zSc-gb-opk" id="Iik-GL-Irk"/>
                         <outlet property="scannerView" destination="L95-ek-nyg" id="Oqq-jm-lGQ"/>
                     </connections>
