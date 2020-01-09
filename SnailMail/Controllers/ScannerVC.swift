@@ -96,11 +96,11 @@ class ScannerVC: UIViewController {
     
 //MARK: IBActions
     @IBAction func mailButtonTapped(_ sender: Any) {
-        print("All mails coming soon")
+        Service.presentAlert(on: self, title: "All mails coming soon", message: "Please check back in the future")
     }
     
     @IBAction func menuButtonTapped(_ sender: Any) {
-        print("Menu coming soon")
+        Service.presentAlert(on: self, title: "Menu Coming Soon", message: "Please check back in the future")
     }
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
