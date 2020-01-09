@@ -49,12 +49,12 @@ class ScaledElementProcessor {
                 for line in block.lines { //get each lines from block
                     //                    for element in line.elements { //get each element in each lines, think of it like words in each setences
                     let frame = self.createScaledFrame(featureFrame: line.frame, imageSize: image.size, viewFrame: imageView.frame) //calls our createScaledFrame method that gives us the frame we want to give a shape layer to
-                    
                     let shapeLayer = self.createShapeLayer(frame: frame) //The innermost for loop creates the shape layer from the element’s frame, which is then used to construct a new ScaledElement instance.
                     let scaledElement = ScaledElement(frame: line.frame, shapeLayer: shapeLayer)
                     scaledElements.append(scaledElement) //Add the newly created instance to scaledElements.
                 }
                 //                }
+                print("Result from Processor's processor \(result.text)")
                 callback(result.text, scaledElements) //Lastly, the callback is triggered to relay the recognized text
             }
         }
