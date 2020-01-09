@@ -9,7 +9,7 @@
 import UIKit
 
 class UnderlinedTextField: UITextField {
-    private let defaultUnderlineColor = UIColor.black
+    private let defaultUnderlineColor = UIColor.white
     private let bottomLine = UIView()
 
     override func awakeFromNib() {
