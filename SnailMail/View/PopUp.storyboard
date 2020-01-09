@@ -21,13 +21,17 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0x2-Dg-OyQ">
                                         <rect key="frame" x="10.5" y="8" width="241.5" height="133.5"/>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Send to Samuel Folledo?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="La9-bI-Q9n">
-                                        <rect key="frame" x="10.5" y="149.5" width="241.5" height="50.5"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify recipient's name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drT-xV-8gH">
+                                        <rect key="frame" x="10.5" y="146.5" width="241.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="I6S-3V-u7q">
+                                        <rect key="frame" x="10.5" y="168" width="241.5" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
+                                    </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HaQ-e5-zAf">
                                         <rect key="frame" x="10.5" y="208" width="241.5" height="51"/>
                                         <subviews>
@@ -57,17 +61,20 @@
                                 <color key="backgroundColor" red="0.26010626549999999" green="0.39904129510000003" blue="0.69025290009999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="0x2-Dg-OyQ" firstAttribute="top" secondItem="N1B-ka-eWp" secondAttribute="top" constant="8" id="597-YC-RTU"/>
-                                    <constraint firstItem="HaQ-e5-zAf" firstAttribute="width" secondItem="La9-bI-Q9n" secondAttribute="width" id="EuN-BB-ipB"/>
+                                    <constraint firstItem="drT-xV-8gH" firstAttribute="centerX" secondItem="0x2-Dg-OyQ" secondAttribute="centerX" id="7OH-eg-DYc"/>
+                                    <constraint firstItem="I6S-3V-u7q" firstAttribute="centerX" secondItem="drT-xV-8gH" secondAttribute="centerX" id="F4l-KG-eGA"/>
+                                    <constraint firstItem="drT-xV-8gH" firstAttribute="top" secondItem="0x2-Dg-OyQ" secondAttribute="bottom" constant="5" id="FUQ-DP-anm"/>
+                                    <constraint firstItem="HaQ-e5-zAf" firstAttribute="width" secondItem="I6S-3V-u7q" secondAttribute="width" id="Hrc-Ib-aNI"/>
                                     <constraint firstItem="HaQ-e5-zAf" firstAttribute="height" secondItem="N1B-ka-eWp" secondAttribute="height" multiplier="1:4" constant="-16" id="IOg-l2-KVM"/>
-                                    <constraint firstItem="HaQ-e5-zAf" firstAttribute="top" secondItem="La9-bI-Q9n" secondAttribute="bottom" constant="8" id="Pbc-N3-G87"/>
-                                    <constraint firstItem="La9-bI-Q9n" firstAttribute="top" secondItem="0x2-Dg-OyQ" secondAttribute="bottom" constant="8" id="Xm5-Px-GsI"/>
+                                    <constraint firstItem="I6S-3V-u7q" firstAttribute="top" secondItem="drT-xV-8gH" secondAttribute="bottom" constant="2" id="NSs-U4-JVB"/>
+                                    <constraint firstItem="drT-xV-8gH" firstAttribute="width" secondItem="0x2-Dg-OyQ" secondAttribute="width" id="Qaw-FU-tFF"/>
                                     <constraint firstAttribute="baseline" secondItem="HaQ-e5-zAf" secondAttribute="bottom" constant="8" id="aWc-eJ-BCA"/>
                                     <constraint firstItem="0x2-Dg-OyQ" firstAttribute="centerX" secondItem="N1B-ka-eWp" secondAttribute="centerX" id="bxO-7X-36a"/>
-                                    <constraint firstItem="La9-bI-Q9n" firstAttribute="centerX" secondItem="0x2-Dg-OyQ" secondAttribute="centerX" id="d06-hl-kDv"/>
+                                    <constraint firstItem="I6S-3V-u7q" firstAttribute="width" secondItem="drT-xV-8gH" secondAttribute="width" id="h0q-i0-h9A"/>
                                     <constraint firstItem="0x2-Dg-OyQ" firstAttribute="width" secondItem="N1B-ka-eWp" secondAttribute="width" multiplier="0.92" id="k4p-3P-FYH"/>
-                                    <constraint firstItem="HaQ-e5-zAf" firstAttribute="centerX" secondItem="La9-bI-Q9n" secondAttribute="centerX" id="nH2-sW-dT4"/>
+                                    <constraint firstItem="HaQ-e5-zAf" firstAttribute="top" secondItem="I6S-3V-u7q" secondAttribute="bottom" constant="5" id="mxV-Fj-WmI"/>
+                                    <constraint firstItem="HaQ-e5-zAf" firstAttribute="centerX" secondItem="I6S-3V-u7q" secondAttribute="centerX" id="qhZ-a7-fUt"/>
                                     <constraint firstItem="0x2-Dg-OyQ" firstAttribute="height" secondItem="N1B-ka-eWp" secondAttribute="height" multiplier="0.5" id="sNP-dT-7S5"/>
-                                    <constraint firstItem="La9-bI-Q9n" firstAttribute="width" secondItem="0x2-Dg-OyQ" secondAttribute="width" id="wxf-aU-aMt"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -84,7 +91,6 @@
                         <outlet property="imageView" destination="0x2-Dg-OyQ" id="RiT-EM-qeA"/>
                         <outlet property="retakeButton" destination="qIu-Gu-uh6" id="sj9-rn-OiF"/>
                         <outlet property="sendButton" destination="3hr-qi-kSK" id="Hsp-w4-4BE"/>
-                        <outlet property="textView" destination="La9-bI-Q9n" id="ZMF-RA-C6B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="leu-Hf-1DQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
