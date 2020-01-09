@@ -17,6 +17,7 @@ public let kOBJECTID: String = "objectId"
 public let kCREATEDAT: String = "createdAt"
 public let kUPDATEDAT: String = "updatedAt"
 public let kSCANNEDTEXT: String = "scannedText"
+public let kNAME: String = "name"
 
 //Service Constant
 public let dateFormat = "yyyyMMddHHmmss"

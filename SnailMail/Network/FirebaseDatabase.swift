@@ -17,7 +17,6 @@ func saveMail(text: String, completion: @escaping (_ error: String?) -> Void) {
     }
 }
 
-
 //MARK: Save Mail Helper - Save in Database
 func saveDataInDatabase(data: [String: Any], completion: @escaping (_ error: String?) -> Void) {
     let ref = firDatabase.child(kMAIL).childByAutoId()
@@ -93,6 +92,6 @@ func mailDictionaryFrom(mail: Mail) -> NSDictionary {
     let createdAt = Service.dateFormatter().string(from: mail.createdAt)
     let updatedAt = Service.dateFormatter().string(from: mail.updatedAt)
     return NSDictionary(
-        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText],
-                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying]) //how you create an NSDictionary
+        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText, mail.name],
+                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying, kNAME as NSCopying]) //how you create an NSDictionary
 }

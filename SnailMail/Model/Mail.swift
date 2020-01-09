@@ -14,12 +14,14 @@ class Mail {
     let createdAt: Date
     let updatedAt: Date
     let scannedText: String
+    let name: String
     
-    init(_objectId: String, _createdAt: Date, _updatedAt: Date, _scannedText: String) {
+    init(_objectId: String, _createdAt: Date, _updatedAt: Date, _scannedText: String, _name: String = "") {
         objectId = _objectId
         createdAt = _createdAt
         updatedAt = _updatedAt
         scannedText = _scannedText
+        name = _name
     }
     
     init(_dictionary: NSDictionary) { //in order to save something to our Firebase, we need to convert it to an NSDictionary which is a type JSON
@@ -36,6 +38,11 @@ class Mail {
             self.scannedText = scannedText
         } else {
             scannedText = ""
+        }
+        if let name = _dictionary[kNAME] as? String {
+            self.name = name
+        } else {
+            self.name = ""
         }
     }
 } //end of class
