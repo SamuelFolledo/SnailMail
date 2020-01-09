@@ -18,16 +18,8 @@ class PopUpVC: UIViewController {
 //MARK: Properties
     var hasKeyboard: Bool = false
     var delegate: ScannerMailProtocol!
-    var mailImage: UIImage = kBLANKIMAGE {
-        didSet {
-            imageView.image = mailImage
-        }
-    }
-    var mailName: String = "" {
-        didSet {
-            textField.text = mailName
-        }
-    }
+    var mailImage: UIImage = kBLANKIMAGE
+    var mailName: String = ""
     
 //MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
@@ -39,6 +31,8 @@ class PopUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        imageView.image = mailImage
+        textField.text = mailName
     }
     
 //MARK: Private Methods
