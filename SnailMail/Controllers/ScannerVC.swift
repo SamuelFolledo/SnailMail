@@ -46,6 +46,8 @@ class ScannerVC: UIViewController {
     fileprivate func setupViews() {
         view.backgroundColor = .black
         scannerView.layer.addSublayer(frameSublayer)
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(viewPinched(recognizer:)))
+        scannerView.addGestureRecognizer(pinch)
     }
     
     fileprivate func displayDetectedText(image: UIImage, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
@@ -122,7 +124,7 @@ class ScannerVC: UIViewController {
     }
     
 //MARK: Helpers
-    
+
 }
 
 //MARK: Extensions
@@ -177,5 +179,26 @@ extension ScannerVC: ScannerMailProtocol {
     func didUpdateMail(name: String) {
         print("updated mail's name = \(name)")
         cameraButton.isEnabled = true
+    }
+}
+
+extension ScannerVC: UIGestureRecognizerDelegate {
+    @objc func viewPinched(recognizer: UIPinchGestureRecognizer) { //pinch gesture for zooming camera in and out
+        switch recognizer.state {
+            case .began:
+                recognizer.scale = device.videoZoomFactor
+            case .changed:
+                let scale = recognizer.scale
+                do {
+                     try device.lockForConfiguration()
+                     device.videoZoomFactor = max(device.minAvailableVideoZoomFactor, min(scale, device.maxAvailableVideoZoomFactor))
+                     device.unlockForConfiguration()
+                }
+                catch {
+                    Service.presentAlert(on: self, title: "Pinch Error", message: error.localizedDescription)
+                }
+            default:
+                break
+        }
     }
 }
