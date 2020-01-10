@@ -125,6 +125,33 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUO-mX-8hl">
+                                <rect key="frame" x="112.5" y="147.5" width="150" height="150"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correct" translatesAutoresizingMaskIntoConstraints="NO" id="ieu-Fl-grL">
+                                        <rect key="frame" x="19" y="0.0" width="112.5" height="112.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ieu-Fl-grL" secondAttribute="height" id="uya-2g-vd4"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-rs-5Mn">
+                                        <rect key="frame" x="0.0" y="123.5" width="150" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" red="0.25882352939999997" green="0.40000000000000002" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="lQB-rs-5Mn" firstAttribute="width" secondItem="hUO-mX-8hl" secondAttribute="width" id="53O-wJ-8Sa"/>
+                                    <constraint firstItem="lQB-rs-5Mn" firstAttribute="centerX" secondItem="hUO-mX-8hl" secondAttribute="centerX" id="BXO-EP-l1d"/>
+                                    <constraint firstItem="ieu-Fl-grL" firstAttribute="width" secondItem="hUO-mX-8hl" secondAttribute="width" multiplier="0.75" id="TlW-m0-i41"/>
+                                    <constraint firstAttribute="bottom" secondItem="lQB-rs-5Mn" secondAttribute="bottom" constant="5" id="ZCc-Ve-otB"/>
+                                    <constraint firstAttribute="top" secondItem="ieu-Fl-grL" secondAttribute="top" id="giG-32-k7N"/>
+                                    <constraint firstItem="ieu-Fl-grL" firstAttribute="centerX" secondItem="hUO-mX-8hl" secondAttribute="centerX" id="qrC-gB-dfN"/>
+                                    <constraint firstAttribute="width" secondItem="hUO-mX-8hl" secondAttribute="height" id="yfM-FR-zwG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -139,7 +166,9 @@
                             <constraint firstItem="zSc-gb-opk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bj2-KK-4d8" secondAttribute="trailing" constant="8" symbolic="YES" id="QVG-KL-E1e"/>
                             <constraint firstItem="Mea-CA-IpI" firstAttribute="trailing" secondItem="JmZ-r7-wDy" secondAttribute="trailing" constant="20" id="UGm-4e-jb6"/>
                             <constraint firstItem="dlV-N3-NQm" firstAttribute="centerX" secondItem="L95-ek-nyg" secondAttribute="centerX" id="Uqe-In-R6g"/>
+                            <constraint firstItem="hUO-mX-8hl" firstAttribute="centerX" secondItem="L95-ek-nyg" secondAttribute="centerX" id="ZAO-EY-nu0"/>
                             <constraint firstItem="JmZ-r7-wDy" firstAttribute="bottom" secondItem="Bj2-KK-4d8" secondAttribute="bottom" id="ZWd-LO-gVJ"/>
+                            <constraint firstItem="hUO-mX-8hl" firstAttribute="width" secondItem="L95-ek-nyg" secondAttribute="width" multiplier="0.4" id="cFt-2J-HkF"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="top" secondItem="Mea-CA-IpI" secondAttribute="top" id="dzr-MD-RWF"/>
                             <constraint firstItem="Bj2-KK-4d8" firstAttribute="width" secondItem="dlV-N3-NQm" secondAttribute="width" multiplier="3:5" constant="-5" id="hrV-1j-TPh"/>
                             <constraint firstItem="dlV-N3-NQm" firstAttribute="width" secondItem="L95-ek-nyg" secondAttribute="width" multiplier="0.2" id="k3x-ov-YGi"/>
@@ -149,6 +178,7 @@
                             <constraint firstItem="Bj2-KK-4d8" firstAttribute="leading" secondItem="Mea-CA-IpI" secondAttribute="leading" constant="20" id="qbR-6L-yDY"/>
                             <constraint firstItem="JmZ-r7-wDy" firstAttribute="width" secondItem="dlV-N3-NQm" secondAttribute="width" multiplier="3:5" constant="10" id="tgk-hd-ZVY"/>
                             <constraint firstItem="Bj2-KK-4d8" firstAttribute="height" secondItem="dlV-N3-NQm" secondAttribute="height" multiplier="3:5" constant="-5" id="uB1-Ci-WfA"/>
+                            <constraint firstItem="hUO-mX-8hl" firstAttribute="centerY" secondItem="L95-ek-nyg" secondAttribute="centerY" multiplier="2:3" id="wA0-H2-mTR"/>
                             <constraint firstItem="JmZ-r7-wDy" firstAttribute="leading" secondItem="Bj2-KK-4d8" secondAttribute="trailing" priority="500" constant="240" id="zJQ-Ah-nIh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mea-CA-IpI"/>
@@ -158,6 +188,9 @@
                         <outlet property="cameraButton" destination="dlV-N3-NQm" id="PYz-Qp-SOB"/>
                         <outlet property="mailCountLabel" destination="zSc-gb-opk" id="Iik-GL-Irk"/>
                         <outlet property="scannerView" destination="L95-ek-nyg" id="Oqq-jm-lGQ"/>
+                        <outlet property="successImageView" destination="ieu-Fl-grL" id="vAL-18-wAP"/>
+                        <outlet property="successLabel" destination="lQB-rs-5Mn" id="jNP-kU-N8t"/>
+                        <outlet property="successView" destination="hUO-mX-8hl" id="EYH-ZY-NAY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pc-yb-9Fh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -186,6 +219,7 @@
     <resources>
         <image name="blueCircle" width="768" height="768"/>
         <image name="camera" width="58" height="46"/>
+        <image name="correct" width="128" height="128"/>
         <image name="mail" width="496" height="369"/>
         <image name="menu" width="128" height="128"/>
         <image name="scanned-text" width="654" height="999"/>
