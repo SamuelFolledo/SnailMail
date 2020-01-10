@@ -191,11 +191,49 @@
                         <outlet property="successImageView" destination="ieu-Fl-grL" id="vAL-18-wAP"/>
                         <outlet property="successLabel" destination="lQB-rs-5Mn" id="jNP-kU-N8t"/>
                         <outlet property="successView" destination="hUO-mX-8hl" id="EYH-ZY-NAY"/>
+                        <segue destination="4j1-pL-fPm" kind="presentation" identifier="toMailsTableVC" id="svQ-hN-1cU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pc-yb-9Fh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2069.5999999999999" y="79.610194902548727"/>
+        </scene>
+        <!--Mails TableVC-->
+        <scene sceneID="mQv-Rn-aJE">
+            <objects>
+                <viewController id="D81-v0-RsK" customClass="MailsTableVC" customModule="SnailMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fbL-L4-532">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aMh-JD-5Dd">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="centerY" secondItem="XmK-zb-EiQ" secondAttribute="centerY" id="bTe-bf-TgA"/>
+                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="width" secondItem="XmK-zb-EiQ" secondAttribute="width" id="bs9-I9-q37"/>
+                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="centerX" secondItem="XmK-zb-EiQ" secondAttribute="centerX" id="eRu-3v-XZL"/>
+                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="height" secondItem="XmK-zb-EiQ" secondAttribute="height" id="gMJ-dj-jyA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XmK-zb-EiQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NUt-dK-t7e">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="fkI-On-aOW">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="D81-v0-RsK" id="j2U-CB-TUH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="aMh-JD-5Dd" id="hc7-aE-s9M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i2D-yl-OlG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4138.3999999999996" y="79.610194902548727"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oJ8-Tc-DLT">
@@ -214,6 +252,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAN-fg-vPf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="79.6875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lLw-dt-wOj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="4j1-pL-fPm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fFg-Nr-VNX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="D81-v0-RsK" kind="relationship" relationship="rootViewController" id="bNl-Fn-UxF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2pZ-B5-7K8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3197.5999999999999" y="79.610194902548727"/>
         </scene>
     </scenes>
     <resources>

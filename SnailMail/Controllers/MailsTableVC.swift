@@ -8,10 +8,12 @@
 
 import UIKit
 
-class MailsTableVC: UITableViewController {
+class MailsTableVC: UIViewController {
 //MARK: Properties
+    var mails: [String: Mail] = [:]
     
 //MARK: IBOutlets
+    @IBOutlet weak var tableView: UITableView!
     
 //MARK: App Life Cycle
     override func viewDidLoad() {
@@ -21,10 +23,13 @@ class MailsTableVC: UITableViewController {
     
 //MARK: Private Methods
     fileprivate func setupViews() {
-        view.backgroundColor = .black
+        
     }
     
 //MARK: IBActions
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 //MARK: Helpers
     
