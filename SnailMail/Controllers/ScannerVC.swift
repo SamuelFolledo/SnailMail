@@ -109,6 +109,12 @@ class ScannerVC: UIViewController {
         cameraImageOutput.capturePhoto(with: settings, delegate: self)
     }
     
+    fileprivate func getMailName(text: String) -> String {
+        var name = ""
+        
+        return name
+    }
+    
 //MARK: IBActions
     @IBAction func mailButtonTapped(_ sender: Any) {
         Service.presentAlert(on: self, title: "All mails coming soon", message: "Please check back in the future")
@@ -140,7 +146,8 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan in properly
             displayDetectedText(image: rotatedImage!) {
-                saveMail(text: self.scannedText) { (mail, error) in
+                let mailText = self.getMailName(text: self.scannedText)
+                saveMail(text: mailText) { (mail, error) in
                     if let error = error {
                         Service.presentAlert(on: self, title: "Error", message: error)
                         return
