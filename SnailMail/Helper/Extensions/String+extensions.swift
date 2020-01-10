@@ -12,7 +12,7 @@ extension String {
     var isAllNumbers: Bool { //regex to see if a word/string are all numbers
         let charCount = self.count
         print("\(charCount) = \(self)")
-        let integerRegEx  = "[0-9]{\(charCount - 1),}"
+        let integerRegEx  = "[0-9]{\(charCount),}"
         let testCase = NSPredicate(format:"SELF MATCHES %@", integerRegEx)
         let containsNumber = testCase.evaluate(with: self)
         return containsNumber
