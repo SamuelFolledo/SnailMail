@@ -10,10 +10,13 @@
 		333F486723C67512005DED20 /* ScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486623C67512005DED20 /* ScannerVC.swift */; };
 		333F486923C67548005DED20 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486823C67548005DED20 /* SettingsVC.swift */; };
 		333F486B23C67563005DED20 /* MailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486A23C67563005DED20 /* MailsTableVC.swift */; };
+		333FAA3123C88C38004DF5D0 /* MailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FAA3023C88C38004DF5D0 /* MailAPI.swift */; };
+		333FAA3523C88D1A004DF5D0 /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FAA3423C88D1A004DF5D0 /* ErrorResult.swift */; };
+		333FAA3723C88D6B004DF5D0 /* MailOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333FAA3623C88D6B004DF5D0 /* MailOwner.swift */; };
 		3340ACCD23C7D08300F80D6A /* ImageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3340ACCC23C7D08300F80D6A /* ImageDetailVC.swift */; };
 		3340ACCF23C8343400F80D6A /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3340ACCE23C8343300F80D6A /* String+extensions.swift */; };
 		335E485023C562C800C401B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 335E484F23C562C800C401B2 /* GoogleService-Info.plist */; };
-		335E485223C568CD00C401B2 /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485123C568CD00C401B2 /* FirebaseDatabase.swift */; };
+		335E485223C568CD00C401B2 /* MailDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485123C568CD00C401B2 /* MailDatabase.swift */; };
 		335E485523C56FD700C401B2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485423C56FD700C401B2 /* Service.swift */; };
 		335E485723C57EED00C401B2 /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485623C57EED00C401B2 /* Mail.swift */; };
 		335E485923C580CC00C401B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E485823C580CC00C401B2 /* Constants.swift */; };
@@ -38,10 +41,13 @@
 		333F486623C67512005DED20 /* ScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerVC.swift; sourceTree = "<group>"; };
 		333F486823C67548005DED20 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		333F486A23C67563005DED20 /* MailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailsTableVC.swift; sourceTree = "<group>"; };
+		333FAA3023C88C38004DF5D0 /* MailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailAPI.swift; sourceTree = "<group>"; };
+		333FAA3423C88D1A004DF5D0 /* ErrorResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResult.swift; sourceTree = "<group>"; };
+		333FAA3623C88D6B004DF5D0 /* MailOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailOwner.swift; sourceTree = "<group>"; };
 		3340ACCC23C7D08300F80D6A /* ImageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailVC.swift; sourceTree = "<group>"; };
 		3340ACCE23C8343300F80D6A /* String+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
 		335E484F23C562C800C401B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		335E485123C568CD00C401B2 /* FirebaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabase.swift; sourceTree = "<group>"; };
+		335E485123C568CD00C401B2 /* MailDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailDatabase.swift; sourceTree = "<group>"; };
 		335E485423C56FD700C401B2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		335E485623C57EED00C401B2 /* Mail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mail.swift; sourceTree = "<group>"; };
 		335E485823C580CC00C401B2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -78,10 +84,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		333FAA3223C88C78004DF5D0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				333FAA3023C88C38004DF5D0 /* MailAPI.swift */,
+				333FAA3323C88C81004DF5D0 /* ModelAPI */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		333FAA3323C88C81004DF5D0 /* ModelAPI */ = {
+			isa = PBXGroup;
+			children = (
+				333FAA3623C88D6B004DF5D0 /* MailOwner.swift */,
+				333FAA3423C88D1A004DF5D0 /* ErrorResult.swift */,
+			);
+			path = ModelAPI;
+			sourceTree = "<group>";
+		};
 		335E485323C568D400C401B2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				335E485123C568CD00C401B2 /* FirebaseDatabase.swift */,
+				335E485123C568CD00C401B2 /* MailDatabase.swift */,
+				333FAA3223C88C78004DF5D0 /* API */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -337,11 +362,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				335E485723C57EED00C401B2 /* Mail.swift in Sources */,
+				333FAA3523C88D1A004DF5D0 /* ErrorResult.swift in Sources */,
 				33C9645423C3E15500141B0A /* ScaledElement.swift in Sources */,
 				335E485523C56FD700C401B2 /* Service.swift in Sources */,
-				335E485223C568CD00C401B2 /* FirebaseDatabase.swift in Sources */,
+				335E485223C568CD00C401B2 /* MailDatabase.swift in Sources */,
 				33EDFBBE23C6E08900EA2AE2 /* UnderlinedTextField.swift in Sources */,
 				33C9643D23C3D6CD00141B0A /* ViewController.swift in Sources */,
+				333FAA3723C88D6B004DF5D0 /* MailOwner.swift in Sources */,
 				333F486923C67548005DED20 /* SettingsVC.swift in Sources */,
 				335E485923C580CC00C401B2 /* Constants.swift in Sources */,
 				33C9645223C3E14900141B0A /* ScaledElementProcessor.swift in Sources */,
@@ -349,6 +376,7 @@
 				33EDFBBB23C6DCB100EA2AE2 /* UIButton+extensions.swift in Sources */,
 				33C9643923C3D6CD00141B0A /* AppDelegate.swift in Sources */,
 				33C9643B23C3D6CD00141B0A /* SceneDelegate.swift in Sources */,
+				333FAA3123C88C38004DF5D0 /* MailAPI.swift in Sources */,
 				333F486723C67512005DED20 /* ScannerVC.swift in Sources */,
 				3340ACCF23C8343400F80D6A /* String+extensions.swift in Sources */,
 				33EDFBB923C6C81500EA2AE2 /* PopUpVC.swift in Sources */,

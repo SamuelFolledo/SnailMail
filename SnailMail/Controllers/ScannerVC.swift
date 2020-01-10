@@ -196,6 +196,14 @@ extension ScannerVC: ScannerMailProtocol {
     func didSendMail(mail: Mail) {
         print("send mail")
         cameraButton.isEnabled = true
+        mail.sendAndGetData { (data, error) in
+            if let error = error {
+                Service.presentAlert(on: self, title: "Error", message: error.localizedDescription)
+                return
+            }
+            guard let data = data else { return }
+            
+        }
     }
     
     func didUpdateMail(name: String) {
