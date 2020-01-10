@@ -12,21 +12,18 @@ import AVFoundation //for scannerView
 
 class ScannerVC: UIViewController {
 //MARK: Properties
+    var device: AVCaptureDevice!
     var cameraSession: AVCaptureSession! //to connect a video input, like a camera
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer! //preview layer
     var cameraImageOutput: AVCapturePhotoOutput!
-    let scene = SCNScene() //scene for scannerView
-    var mails: [String:Mail] = [:]
-    var capturedImage: UIImage? = nil
-    var images: [UIImage] = []
-    var frameSublayer = CALayer()
+    var mails: [String:Mail] = [:] //???????
+    var frameSublayer = CALayer() //???????
     var scannedText: String = "Detected text can be edited here." {
         didSet {
-            print("\(kSCANNEDTEXT) = \(scannedText)")
+            print("Scanned Text = \(scannedText)")
         }
     }
     let processor = ScaledElementProcessor()
-    var deviceOrientation = UIImage.Orientation.down
     
 //MARK: IBOutlets
     @IBOutlet weak var scannerView: SCNView!
@@ -64,8 +61,8 @@ class ScannerVC: UIViewController {
         cameraSession = AVCaptureSession()
         cameraSession.sessionPreset = AVCaptureSession.Preset.photo
         cameraImageOutput = AVCapturePhotoOutput()
-        if let device = AVCaptureDevice.default(for: .video),
-           let input = try? AVCaptureDeviceInput(device: device) {
+        device = AVCaptureDevice.default(for: .video)
+        if let input = try? AVCaptureDeviceInput(device: device) {
             if (cameraSession.canAddInput(input)) {
                 cameraSession.addInput(input)
                 if (cameraSession.canAddOutput(cameraImageOutput)) {
