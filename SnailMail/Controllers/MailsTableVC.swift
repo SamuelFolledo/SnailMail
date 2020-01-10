@@ -23,7 +23,8 @@ class MailsTableVC: UIViewController {
     
 //MARK: Private Methods
     fileprivate func setupViews() {
-        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
 //MARK: IBActions
@@ -36,5 +37,18 @@ class MailsTableVC: UIViewController {
 }
 
 //MARK: Extensions
+extension MailsTableVC: UITableViewDelegate {
+    
+}
 
-
+extension MailsTableVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        mails.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    
+}
