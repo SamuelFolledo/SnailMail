@@ -22,7 +22,7 @@ class ImageDetailVC: UIViewController {
     
 //MARK: Private Methods
     fileprivate func setupViews() {
-        view.backgroundColor = .black
+        imageView.image = image
     }
     
 //MARK: IBActions
