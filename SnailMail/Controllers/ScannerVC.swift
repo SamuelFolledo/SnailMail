@@ -202,6 +202,15 @@ extension ScannerVC: ScannerMailProtocol {
                 return
             }
             guard let data = data else { return }
+            if let success = data[kSUCCESS] as? String, success == "false"  { //if not success, show error
+                guard let dataError = data[kERROR] as? String else { return }
+                Service.presentAlert(on: self, title: "Error", message: dataError)
+                return
+            }
+//            let note = data[kNOTE] as? String //currently optional
+            let name = data[kNAME] as? String
+            let slackID = data[kSLACKID] as? String
+            print("NAME = \(name), SLACKID = \(slackID)")
             
         }
     }
