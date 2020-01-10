@@ -127,6 +127,7 @@ class ScannerVC: UIViewController {
             }
             break //stop the loop because we only want the first instance of street suffix
         }
+                    if streetSuffix.contains(word.lowercased()) { //if that line contains a street suffix word, then the index after the current index should be a name
         return name
     }
     
