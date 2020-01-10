@@ -34,6 +34,7 @@ class ScannerVC: UIViewController {
         super.viewDidLoad()
         setupViews()
         configureVideoOrientation()
+        downloadMails()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,6 +110,19 @@ class ScannerVC: UIViewController {
         cameraImageOutput.capturePhoto(with: settings, delegate: self)
     }
     
+    func downloadMails() {
+        self.mails.removeAll()
+        let mailRef = firDatabase.child(kMAIL)
+        mailRef.observe(.childAdded, with: { (snapshot) in
+            if snapshot.exists() {
+                guard let mailDic = snapshot.value as? [String: Any] else { return }
+                let mail: Mail = Mail(_dictionary: mailDic as NSDictionary)
+                self.mails[mail.objectId] = mail
+            }
+            self.mailCountLabel.text = "\(self.mails.count)"
+        }, withCancel: nil)
+    }
+    
     fileprivate func getMailName(text: String) -> String { //from scannedText, get the name
         /* ALGORITHM to find a name from the scanned text
          1. put string in an array of strings
@@ -172,7 +186,7 @@ class ScannerVC: UIViewController {
     
 //MARK: IBActions
     @IBAction func mailButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toMailsTableVC", sender: nil)
+        performSegue(withIdentifier: "toMailsTableVC", sender: mails)
     }
     
     @IBAction func menuButtonTapped(_ sender: Any) {
