@@ -6,7 +6,7 @@
 //  Copyright © 2020 SamuelFolledo. All rights reserved.
 //
 
-enum ErrorResult: Error { //APPError enum which shows all possible errors
+enum APIError: Error { //APPError enum which shows all possible errors
     case networkError(Error)
     case dataNotFound
     case jsonParsingError(Error)

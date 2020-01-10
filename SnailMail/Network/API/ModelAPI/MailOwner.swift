@@ -8,7 +8,7 @@
 
 enum Result<T> { //Result enum to show success or failure
     case success(T)
-    case failure(ErrorResult)
+    case failure(APIError)
 }
 
 struct MailOwner: Codable {
@@ -16,5 +16,5 @@ struct MailOwner: Codable {
     let name: String?
     let note: String?
     let slackID: String?
-    let success: Bool
+    let success: String
 }
