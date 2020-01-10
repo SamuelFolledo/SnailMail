@@ -9,7 +9,12 @@
 import UIKit
 
 class MailCell: UITableViewCell {
-
+    
+    var mail: Mail!
+    
+    @IBOutlet weak var mailImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +22,9 @@ class MailCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+        mailImageView.image = kBLANKIMAGE
+        nameLabel.text = mail.name
     }
 
 }
