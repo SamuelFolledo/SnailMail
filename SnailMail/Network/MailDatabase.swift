@@ -1,5 +1,5 @@
 //
-//  FirebaseDatabase.swift
+//  MailDatabase.swift
 //  SnailMail
 //
 //  Created by Macbook Pro 15 on 1/7/20.
@@ -7,7 +7,7 @@
 //
 import Foundation
 
-//MARK: Create Mail
+//MARK: Create Mail - Firebase
 func saveMail(text: String, completion: @escaping (_ mail: Mail?, _ error: String?) -> Void) {
     saveDataInDatabase(data: [kSCANNEDTEXT: text]) { (mailId, error) in
         if let error = error {
