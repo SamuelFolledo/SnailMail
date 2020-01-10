@@ -13,11 +13,10 @@ extension String {
         return self.components(separatedBy: "\n")
     }
     
-    var byWords: [String] { //turns string to an array of strings
+    var byWords: [String] { //turns string to an array of strings https://exceptionshub.com/extract-last-word-in-string-with-swift.html
         var byWords:[String] = []
-        enumerateSubstrings(in: startIndex..<endIndex, options: .byWords) {
-            guard let word = $0 else { return }
-            print($1,$2,$3)
+        enumerateSubstrings(in: startIndex..<endIndex, options: .byWords) { (word, range1, range2, shouldStop) in //Enumerates the substrings of the specified type in the specified range of the string.
+            guard let word = word else { return }
             byWords.append(word)
         }
         return byWords
