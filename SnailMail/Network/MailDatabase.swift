@@ -58,20 +58,18 @@ func fetchMailWith(mailId: String, completion: @escaping (_ mail: Mail?) -> Void
 }
 
 //MARK: Update Mail
-func updateCurrentMail(mail: Mail, withValues values: [String : Any], withBlock: @escaping(_ success: Bool) -> Void) { //will pass a dictionary with an Any value, with running a background thread escaping, pass success type boolean, so we can return if user was updated successfully, no return here so void
+func updateMail(mail: Mail, withBlock: @escaping(_ success: Bool) -> Void) { //will pass a dictionary with an Any value, with running a background thread escaping, pass success type boolean, so we can return if user was updated successfully, no return here so void
     if UserDefaults.standard.object(forKey: mail.objectId) != nil {
-        let mailObject = mailToDictionary(mail: mail).mutableCopy() as! NSMutableDictionary //this makes the normal dictionary a mutable dictionary and specify it as NSMutableDictionary
-        mailObject.setValuesForKeys(values) //pass our values parameter and to pass it to mailObject, now we can save our user to Firebase
+        guard let mailDictionary: [String: Any] = mailToDictionary(mail: mail) as? [String : Any] else { print("update mail could not convert to dictionary"); return }
         let ref = firDatabase.child(kMAIL).child(mail.objectId)
-        ref.updateChildValues(values) { (error, ref) in
+        ref.updateChildValues(mailDictionary) { (error, ref) in
             if error != nil {
                 withBlock(false)
                 return
             }
-            UserDefaults.standard.set(mailObject, forKey: mail.objectId) //update our user in our UserDefaults because save might create a new instance of it
+            UserDefaults.standard.set(mailDictionary, forKey: mail.objectId) //update our user in our UserDefaults because save might create a new instance of it
             UserDefaults.standard.synchronize()
             withBlock(true)
-            
         }
     }
 }
