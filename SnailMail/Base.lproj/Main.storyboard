@@ -210,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="591"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mailCell" rowHeight="65" id="oBZ-3j-366">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mailCell" rowHeight="65" id="oBZ-3j-366" customClass="MailCell" customModule="SnailMail" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oBZ-3j-366" id="p5C-sE-ji9">
@@ -239,6 +239,10 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="lZB-BT-ZbT" secondAttribute="trailing" id="snc-Y9-lwn"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mailImageView" destination="442-nk-OWw" id="jum-Bg-z1G"/>
+                                            <outlet property="nameLabel" destination="lZB-BT-ZbT" id="QNq-CY-jJA"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
