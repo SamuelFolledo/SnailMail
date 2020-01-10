@@ -11,10 +11,10 @@ import UIKit
 extension UIView {
     func enlargeThenShrinkAnimation() {
         self.isHidden = false
-        UIView.animate(withDuration: 1.5, animations: {
+        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
         }) { (finished) in
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 1, delay: 3, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
 //                self.transform = CGAffineTransform.identity
                 self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
             }) { (finished) in
