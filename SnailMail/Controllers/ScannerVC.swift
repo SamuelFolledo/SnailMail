@@ -114,38 +114,71 @@ class ScannerVC: UIViewController {
          */
         var name: String = ""
         let lines: [String] = text.lines //turns multi-line text(String) into an array of strings
-        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased()) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
-            var trialCount: Int = 1
-            name = lines[lines.count - trialCount - index - 1] //nameLine should be the index before the line that has the last word as a street suffix. Since array is reverse(), we had to subtract - index and another - 1 to get the line on top of it
-            while impossibleNames.contains(name){ //extra error checker
-                if trialCount > 10 { //if too many trials then break
+//        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased().filter(kALLALPHANUM.contains)) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
+        for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers {
+            for word in line.byWords where streetSuffix.contains(word.lowercased().filter(kALLALPHANUM.contains)) { //for each word in line where it contains in streetSuffix array...
+//                var trialCount: Int = 1
+                print("1)\(line) in index \(index)::: \(word)")
+                name = lines[lines.count - 1 - index - 1] //name will be the line on top of this line's index
+                if impossibleNames.contains(name.lowercased().filter(kALLALPHANUM.contains)) { //if name is one of the illegal name, then skip and continue
+                    print("1) \(name) is ILLEGAL")
                     name = ""
-                    break
+                    continue
+                } else { //if not an illegal name
+                    print("1) \(name) ✅")
+                    return name
                 }
-                trialCount += 1
-                name = lines[lines.count - trialCount - index - 1]
+//                while impossibleNames.contains(name){ //extra error checker
+//                    print("1) \(name) is in impossibleNames")
+//                    if trialCount > (lines.count - index) { //if too many trials then break
+//                        name = ""
+//                        break
+//                    }
+//                    print("\(index) --- \(name) --- \(trialCount)!")
+//                    trialCount += 1
+//                    name = lines[lines.count - trialCount - index - 1]
+//                }
             }
-            break //stop the loop because we only want the first instance of street suffix
+//            var trialCount: Int = 1
+//            print("\(index) --- \(line)")
+//            name = lines[lines.count - trialCount - index - 1] //nameLine should be the index before the line that has the last word as a street suffix. Since array is reverse(), we had to subtract - index and another - 1 to get the line on top of it
+            
+//            print("\(index) --- \(name) --- \(trialCount)")
+//            while impossibleNames.contains(name){ //extra error checker
+//                if trialCount > (lines.count - index) { //if too many trials then break
+//                    name = ""
+//                    break
+//                }
+//                print("\(index) --- \(name) --- \(trialCount)!")
+//                trialCount += 1
+//                name = lines[lines.count - trialCount - index - 1]
+//            }
+//            break //stop the loop because we only want the first instance of street suffix
         }
-        if name == "" { //if name is still empty, apply SECOND ALGORITHM
-            for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers { //loop through each lines in reversed() where line's firstWord is consists of integers only
-                for word in line.byWords { //loop through each word in that line
-                    if streetSuffix.contains(word.lowercased()) { //if that line contains a street suffix word, then the index after the current index should be a name
-                        var trialCount: Int = 1
-                        name = lines[lines.count - trialCount - index - 1] //nameLine should be the index before the line that has the last word as a street suffix. Since array is reverse(), we had to subtract - index and another - 1 to get the line on top of it
-                        while impossibleNames.contains(name){ //extra error checker
-                            if trialCount > 10 { //if too many trials then break
-                                name = ""
-                                break
-                            }
-                            trialCount += 1
-                            name = lines[lines.count - trialCount - index - 1]
-                        }
-                        break
-                    }
-                }
-            }
-        }
+//        if name == "" { //if name is still empty, apply SECOND ALGORITHM
+//            for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers { //loop through each lines in reversed() where line's firstWord is consists of integers only
+//                for word in line.byWords { //loop through each word in that line
+//                    print("\(index) === \(name) === \(word)")
+//
+//                    if streetSuffix.contains(word.lowercased().filter(allAlphaNum.contains)) { //if that line contains a street suffix word, then the index after the current index should be a name //.filter removes all non alphaNumeric
+//                        var trialCount: Int = 1
+//                        name = lines[lines.count - trialCount - index - 1] //nameLine should be the index before the line that has the last word as a street suffix. Since array is reverse(), we had to subtract - index and another - 1 to get the line on top of it
+//                        print("number of words in line #\(index) = \(line.byWords.count - 1)")
+//                        print("\(index) === \(name) === \(word)!!!")
+//                        while impossibleNames.contains(name) { //extra error checker
+//                            if trialCount > line.byWords.count - 1 { //if too many trials then break, to prevent index out of range error
+//                                name = ""
+//                                break
+//                            }
+//                            print("\(index) === \(name) === trial count \(trialCount)!!!")
+//                            trialCount += 1
+//                            name = lines[lines.count - trialCount - index - 1]
+//                        }
+//                        return name
+//                    }
+//                }
+//            }
+//        }
         return name
     }
     
@@ -185,6 +218,7 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan in properly
             displayDetectedText(image: rotatedImage!) {
+                print("SCANNED TEXT = \(self.scannedText)")
                 let mailText = self.getMailName(text: self.scannedText)
                 saveMail(text: mailText) { (mail, error) in
                     if let error = error {
@@ -221,7 +255,7 @@ extension ScannerVC: ScannerMailProtocol {
     
     func didSendMail(mail: Mail) {
         cameraButton.isEnabled = true
-        print(getURLFromMail(mail: mail))
+        print("URL = \(getURLFromMail(mail: mail))")
         dataRequest(with: getURLFromMail(mail: mail), objectType: MailOwner.self) { (result: Result) in //GET from API
             switch result {
             case .success(let object):

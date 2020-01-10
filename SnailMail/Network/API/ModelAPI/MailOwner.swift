@@ -7,7 +7,7 @@
 //
 
 enum Result<T> { //Result enum to show success or failure
-    case success(T)
+    case success([String: Any])
     case failure(APIError)
 }
 
