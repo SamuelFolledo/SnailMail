@@ -26,6 +26,7 @@ class PopUpVC: UIViewController {
     var frameSublayer = CALayer()
     
 //MARK: IBOutlets
+    @IBOutlet weak var popUpView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UnderlinedTextField!
     @IBOutlet weak var retakeButton: UIButton!
@@ -58,6 +59,14 @@ class PopUpVC: UIViewController {
 //        }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toImageDetailVC" {
+            let vc: ImageDetailVC = segue.destination as! ImageDetailVC
+            vc.image = sender as? UIImage
+        }
+    }
+    
+    
     private func displayDetectedText(in imageView: UIImageView, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
 //        removeFrames() //remove the frames before processing a new image
         processor.process(in: imageView) { text, elements in
@@ -74,8 +83,17 @@ class PopUpVC: UIViewController {
 //MARK: Private Methods
     fileprivate func setupViews() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissTap(_:)))
-        self.view.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissTap(_:)))
+//        self.view.addGestureRecognizer(tap)
+//
+        let popUpTap = UITapGestureRecognizer(target: self, action: #selector(handlePopupViewTap(_:)))
+        self.popUpView.addGestureRecognizer(popUpTap)
+        
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(handeImageViewTap(_:)))
+        
+        self.imageView.isUserInteractionEnabled = true
+        self.imageView.addGestureRecognizer(imageTap)
+        
         showAnimate()
         setupKeyboardNotifications()
         textField.textColor = .white
@@ -128,6 +146,22 @@ class PopUpVC: UIViewController {
     }
     
 //MARK: Helpers
+    @objc func handeImageViewTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard, else dismiss popup
+//        if hasKeyboard {
+//            self.view.endEditing(false)
+//        } else {
+            performSegue(withIdentifier: "toImageDetailVC", sender: mailImage)
+//        }
+    }
+    
+    @objc func handlePopupViewTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard, else dismiss popup
+        if hasKeyboard {
+            self.view.endEditing(false)
+        } else {
+            print("EYOOOOOO")
+        }
+    }
+    
     @objc func handleDismissTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard, else dismiss popup
         if hasKeyboard {
             self.view.endEditing(false)
