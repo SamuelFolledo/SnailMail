@@ -145,7 +145,11 @@ class ScannerVC: UIViewController {
     }
     
 //MARK: Helpers
-
+    fileprivate func getURLFromMail(mail: Mail) -> String {
+        let nameArr: [String] = mail.name.byWords
+        let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
+        return "https://ms-snailmail.herokuapp.com/api/\(nameQueryString)"
+    }
 }
 
 //MARK: Extensions
@@ -194,12 +198,8 @@ extension ScannerVC: ScannerMailProtocol {
     }
     
     func didSendMail(mail: Mail) {
-        print("send mail")
         cameraButton.isEnabled = true
-        let nameArr: [String] = mail.name.byWords
-        let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
-        let urlString: String = "https://ms-snailmail.herokuapp.com/api/\(nameQueryString)"
-        dataRequest(with: urlString, objectType: MailOwner.self) { (result: Result) in
+        dataRequest(with: getURLFromMail(mail: mail), objectType: MailOwner.self) { (result: Result) in //GET from API
             switch result {
             case .success(let object):
                 print("OBJECT = \(object)")
@@ -207,31 +207,6 @@ extension ScannerVC: ScannerMailProtocol {
                 Service.presentAlert(on: self, title: "API Error", message: error.localizedDescription)
             }
         }
-        
-//        print("send mail")
-//        cameraButton.isEnabled = true
-//        let nameArr: [String] = mail.name.byWords
-//        let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
-//        let url: URL = URL(string: "https://ms-snailmail.herokuapp.com/api/\(nameQueryString)")!
-//        dataRequest(with: <#T##String#>, objectType: ., completion: <#T##(Result<Decodable>) -> Void#>)
-        //        mail.sendAndGetData { (data, error) in
-        //            if let error = error {
-        //                Service.presentAlert(on: self, title: "Error", message: error.localizedDescription)
-        //                return
-        //            }
-        //            guard let data = data else { return }
-        //            if let success = data[kSUCCESS] as? String, success == "false"  { //if not success, show error
-        //                guard let dataError = data[kERROR] as? String else { return }
-        //                Service.presentAlert(on: self, title: "Error", message: dataError)
-        //                return
-        //            }
-        ////            let note = data[kNOTE] as? String //currently optional
-        //            let name = data[kNAME] as? String
-        //            let slackID = data[kSLACKID] as? String
-        //            print("NAME = \(name), SLACKID = \(slackID)")
-        //
-        //        }
-        
     }
     
     func didUpdateMail(name: String) {
