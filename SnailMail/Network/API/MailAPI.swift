@@ -22,22 +22,9 @@ func dataRequest<T: Codable>(with url: String, objectType: T.Type, completion: @
             return
         }
         do {
-            //create decodable object from data
-            //            let decodedObject = try JSONDecoder().decode(objectType.self, from: data)
-            //            do {
-            //                if let json = try JSONDecoder().decode(objectType.self, from: data) {
-            //
-            //                }
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                
                 completion(Result.success(json))
             }
-            //            } catch {
-            //                completion(Result.failure(.jsonParsingError(error)))
-            ////                completion(nil, error)
-            //            }
-            
-            //            completion(Result.success(decodedObject))
         } catch let error {
             completion(Result.failure(APIError.jsonParsingError(error as! DecodingError)))
         }
