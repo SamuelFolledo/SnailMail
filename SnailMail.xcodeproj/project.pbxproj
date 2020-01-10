@@ -157,8 +157,8 @@
 			children = (
 				33EDFBB423C6C26E00EA2AE2 /* PopUp.storyboard */,
 				33EDFBB823C6C81500EA2AE2 /* PopUpVC.swift */,
-				33EDFBBD23C6E08900EA2AE2 /* UnderlinedTextField.swift */,
 				3340ACCC23C7D08300F80D6A /* ImageDetailVC.swift */,
+				33EDFBBD23C6E08900EA2AE2 /* UnderlinedTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
