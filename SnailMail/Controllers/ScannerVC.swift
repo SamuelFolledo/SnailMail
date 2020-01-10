@@ -172,7 +172,7 @@ class ScannerVC: UIViewController {
     
 //MARK: IBActions
     @IBAction func mailButtonTapped(_ sender: Any) {
-        Service.presentAlert(on: self, title: "All mails coming soon", message: "Please check back in the future")
+        performSegue(withIdentifier: "toMailsTableVC", sender: nil)
     }
     
     @IBAction func menuButtonTapped(_ sender: Any) {
