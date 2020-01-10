@@ -26,6 +26,7 @@ class ScannerVC: UIViewController {
         }
     }
     let processor = ScaledElementProcessor()
+    var deviceOrientation = UIImage.Orientation.down
     
 //MARK: IBOutlets
     @IBOutlet weak var scannerView: SCNView!
@@ -36,6 +37,7 @@ class ScannerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        configureVideoOrientation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,11 +107,46 @@ class ScannerVC: UIViewController {
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
         cameraButton.isEnabled = false
+        if let photoOutputConnection = self.cameraImageOutput.connection(with: .video) {
+            print("ORIENTATION = \(photoOutputConnection.videoOrientation.rawValue)")
+//            photoOutputConnection.videoOrientation = videoDe
+        }
+//        if let photoOutputConnection = CustomCamera.photoOutput.connection(with: AVMediaType.video) {
+//            photoOutputConnection.videoOrientation = videoDeviceOrientation
+//        }
         captureImage()
     }
     
 //MARK: Helpers
-
+//    func managePhotoOrientation() -> UIImage.Orientation { //get the current orientation of the device and assign it to the image orientation
+//        var currentDevice: UIDevice
+//        currentDevice = .current
+//        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+//        var deviceOrientation: UIDeviceOrientation
+//        deviceOrientation = currentDevice.orientation
+//
+//        var imageOrientation: UIImage.Orientation!
+//
+//        if deviceOrientation == .portrait {
+//            imageOrientation = .up
+//            print("Device: Portrait")
+//        }else if (deviceOrientation == .landscapeLeft){
+//            imageOrientation = .left
+//            print("Device: LandscapeLeft")
+//        }else if (deviceOrientation == .landscapeRight){
+//            imageOrientation = .right
+//            cameraPreviewLayer.connection?.videoOrientation = .portrait
+////            CustomCamera.cameraPreviewLayer?.connection?.videoOrientation = .landscapeRight
+//            print("Device LandscapeRight")
+//        }else if (deviceOrientation == .portraitUpsideDown){
+//            imageOrientation = .down
+//            print("Device PortraitUpsideDown")
+//        }else{
+//           imageOrientation = .up
+//            print("Device: Fake portrait")
+//        }
+//        return imageOrientation
+//    }
 }
 
 //MARK: Extensions
@@ -144,6 +181,18 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             print("some error here")
         }
     }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+//            cameraPreviewLayer.orient
+//            cameraSession.orie
+//            cameraImageOutput.orie
+        }else{
+            
+        }
+    }
+    
 }
 
 extension ScannerVC: ScannerMailProtocol {
@@ -166,5 +215,24 @@ extension ScannerVC: ScannerMailProtocol {
     func didUpdateMail(name: String) {
         print("updated mail's name = \(name)")
         cameraButton.isEnabled = true
+    }
+}
+
+extension ScannerVC {
+    override func viewDidLayoutSubviews() {
+//        self.configureVideoOrientation()
+    }
+
+    private func configureVideoOrientation() {
+        if let previewLayer = self.cameraPreviewLayer,
+            let connection = previewLayer.connection {
+            let orientation = UIDevice.current.orientation
+
+            if connection.isVideoOrientationSupported,
+                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
+                previewLayer.frame = self.view.bounds
+                connection.videoOrientation = videoOrientation
+            }
+        }
     }
 }
