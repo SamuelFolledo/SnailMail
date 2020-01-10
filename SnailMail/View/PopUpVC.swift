@@ -89,10 +89,13 @@ class PopUpVC: UIViewController {
     
 //MARK: IBActions
     @IBAction func sendButtonTapped(_ sender: Any) {
-        if let text = textField.text {
-            if text != "" {
-                if let delegate = delegate {
-                    delegate.didUpdateMail(name: text)
+        guard let name = textField.text?.trimmedString() else { return }
+        if name != "" {
+            if let delegate = delegate {
+                if name != mail.scannedText.trimmedString() { //update this with mail's name
+                    delegate.didUpdateMail(name: name)
+                } else {
+                    delegate.didSendMail(mail: mail)
                 }
             }
             dismissPopup()
