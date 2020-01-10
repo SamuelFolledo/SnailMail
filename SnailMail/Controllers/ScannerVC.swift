@@ -114,19 +114,27 @@ class ScannerVC: UIViewController {
          */
         var name: String = ""
         let lines: [String] = text.lines //turns multi-line text(String) into an array of strings
-//        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased().filter(kALLALPHANUM.contains)) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
+//        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased().filter(allAlphaNum.contains)) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
         for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers { //loop through lines in reversed() where line's firstWord is made up of all integers only
-            for word in line.byWords where streetSuffix.contains(word.lowercased().filter(kALLALPHANUM.contains)) { //for each word in line where it contains in streetSuffix array...
+            for word in line.byWords where streetSuffix.contains(word.lowercased().filter(allAlphaNum.contains)) { //for each word in line where it contains in streetSuffix array...
                 print("1)\(line) in index \(index)::: \(word)")
-                name = lines[lines.count - 1 - index - 1] //name will be the line on top of this line's index
-                if impossibleNames.contains(name.lowercased().filter(kALLALPHANUM.contains)) { //if name is one of the illegal name, then skip and continue
-                    print("1) \(name) is ILLEGAL")
-                    name = ""
-                    continue
-                } else { //if not an illegal name
-                    print("1) \(name) ✅")
-                    return name
+                var nameIndex: Int = lines.count - 1 - index - 1 //name will be the line on top of this line's index
+                name = lines[nameIndex]
+                while illegalNames.contains(name.lowercased().filter(allAlphaNum.contains)) { //if name grabbed is one of the illegal names
+                    print("1) \(name) is ILLEGAL ❌")
+                    nameIndex -= 1
+                    name = lines[nameIndex]
                 }
+                print("1) \(name) is ALLOWED ✅")
+                return name
+//                if impossibleNames.contains(name.lowercased().filter(allAlphaNum.contains)) { //if name is one of the illegal name, then skip and continue
+//                    print("1) \(name) is ILLEGAL ❌")
+//                    name = ""
+//                    continue
+//                } else { //if not an illegal name
+//                    print("1) \(name) is ALLOWED ✅")
+//                    return name
+//                }
             }
         }
         return name
