@@ -114,6 +114,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmZ-r7-wDy">
                                 <rect key="frame" x="300" y="5" width="55" height="55"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Button" image="mail"/>
                                 <connections>
                                     <action selector="mailButtonTapped:" destination="yja-ZF-KDz" eventType="touchUpInside" id="0CB-G5-RdB"/>
