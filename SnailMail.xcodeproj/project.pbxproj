@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		333C257423C90B7500740E44 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333C257323C90B7500740E44 /* UIView+extensions.swift */; };
+		333C257623C9178500740E44 /* MailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333C257523C9178500740E44 /* MailCell.swift */; };
 		333F486723C67512005DED20 /* ScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486623C67512005DED20 /* ScannerVC.swift */; };
 		333F486923C67548005DED20 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486823C67548005DED20 /* SettingsVC.swift */; };
 		333F486B23C67563005DED20 /* MailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333F486A23C67563005DED20 /* MailsTableVC.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		333C257323C90B7500740E44 /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
+		333C257523C9178500740E44 /* MailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailCell.swift; sourceTree = "<group>"; };
 		333F486623C67512005DED20 /* ScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerVC.swift; sourceTree = "<group>"; };
 		333F486823C67548005DED20 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		333F486A23C67563005DED20 /* MailsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailsTableVC.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			children = (
 				333FAA3923C905DC004DF5D0 /* Alert */,
 				333FAA3823C905CF004DF5D0 /* PopUp */,
+				333C257523C9178500740E44 /* MailCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				3340ACCF23C8343400F80D6A /* String+extensions.swift in Sources */,
 				33EDFBB923C6C81500EA2AE2 /* PopUpVC.swift in Sources */,
 				3340ACCD23C7D08300F80D6A /* ImageDetailVC.swift in Sources */,
+				333C257623C9178500740E44 /* MailCell.swift in Sources */,
 				333F486B23C67563005DED20 /* MailsTableVC.swift in Sources */,
 				333C257423C90B7500740E44 /* UIView+extensions.swift in Sources */,
 				33C9645623C3E16C00141B0A /* UIImage+extensions.swift in Sources */,

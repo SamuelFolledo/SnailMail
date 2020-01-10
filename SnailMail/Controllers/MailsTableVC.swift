@@ -47,7 +47,9 @@ extension MailsTableVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell: MailCell = tableView.dequeueReusableCell(withIdentifier: "mailCell") as! MailCell
+//        cell.mail = mails
+        return cell
     }
     
     
