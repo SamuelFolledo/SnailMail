@@ -9,12 +9,13 @@ import Foundation
 
 //MARK: Create Mail - Firebase
 func saveMail(text: String, completion: @escaping (_ mail: Mail?, _ error: String?) -> Void) {
-    saveDataInDatabase(data: [kSCANNEDTEXT: text]) { (mailId, error) in
+    saveDataInDatabase(data: [kNAME: text, kSCANNEDTEXT: text]) { (mailId, error) in
         if let error = error {
             completion(nil, error)
         }
         let mailDic: NSDictionary = UserDefaults.standard.dictionary(forKey: mailId)! as NSDictionary
         let mail = Mail(_dictionary: mailDic)
+        print("SAVED MAIL = \(mail)")
         completion(mail, nil) //success!
     }
 }
