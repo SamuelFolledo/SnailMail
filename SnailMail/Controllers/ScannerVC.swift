@@ -127,7 +127,25 @@ class ScannerVC: UIViewController {
             }
             break //stop the loop because we only want the first instance of street suffix
         }
+        if name == "" { //if name is still empty, apply SECOND ALGORITHM
+            for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers { //loop through each lines in reversed() where line's firstWord is consists of integers only
+                for word in line.byWords { //loop through each word in that line
                     if streetSuffix.contains(word.lowercased()) { //if that line contains a street suffix word, then the index after the current index should be a name
+                        var trialCount: Int = 1
+                        name = lines[lines.count - trialCount - index - 1] //nameLine should be the index before the line that has the last word as a street suffix. Since array is reverse(), we had to subtract - index and another - 1 to get the line on top of it
+                        while impossibleNames.contains(name){ //extra error checker
+                            if trialCount > 10 { //if too many trials then break
+                                name = ""
+                                break
+                            }
+                            trialCount += 1
+                            name = lines[lines.count - trialCount - index - 1]
+                        }
+                        break
+                    }
+                }
+            }
+        }
         return name
     }
     
@@ -148,6 +166,7 @@ class ScannerVC: UIViewController {
 //MARK: Helpers
     fileprivate func getURLFromMail(mail: Mail) -> String {
         let nameArr: [String] = mail.name.byWords
+        print("Mail name \(mail.name)")
         let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
         return "https://ms-snailmail.herokuapp.com/api/\(nameQueryString)"
     }
@@ -172,10 +191,12 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                         Service.presentAlert(on: self, title: "Error", message: error)
                         return
                     }
+                    guard let mail: Mail = mail else { return }
                     let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
                     popUpVC.delegate = self
                     popUpVC.mailImage = image
                     popUpVC.mail = mail
+                    print("MAIL NAME = \(mail.name)")
                     self.addChild(popUpVC)
                     popUpVC.view.frame = self.view.frame
                     self.view.addSubview(popUpVC.view)
@@ -200,18 +221,19 @@ extension ScannerVC: ScannerMailProtocol {
     
     func didSendMail(mail: Mail) {
         cameraButton.isEnabled = true
+        print(getURLFromMail(mail: mail))
         dataRequest(with: getURLFromMail(mail: mail), objectType: MailOwner.self) { (result: Result) in //GET from API
             switch result {
             case .success(let object):
-                print("OBJECT = \(object)")
+                print("didSend OBJECT = \(object)")
             case .failure(let error):
                 Service.presentAlert(on: self, title: "API Error", message: error.localizedDescription)
             }
         }
     }
     
-    func didUpdateMail(name: String) {
-        print("updated mail's name = \(name)")
+    func didUpdateMail(mail: Mail) {
+        print("updated mail's name = \(mail.name)")
         cameraButton.isEnabled = true
     }
 }
