@@ -114,10 +114,24 @@ class ScannerVC: UIViewController {
          1. put string in an array of strings
          2. loop through each string, and starting from the end of the string, loop until it reaches a whitespace, and get that word
          3. if that word is either avenue, street, lane, etc. get the index of that line
-         4. index - 1 should be the index of the name
+         4. index - 1 should be the index of the line that has the name
          */
-        var name = ""
-        
+        var name: String = ""
+        let lines: [String] = text.lines //turns multi-line text(String) into an array of strings
+        print("LINES = \(lines)")
+        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased()) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
+            var trialCount: Int = 1
+            name = lines[lines.count - trialCount - index - 1] //nameLine should be the index before the line that has the last word as a street suffix. Since array is reverse(), we had to subtract - index and another - 1 to get the line on top of it
+            while impossibleNames.contains(name){ //extra error checker
+                if trialCount > 10 { //if too many trials then break
+                    name = ""
+                    break
+                }
+                trialCount += 1
+                name = lines[lines.count - trialCount - index - 1]
+            }
+            break //stop the loop because we only want the first instance of street suffix
+        }
         return name
     }
     
