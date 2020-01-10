@@ -187,6 +187,12 @@ class ScannerVC: UIViewController {
         let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
         return "https://ms-snailmail.herokuapp.com/api/\(nameQueryString)"
     }
+    
+    fileprivate func showSuccessAlertView(success: Bool, message: String) {
+        successImageView.image = success ? kCORRECTIMAGE : kWRONGIMAGE
+        successLabel.text = message
+        successView.enlargeThenShrinkAnimation()
+    }
 }
 
 //MARK: Extensions
