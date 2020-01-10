@@ -10,7 +10,7 @@ import UIKit
 
 protocol ScannerMailProtocol {
     /* parameters here is what the parent class will receive */
-    func didUpdateMail(name: String)
+    func didUpdateMail(mail: Mail)
     func didRetakeMail(mail: Mail)
     func didSendMail(mail: Mail)
 }
@@ -60,7 +60,7 @@ class PopUpVC: UIViewController {
         self.imageView.isUserInteractionEnabled = true
         self.imageView.addGestureRecognizer(imageTap)
         textField.textColor = .white
-        textField.text = mail.scannedText
+        textField.text = mail.name
         retakeButton.isPopupButton()
         sendButton.isPopupButton()
         showAnimate()
@@ -103,7 +103,7 @@ class PopUpVC: UIViewController {
         if name != "" {
             if let delegate = delegate {
                 if name != mail.scannedText.trimmedString() { //update this with mail's name
-                    delegate.didUpdateMail(name: name)
+                    delegate.didUpdateMail(mail: mail)
                 } else {
                     delegate.didSendMail(mail: mail)
                 }
