@@ -140,6 +140,17 @@ class ScannerVC: UIViewController {
         return name
     }
     
+    fileprivate func sendSlackMessage(mail: Mail) {
+        dataRequest(with: getURLFromMail(mail: mail), objectType: MailOwner.self) { (result: Result) in //GET from API
+            switch result {
+            case .success(let object):
+                print("didSend OBJECT = \(object)")
+            case .failure(let error):
+                Service.presentAlert(on: self, title: "API Error", message: error.localizedDescription)
+            }
+        }
+    }
+    
 //MARK: IBActions
     @IBAction func mailButtonTapped(_ sender: Any) {
         Service.presentAlert(on: self, title: "All mails coming soon", message: "Please check back in the future")
@@ -203,30 +214,29 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
 
 extension ScannerVC: ScannerMailProtocol {
     func didRetakeMail(mail: Mail) {
+        cameraButton.isEnabled = true
         deleteMail(objectId: mail.objectId) { (error) in
             if let error = error {
                 Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
             }
         }
-        cameraButton.isEnabled = true
     }
     
     func didSendMail(mail: Mail) {
         cameraButton.isEnabled = true
-        print("URL = \(getURLFromMail(mail: mail))")
-        dataRequest(with: getURLFromMail(mail: mail), objectType: MailOwner.self) { (result: Result) in //GET from API
-            switch result {
-            case .success(let object):
-                print("didSend OBJECT = \(object)")
-            case .failure(let error):
-                Service.presentAlert(on: self, title: "API Error", message: error.localizedDescription)
-            }
-        }
+        sendSlackMessage(mail: mail)
     }
     
     func didUpdateMail(mail: Mail) {
-        print("updated mail's name = \(mail.name)")
         cameraButton.isEnabled = true
+        print("updated mail's name to \(mail.name)")
+        updateMail(mail: mail) { (success) in
+            if !success {
+                Service.presentAlert(on: self, title: "Error", message: "Error updating mail")
+            } else { //if no error send mail to API
+                self.sendSlackMessage(mail: mail)
+            }
+        }
     }
 }
 
