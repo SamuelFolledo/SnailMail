@@ -25,8 +25,11 @@ class ScannerVC: UIViewController {
     @IBOutlet weak var scannerView: SCNView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var mailCountLabel: UILabel!
+    @IBOutlet weak var successImageView: UIImageView!
+    @IBOutlet weak var successLabel: UILabel!
+    @IBOutlet weak var successView: UIView!
     
-//MARK: App Life Cycle
+    //MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -145,6 +148,18 @@ class ScannerVC: UIViewController {
             switch result {
             case .success(let object):
                 print("didSend OBJECT = \(object)")
+                guard let name = object[kNAME] as? String else { return }
+//                guard let note = object[kNOTE] as? String else { return }
+//                guard let success = object[kSUCCESS] as? String else { return } //success = 1, fail = false
+//                guard let error = object[kERROR] as? String else { return }
+//                guard let slackID = object[kSLACKID] as? String else { return }
+//                print(name, note, success, error, slackID)
+                if name != "null" {
+                    print(name)
+                } else {
+                    print("no name found")
+                }
+                
             case .failure(let error):
                 Service.presentAlert(on: self, title: "API Error", message: error.localizedDescription)
             }
