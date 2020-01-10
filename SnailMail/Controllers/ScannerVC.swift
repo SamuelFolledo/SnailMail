@@ -120,7 +120,7 @@ class ScannerVC: UIViewController {
                 print("1)\(line) in index \(index)::: \(word)")
                 var nameIndex: Int = lines.count - 1 - index - 1 //name will be the line on top of this line's index
                 name = lines[nameIndex]
-                while illegalNames.contains(name.lowercased().filter(allAlphaNum.contains)) { //if name grabbed is one of the illegal names
+                while illegalNames.contains(name.lowercased().filter(allAlphaNum.contains)) && nameIndex >= 0 { //if name grabbed is one of the illegal names keep going up one line, or until it reaches the first/highest line
                     print("1) \(name) is ILLEGAL ❌")
                     nameIndex -= 1
                     name = lines[nameIndex]
