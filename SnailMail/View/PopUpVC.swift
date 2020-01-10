@@ -37,6 +37,11 @@ class PopUpVC: UIViewController {
         imageView.image = mailImage
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeKeyboardObervers()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toImageDetailVC" {
             let vc: ImageDetailVC = segue.destination as! ImageDetailVC
@@ -65,6 +70,11 @@ class PopUpVC: UIViewController {
     fileprivate func setupKeyboardNotifications() { //setup notifications when keyboard shows or hide
         NotificationCenter.default.addObserver(self, selector: #selector(PopUpVC.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PopUpVC.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    fileprivate func removeKeyboardObervers() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     fileprivate func showAnimate() { //show popup with animation
