@@ -18,11 +18,7 @@ class ScannerVC: UIViewController {
     var cameraImageOutput: AVCapturePhotoOutput!
     var mails: [String:Mail] = [:] //???????
     var frameSublayer = CALayer() //???????
-    var scannedText: String = "Detected text can be edited here." {
-        didSet {
-            print("Scanned Text = \(scannedText)")
-        }
-    }
+    var scannedText: String = "Detected text will be here."
     let processor = ScaledElementProcessor()
     
 //MARK: IBOutlets
@@ -118,7 +114,6 @@ class ScannerVC: UIViewController {
          */
         var name: String = ""
         let lines: [String] = text.lines //turns multi-line text(String) into an array of strings
-        print("LINES = \(lines)")
         for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased()) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
             var trialCount: Int = 1
             name = lines[lines.count - trialCount - index - 1] //nameLine should be the index before the line that has the last word as a street suffix. Since array is reverse(), we had to subtract - index and another - 1 to get the line on top of it
@@ -183,7 +178,7 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                 }
             }
         } else {
-            print("some error here")
+            print("Error: could not get imageData from photo.fileDataRepresentation()")
         }
     }
 }
