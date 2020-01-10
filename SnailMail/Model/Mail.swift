@@ -45,4 +45,25 @@ class Mail {
             self.name = ""
         }
     }
+    
+    func sendAndGetData(completion: @escaping (_ data: [String: Any]?, _ error: Error?) -> Void) { //sends HttpRequest GET method to trigger SlackBot message
+        let nameArr: [String] = name.byWords
+        let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
+        let url: URL = URL(string: "https://ms-snailmail.herokuapp.com/api/\(nameQueryString)")!
+        let task: URLSessionDataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(nil, error as Error)
+            }
+            guard let data = data else { return }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    completion(json, nil)
+                }
+            } catch {
+                completion(nil, error)
+            }
+//            completion((data: data, encoding: .utf8.rawValue), nil)
+        }
+        task.resume()
+    }
 } //end of class
