@@ -22,8 +22,6 @@ class PopUpVC: UIViewController {
     var mail: Mail!
     var mailImage: UIImage = kBLANKIMAGE
     var mailName: String = ""
-    let processor = ScaledElementProcessor()
-    var frameSublayer = CALayer()
     
 //MARK: IBOutlets
     @IBOutlet weak var popUpView: UIView!
@@ -37,26 +35,6 @@ class PopUpVC: UIViewController {
         super.viewDidLoad()
         setupViews()
         imageView.image = mailImage
-        displayDetectedText(in: imageView)
-        imageView.layer.addSublayer(frameSublayer) //for drawing squares
-//        textField.text = mailName
-//        processor.process(in: imageView) { text, elements in
-//            elements.forEach() { element in
-//                self.frameSublayer.addSublayer(element.shapeLayer) //this controller has a frameSublayer property that is attached to the imageView. Here, you add each element’s shape layer to the sublayer, so that iOS will automatically draw the shape on the image
-//            }
-//            print("text issss = \(text)")
-//            if text != self.textField.text {
-//                self.textField.text = text
-//            }
-//        // 3
-////            completion?()
-//        }
-//        processor.processImage(mailImage) { text in
-//            print("New text = \(text)")
-//            if self.textField.text != text { //to avoid duplicates
-//                self.textField.text = text
-//            }
-//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,42 +44,25 @@ class PopUpVC: UIViewController {
         }
     }
     
-    
-    private func displayDetectedText(in imageView: UIImageView, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
-//        removeFrames() //remove the frames before processing a new image
-        processor.process(in: imageView) { text, elements in
-            elements.forEach() { element in
-                self.frameSublayer.addSublayer(element.shapeLayer) //this controller has a frameSublayer property that is attached to the imageView. Here, you add each element’s shape layer to the sublayer, so that iOS will automatically draw the shape on the image
-            }
-            print("Final processed Text = \(text)")
-            self.textField.text = text
-        // 3
-            completion?()
-        }
-    }
-    
 //MARK: Private Methods
     fileprivate func setupViews() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissTap(_:)))
-//        self.view.addGestureRecognizer(tap)
-//
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismissTap(_:)))
+        self.view.addGestureRecognizer(tap)
         let popUpTap = UITapGestureRecognizer(target: self, action: #selector(handlePopupViewTap(_:)))
         self.popUpView.addGestureRecognizer(popUpTap)
-        
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(handeImageViewTap(_:)))
-        
         self.imageView.isUserInteractionEnabled = true
         self.imageView.addGestureRecognizer(imageTap)
-        
-        showAnimate()
-        setupKeyboardNotifications()
         textField.textColor = .white
+        textField.text = mail.scannedText
         retakeButton.isPopupButton()
         sendButton.isPopupButton()
+        showAnimate()
+        setupKeyboardNotifications()
     }
     
-    fileprivate func setupKeyboardNotifications() {
+    fileprivate func setupKeyboardNotifications() { //setup notifications when keyboard shows or hide
         NotificationCenter.default.addObserver(self, selector: #selector(PopUpVC.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PopUpVC.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -128,14 +89,17 @@ class PopUpVC: UIViewController {
     
 //MARK: IBActions
     @IBAction func sendButtonTapped(_ sender: Any) {
-        guard let text = textField.text else { return }
-        print("\(text) and \(mailName)")
-        if text != "" {
-            if let delegate = delegate {
-                delegate.didUpdateMail(name: text)
+        if let text = textField.text {
+            if text != "" {
+                if let delegate = delegate {
+                    delegate.didUpdateMail(name: text)
+                }
             }
+            dismissPopup()
+        } else { //if no text on name
+            Service.presentAlert(on: self, title: "Error", message: "Receiver field cannot be empty. Please try again")
+            textField.text = mail.scannedText
         }
-        dismissPopup()
     }
     
     @IBAction func retakeButtonTapped(_ sender: Any) {
@@ -146,19 +110,13 @@ class PopUpVC: UIViewController {
     }
     
 //MARK: Helpers
-    @objc func handeImageViewTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard, else dismiss popup
-//        if hasKeyboard {
-//            self.view.endEditing(false)
-//        } else {
-            performSegue(withIdentifier: "toImageDetailVC", sender: mailImage)
-//        }
+    @objc func handeImageViewTap(_ gesture: UITapGestureRecognizer) { //go to imageDetailVC
+        performSegue(withIdentifier: "toImageDetailVC", sender: mailImage)
     }
     
-    @objc func handlePopupViewTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard, else dismiss popup
+    @objc func handlePopupViewTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard
         if hasKeyboard {
             self.view.endEditing(false)
-        } else {
-            print("EYOOOOOO")
         }
     }
     
@@ -175,11 +133,6 @@ class PopUpVC: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) { //makes the view go up by keyboard's height
         hasKeyboard = true
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            if view.frame.origin.y == 0 {
-//                view.frame.origin.y -= keyboardSize.height
-//            }
-//        }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) { //put the view back to 0
@@ -191,5 +144,3 @@ class PopUpVC: UIViewController {
 }
 
 //MARK: Extensions
-
-
