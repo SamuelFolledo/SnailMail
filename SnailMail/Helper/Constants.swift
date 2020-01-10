@@ -25,6 +25,8 @@ public let dateFormat = "yyyyMMddHHmmss"
 
 //Image constant
 let kBLANKIMAGE: UIImage = UIImage(named: "blankImage")!
+let kCORRECTIMAGE: UIImage = UIImage(named: "correct")!
+let kWRONGIMAGE: UIImage = UIImage(named: "wrong")!
 
 //getMailName() algorithm
 //streetSuffix.count = 286
