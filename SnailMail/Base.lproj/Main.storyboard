@@ -135,18 +135,18 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-rs-5Mn">
-                                        <rect key="frame" x="0.0" y="123.5" width="150" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <rect key="frame" x="-75" y="117.5" width="300" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                         <color key="textColor" red="0.25882352939999997" green="0.40000000000000002" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="lQB-rs-5Mn" firstAttribute="width" secondItem="hUO-mX-8hl" secondAttribute="width" id="53O-wJ-8Sa"/>
+                                    <constraint firstItem="lQB-rs-5Mn" firstAttribute="width" secondItem="hUO-mX-8hl" secondAttribute="width" multiplier="2" id="53O-wJ-8Sa"/>
                                     <constraint firstItem="lQB-rs-5Mn" firstAttribute="centerX" secondItem="hUO-mX-8hl" secondAttribute="centerX" id="BXO-EP-l1d"/>
                                     <constraint firstItem="ieu-Fl-grL" firstAttribute="width" secondItem="hUO-mX-8hl" secondAttribute="width" multiplier="0.75" id="TlW-m0-i41"/>
-                                    <constraint firstAttribute="bottom" secondItem="lQB-rs-5Mn" secondAttribute="bottom" constant="5" id="ZCc-Ve-otB"/>
+                                    <constraint firstItem="lQB-rs-5Mn" firstAttribute="top" secondItem="ieu-Fl-grL" secondAttribute="bottom" constant="5" id="W15-gs-Ndz"/>
                                     <constraint firstAttribute="top" secondItem="ieu-Fl-grL" secondAttribute="top" id="giG-32-k7N"/>
                                     <constraint firstItem="ieu-Fl-grL" firstAttribute="centerX" secondItem="hUO-mX-8hl" secondAttribute="centerX" id="qrC-gB-dfN"/>
                                     <constraint firstAttribute="width" secondItem="hUO-mX-8hl" secondAttribute="height" id="yfM-FR-zwG"/>
