@@ -60,6 +60,7 @@ class PopUpVC: UIViewController {
         self.imageView.isUserInteractionEnabled = true
         self.imageView.addGestureRecognizer(imageTap)
         textField.textColor = .white
+        textField.tintColor = .white
         textField.text = mail.name
         retakeButton.isPopupButton()
         sendButton.isPopupButton()
@@ -102,7 +103,8 @@ class PopUpVC: UIViewController {
         guard let name = textField.text?.trimmedString() else { return }
         if name != "" {
             if let delegate = delegate {
-                if name != mail.scannedText.trimmedString() { //update this with mail's name
+                if name != mail.name { //update this with mail's name
+                    mail.name = name //update mail.name before returning
                     delegate.didUpdateMail(mail: mail)
                 } else {
                     delegate.didSendMail(mail: mail)
@@ -111,7 +113,7 @@ class PopUpVC: UIViewController {
             dismissPopup()
         } else { //if no text on name
             Service.presentAlert(on: self, title: "Error", message: "Receiver field cannot be empty. Please try again")
-            textField.text = mail.scannedText
+            textField.text = mail.name
         }
     }
     
