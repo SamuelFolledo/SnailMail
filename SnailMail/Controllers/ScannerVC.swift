@@ -84,7 +84,21 @@ class ScannerVC: UIViewController {
         }
     }
     
-    fileprivate func captureImage() {
+    fileprivate func configureVideoOrientation() { //sets the previewLayer's orientation correctly
+        /* https://stackoverflow.com/questions/15075300/avcapturevideopreviewlayer-orientation-need-landscape
+         */
+        if let previewLayer = self.cameraPreviewLayer,
+            let connection = previewLayer.connection {
+            let orientation = UIDevice.current.orientation
+            if connection.isVideoOrientationSupported,
+                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
+                previewLayer.frame = self.view.bounds
+                connection.videoOrientation = videoOrientation
+            }
+        }
+    }
+    
+    fileprivate func captureImage() { //captures a still image from imageOutput
         let settings = AVCapturePhotoSettings()
         let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [
@@ -107,60 +121,26 @@ class ScannerVC: UIViewController {
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
         cameraButton.isEnabled = false
-        if let photoOutputConnection = self.cameraImageOutput.connection(with: .video) {
-            print("ORIENTATION = \(photoOutputConnection.videoOrientation.rawValue)")
-//            photoOutputConnection.videoOrientation = videoDe
-        }
-//        if let photoOutputConnection = CustomCamera.photoOutput.connection(with: AVMediaType.video) {
-//            photoOutputConnection.videoOrientation = videoDeviceOrientation
-//        }
         captureImage()
     }
     
 //MARK: Helpers
-//    func managePhotoOrientation() -> UIImage.Orientation { //get the current orientation of the device and assign it to the image orientation
-//        var currentDevice: UIDevice
-//        currentDevice = .current
-//        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-//        var deviceOrientation: UIDeviceOrientation
-//        deviceOrientation = currentDevice.orientation
-//
-//        var imageOrientation: UIImage.Orientation!
-//
-//        if deviceOrientation == .portrait {
-//            imageOrientation = .up
-//            print("Device: Portrait")
-//        }else if (deviceOrientation == .landscapeLeft){
-//            imageOrientation = .left
-//            print("Device: LandscapeLeft")
-//        }else if (deviceOrientation == .landscapeRight){
-//            imageOrientation = .right
-//            cameraPreviewLayer.connection?.videoOrientation = .portrait
-////            CustomCamera.cameraPreviewLayer?.connection?.videoOrientation = .landscapeRight
-//            print("Device LandscapeRight")
-//        }else if (deviceOrientation == .portraitUpsideDown){
-//            imageOrientation = .down
-//            print("Device PortraitUpsideDown")
-//        }else{
-//           imageOrientation = .up
-//            print("Device: Fake portrait")
-//        }
-//        return imageOrientation
-//    }
+    
 }
 
 //MARK: Extensions
 extension ScannerVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let error = error {
-            print("error occured : \(error.localizedDescription)")
+            Service.presentAlert(on: self, title: "Error", message: error.localizedDescription)
         }
         if let dataImage = photo.fileDataRepresentation() {
 //            print(UIImage(data: dataImage)?.size as Any)
             let dataProvider = CGDataProvider(data: dataImage as CFData)
             let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
-            displayDetectedText(image: image) {
+            let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan in properly
+            displayDetectedText(image: rotatedImage!) {
                 saveMail(text: self.scannedText) { (mail, error) in
                     if let error = error {
                         Service.presentAlert(on: self, title: "Error", message: error)
@@ -176,32 +156,17 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                     popUpVC.didMove(toParent: self)
                 }
             }
-//            self.images.append(image)
         } else {
             print("some error here")
         }
     }
-    
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape {
-//            cameraPreviewLayer.orient
-//            cameraSession.orie
-//            cameraImageOutput.orie
-        }else{
-            
-        }
-    }
-    
 }
 
 extension ScannerVC: ScannerMailProtocol {
     func didRetakeMail(mail: Mail) {
-        print("delete mail")
         deleteMail(objectId: mail.objectId) { (error) in
             if let error = error {
                 Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
-                return
             }
         }
         cameraButton.isEnabled = true
@@ -215,24 +180,5 @@ extension ScannerVC: ScannerMailProtocol {
     func didUpdateMail(name: String) {
         print("updated mail's name = \(name)")
         cameraButton.isEnabled = true
-    }
-}
-
-extension ScannerVC {
-    override func viewDidLayoutSubviews() {
-//        self.configureVideoOrientation()
-    }
-
-    private func configureVideoOrientation() {
-        if let previewLayer = self.cameraPreviewLayer,
-            let connection = previewLayer.connection {
-            let orientation = UIDevice.current.orientation
-
-            if connection.isVideoOrientationSupported,
-                let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) {
-                previewLayer.frame = self.view.bounds
-                connection.videoOrientation = videoOrientation
-            }
-        }
     }
 }
