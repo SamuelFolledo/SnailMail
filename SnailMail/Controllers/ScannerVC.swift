@@ -47,6 +47,7 @@ class ScannerVC: UIViewController {
         scannerView.layer.addSublayer(frameSublayer)
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(viewPinched(recognizer:)))
         scannerView.addGestureRecognizer(pinch)
+        successView.isHidden = true
     }
     
     fileprivate func displayDetectedText(image: UIImage, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
@@ -145,23 +146,26 @@ class ScannerVC: UIViewController {
     
     fileprivate func sendSlackMessage(mail: Mail) {
         dataRequest(with: getURLFromMail(mail: mail), objectType: MailOwner.self) { (result: Result) in //GET from API
-            switch result {
-            case .success(let object):
-                print("didSend OBJECT = \(object)")
-                guard let name = object[kNAME] as? String else { return }
-//                guard let note = object[kNOTE] as? String else { return }
-//                guard let success = object[kSUCCESS] as? String else { return } //success = 1, fail = false
-//                guard let error = object[kERROR] as? String else { return }
-//                guard let slackID = object[kSLACKID] as? String else { return }
-//                print(name, note, success, error, slackID)
-                if name != "null" {
-                    print(name)
-                } else {
-                    print("no name found")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let object):
+                    print("didSend OBJECT = \(object)")
+                    guard let name = object[kNAME] as? String else { return }
+                    //                guard let note = object[kNOTE] as? String else { return }
+                    //                guard let success = object[kSUCCESS] as? String else { return } //success = 1, fail = false
+                    //                guard let error = object[kERROR] as? String else { return }
+                    //                guard let slackID = object[kSLACKID] as? String else { return }
+                    //                print(name, note, success, error, slackID)
+                    DispatchQueue.main.async {
+                        if name == "null" {
+                            self.showSuccessAlertView(success: false, message: "No User Found")
+                        } else {
+                            self.showSuccessAlertView(success: true, message: "Mail Sent!")
+                        }
+                    }
+                case .failure(let error):
+                    Service.presentAlert(on: self, title: "API Error", message: error.localizedDescription)
                 }
-                
-            case .failure(let error):
-                Service.presentAlert(on: self, title: "API Error", message: error.localizedDescription)
             }
         }
     }
