@@ -109,7 +109,13 @@ class ScannerVC: UIViewController {
         cameraImageOutput.capturePhoto(with: settings, delegate: self)
     }
     
-    fileprivate func getMailName(text: String) -> String {
+    fileprivate func getMailName(text: String) -> String { //from scannedText, get the name
+        /* ALGORITHM to find a name from the scanned text
+         1. put string in an array of strings
+         2. loop through each string, and starting from the end of the string, loop until it reaches a whitespace, and get that word
+         3. if that word is either avenue, street, lane, etc. get the index of that line
+         4. index - 1 should be the index of the name
+         */
         var name = ""
         
         return name
