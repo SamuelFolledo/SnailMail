@@ -9,10 +9,16 @@
 import Foundation
 
 extension String {
+    var isAllNumbers: Bool { //regex to see if a word/string are all numbers
+        let integerRegEx  = "[0-9]"
+        let testCase = NSPredicate(format:"SELF MATCHES %@", integerRegEx)
+        let containsNumber = testCase.evaluate(with: self)
+        return containsNumber
+        }
+    }
     var lines: [String] { //turns a multi-line string into an array of each line https://www.hackingwithswift.com/example-code/strings/how-to-get-the-lines-in-a-string-as-an-array
         return self.components(separatedBy: "\n")
     }
-    
     var byWords: [String] { //turns string to an array of strings https://exceptionshub.com/extract-last-word-in-string-with-swift.html
         var byWords:[String] = []
         enumerateSubstrings(in: startIndex..<endIndex, options: .byWords) { (word, range1, range2, shouldStop) in //Enumerates the substrings of the specified type in the specified range of the string.
