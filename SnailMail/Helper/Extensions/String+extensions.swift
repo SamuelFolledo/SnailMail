@@ -10,11 +10,12 @@ import Foundation
 
 extension String {
     var isAllNumbers: Bool { //regex to see if a word/string are all numbers
-        let integerRegEx  = "[0-9]"
+        let charCount = self.count
+        print("\(charCount) = \(self)")
+        let integerRegEx  = "[0-9]{\(charCount - 1),}"
         let testCase = NSPredicate(format:"SELF MATCHES %@", integerRegEx)
         let containsNumber = testCase.evaluate(with: self)
         return containsNumber
-        }
     }
     var lines: [String] { //turns a multi-line string into an array of each line https://www.hackingwithswift.com/example-code/strings/how-to-get-the-lines-in-a-string-as-an-array
         return self.components(separatedBy: "\n")
