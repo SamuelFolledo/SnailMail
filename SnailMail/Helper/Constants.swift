@@ -36,3 +36,6 @@ let kERROR: String = "error"
 let kNOTE: String = "note"
 let kSLACKID: String = "slackID"
 let kSUCCESS: String = "success"
+
+//for filtering
+let kALLALPHANUM: String = "qwertyuiopasdfghjklzxcvbnm1234567890"
