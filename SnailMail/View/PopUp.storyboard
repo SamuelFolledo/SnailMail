@@ -89,14 +89,46 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="0x2-Dg-OyQ" id="RiT-EM-qeA"/>
+                        <outlet property="popUpView" destination="N1B-ka-eWp" id="KqS-j9-Aih"/>
                         <outlet property="retakeButton" destination="qIu-Gu-uh6" id="sj9-rn-OiF"/>
                         <outlet property="sendButton" destination="3hr-qi-kSK" id="Hsp-w4-4BE"/>
                         <outlet property="textField" destination="I6S-3V-u7q" id="C7q-Qj-6ar"/>
+                        <segue destination="y13-VT-jhk" kind="presentation" identifier="toImageDetailVC" id="K1r-Pz-Wpg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="leu-Hf-1DQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-66.400000000000006" y="112.89355322338831"/>
+        </scene>
+        <!--Image DetailVC-->
+        <scene sceneID="yxS-s3-Lk6">
+            <objects>
+                <viewController id="y13-VT-jhk" customClass="ImageDetailVC" customModule="SnailMail" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="laT-cv-xxw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ldv-9T-3dG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ldv-9T-3dG" firstAttribute="width" secondItem="laT-cv-xxw" secondAttribute="width" id="G2q-ea-C3M"/>
+                            <constraint firstItem="ldv-9T-3dG" firstAttribute="height" secondItem="laT-cv-xxw" secondAttribute="height" id="UE6-dy-UB0"/>
+                            <constraint firstItem="ldv-9T-3dG" firstAttribute="centerX" secondItem="0kW-xV-ekm" secondAttribute="centerX" id="W2O-yb-Ynh"/>
+                            <constraint firstItem="ldv-9T-3dG" firstAttribute="centerY" secondItem="0kW-xV-ekm" secondAttribute="centerY" id="gm1-Ie-wZ3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0kW-xV-ekm"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lvl-PR-a0w"/>
+                    <connections>
+                        <outlet property="imageView" destination="ldv-9T-3dG" id="i7R-1j-19u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qug-A3-hDA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="967" y="113"/>
         </scene>
     </scenes>
     <resources>
