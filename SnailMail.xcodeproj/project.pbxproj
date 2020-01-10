@@ -139,7 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				335E485623C57EED00C401B2 /* Mail.swift */,
-				33EDFBBF23C6E9C200EA2AE2 /* Processor */,
+				33EDFBBF23C6E9C200EA2AE2 /* Image Processor */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,13 +175,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		33EDFBBF23C6E9C200EA2AE2 /* Processor */ = {
+		33EDFBBF23C6E9C200EA2AE2 /* Image Processor */ = {
 			isa = PBXGroup;
 			children = (
 				33C9645123C3E14900141B0A /* ScaledElementProcessor.swift */,
 				33C9645323C3E15500141B0A /* ScaledElement.swift */,
 			);
-			path = Processor;
+			path = "Image Processor";
 			sourceTree = "<group>";
 		};
 		641471742A32207F33594924 /* Frameworks */ = {
