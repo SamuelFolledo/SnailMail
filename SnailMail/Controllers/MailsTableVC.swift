@@ -63,6 +63,20 @@ extension MailsTableVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) { //swipe to delete mail
+        if editingStyle == .delete {
+            let deletedMail = mails[indexPath.row]
+            deleteMail(objectId: deletedMail.objectId) { (error) in //delete mail from storage
+                if let error = error {
+                    Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
+                    return
+                }
+                self.mails.remove(at: indexPath.row) //remove from list, and cell row
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
 }
 
 extension MailsTableVC: UITableViewDataSource {
