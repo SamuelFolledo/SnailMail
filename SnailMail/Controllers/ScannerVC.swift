@@ -20,6 +20,7 @@ class ScannerVC: UIViewController {
     var frameSublayer = CALayer() //???????
     var scannedText: String = "Detected text will be here."
     let processor = ScaledElementProcessor()
+    let mailRef = firDatabase.child(kMAIL)
     
 //MARK: IBOutlets
     @IBOutlet weak var scannerView: SCNView!
@@ -29,10 +30,15 @@ class ScannerVC: UIViewController {
     @IBOutlet weak var successLabel: UILabel!
     @IBOutlet weak var successView: UIView!
     
-    //MARK: App Life Cycle
+//MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        mailRef.removeAllObservers()
     }
     
 //MARK: Private Methods
