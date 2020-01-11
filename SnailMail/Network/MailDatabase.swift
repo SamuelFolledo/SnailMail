@@ -30,7 +30,7 @@ func saveDataInDatabase(data: [String: Any], completion: @escaping (_ mailId: St
         if let error = error {
             completion(id!, error.localizedDescription)
         }
-        //saveDataLocally(key: id!, data: dataWithKey)
+        saveDataLocally(key: id!, data: dataWithKey)
         completion(id!, nil)
     }
 //    print("Finished saving data \(data) in Firebase")
