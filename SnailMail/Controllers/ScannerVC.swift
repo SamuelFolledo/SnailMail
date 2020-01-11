@@ -253,7 +253,8 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan it properly
             displayDetectedText(image: rotatedImage!) { //scan the image's text
                 let mailText = self.getMailName(text: self.scannedText) //get the name from scannedText from image
-                saveMail(text: mailText) { (mail, error) in //with mail's name, save mail
+                let values: [String: Any] = [kNAME: mailText, kSCANNEDTEXT: self.scannedText]
+                saveMail(values: values) { (mail, error) in //with mail's name, save mail
                     if let error = error {
                         Service.presentAlert(on: self, title: "Error", message: error)
                         return
