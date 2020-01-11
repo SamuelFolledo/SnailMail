@@ -34,14 +34,24 @@ class MailsTableVC: UIViewController {
     }
     
     @IBAction func deleteAllButtonTapped(_ sender: Any) {
-        deleteAllMails(mails: mails) { (error) in
-            if let error = error {
-                Service.presentAlert(on: self, title: "Error Deleting All Mails", message: error.localizedDescription)
-                return
+        let alertVC = UIAlertController(title: "Delete All Mails?", message: "Are you sure? Mails will be gone forever.", preferredStyle: .alert)
+        let deleteAllAction: UIAlertAction = UIAlertAction(title: "Delete All", style: .destructive) { (action) in //deleteAllMails method
+            deleteAllMails(mails: self.mails) { (error) in
+                if let error = error {
+                    Service.presentAlert(on: self, title: "Error Deleting All Mails", message: error.localizedDescription)
+                    return
+                }
+                self.mails.removeAll() //removeAll mails
+                self.tableView.reloadData()
+                self.dismiss(animated: true, completion: nil) //dismiss MailsTableVC
             }
-            self.mails.removeAll()
-            self.tableView.reloadData()
         }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in //dismisses the alertVC
+            alertVC.dismiss(animated: true, completion: nil)
+        }
+        alertVC.addAction(deleteAllAction)
+        alertVC.addAction(cancelAction)
+        self.present(alertVC, animated: true, completion: nil)
     }
     
 //MARK: Helpers
