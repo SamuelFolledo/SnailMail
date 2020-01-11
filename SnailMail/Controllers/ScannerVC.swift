@@ -303,12 +303,12 @@ extension ScannerVC: ScannerMailProtocol {
     func didUpdateMail(mail: Mail) {
         cameraButton.isEnabled = true
         print("updated mail's name to \(mail.name)")
-        updateMail(mail: mail) { (success) in
-            if !success {
-                Service.presentAlert(on: self, title: "Error", message: "Error updating mail")
-            } else { //if no error send mail to API
-                self.sendSlackMessage(mail: mail)
+        updateMail(mail: mail) { (error) in
+            if let error = error {
+                Service.presentAlert(on: sel, title: "Error", message: error.localizedDescription)
+                return
             }
+            self.sendSlackMessage(mail: mail)
         }
     }
 }
