@@ -8,14 +8,13 @@
 import Foundation
 
 //MARK: Create Mail - Firebase
-func saveMail(text: String, completion: @escaping (_ mail: Mail?, _ error: String?) -> Void) {
-    saveDataInDatabase(data: [kNAME: text, kSCANNEDTEXT: text]) { (mailId, error) in
+func saveMail(values: [String: Any], completion: @escaping (_ mail: Mail?, _ error: String?) -> Void) {
+    saveDataInDatabase(data: values) { (mailId, error) in
         if let error = error {
             completion(nil, error)
         }
         let mailDic: NSDictionary = UserDefaults.standard.dictionary(forKey: mailId)! as NSDictionary
         let mail = Mail(_dictionary: mailDic)
-        print("SAVED MAIL = \(mail)")
         completion(mail, nil) //success!
     }
 }
@@ -33,14 +32,12 @@ func saveDataInDatabase(data: [String: Any], completion: @escaping (_ mailId: St
         saveDataLocally(key: id!, data: dataWithKey)
         completion(id!, nil)
     }
-//    print("Finished saving data \(data) in Firebase")
 }
 
 //MARK: Save Mail Helper - save locally
 func saveDataLocally(key: String, data: [String: Any]) {
     UserDefaults.standard.set(data, forKey: key)
     UserDefaults.standard.synchronize()
-//    print("Finished saving data \(data) locally...")
 }
 
 //MARK: Read Mail - take a Mail objectId and returns Mail
@@ -110,6 +107,6 @@ func mailToDictionary(mail: Mail) -> NSDictionary {
     let createdAt = Service.dateFormatter().string(from: mail.createdAt)
     let updatedAt = Service.dateFormatter().string(from: mail.updatedAt)
     return NSDictionary(
-        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText, mail.name],
-                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying, kNAME as NSCopying]) //how you create an NSDictionary
+        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText, mail.name, mail.image],
+                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying, kNAME as NSCopying, kIMAGE as NSCopying]) //how you create an NSDictionary
 }
