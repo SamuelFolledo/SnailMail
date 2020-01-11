@@ -252,22 +252,28 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan it properly
             displayDetectedText(image: rotatedImage!) { //scan the image's text
-                let mailName = self.getMailName(text: self.scannedText) //get the name from scannedText from image
-                let values: [String: Any] = [kNAME: mailName, kSCANNEDTEXT: self.scannedText, kIMAGE: image]
-                saveMail(values: values) { (mail, error) in //with mail's name, save mail
+                getImageURL(image: image) { (imageUrl, error) in //storage the image scanned
                     if let error = error {
-                        Service.presentAlert(on: self, title: "Error", message: error)
+                        Service.presentAlert(on: self, title: "Error Storing Image", message: error)
                         return
                     }
-                    guard let mail: Mail = mail else { return } //with mail, show popUp
-                    let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
-                    popUpVC.delegate = self
-                    popUpVC.mail = mail
-                    print("MAIL NAME = \(mail.name)")
-                    self.addChild(popUpVC)
-                    popUpVC.view.frame = self.view.frame
-                    self.view.addSubview(popUpVC.view)
-                    popUpVC.didMove(toParent: self)
+                    let mailName = self.getMailName(text: self.scannedText) //get the name from scannedText from image
+                    let values: [String: Any] = [kNAME: mailName, kSCANNEDTEXT: self.scannedText, kIMAGEURL: imageUrl!]
+                    saveMail(values: values) { (mail, error) in //with mail's name, save mail
+                        if let error = error {
+                            Service.presentAlert(on: self, title: "Error", message: error)
+                            return
+                        }
+                        guard let mail: Mail = mail else { return } //with mail, show popUp
+                        let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
+                        popUpVC.delegate = self
+                        popUpVC.mail = mail
+                        print("MAIL NAME = \(mail.name)")
+                        self.addChild(popUpVC)
+                        popUpVC.view.frame = self.view.frame
+                        self.view.addSubview(popUpVC.view)
+                        popUpVC.didMove(toParent: self)
+                    }
                 }
             }
         } else {
