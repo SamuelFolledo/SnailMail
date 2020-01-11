@@ -20,7 +20,7 @@ class PopUpVC: UIViewController {
     var hasKeyboard: Bool = false
     var delegate: ScannerMailProtocol!
     var mail: Mail!
-    var mailName: String = ""
+    var mailImage: UIImage!
     
 //MARK: IBOutlets
     @IBOutlet weak var popUpView: UIView!
@@ -33,7 +33,7 @@ class PopUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        imageView.image = mail.image
+        imageView.image = mailImage
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,6 +41,7 @@ class PopUpVC: UIViewController {
         removeKeyboardObervers()
     }
     
+//MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toImageDetailVC" {
             let vc: ImageDetailVC = segue.destination as! ImageDetailVC
