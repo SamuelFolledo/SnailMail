@@ -254,7 +254,8 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             displayDetectedText(image: rotatedImage!) { //scan the image's text
                 getImageURL(image: image) { (imageUrl, error) in //storage the image scanned
                     if let error = error {
-                        Service.presentAlert(on: self, title: "Error Storing Image", message: error)
+                        Service.presentAlert(on: self, title: "Error Storing Image", message: error.localizedDescription)
+                        self.cameraButton.isEnabled = true
                         return
                     }
                     let mailName = self.getMailName(text: self.scannedText) //get the name from scannedText from image
@@ -262,12 +263,14 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                     saveMail(values: values) { (mail, error) in //with mail's name, save mail
                         if let error = error {
                             Service.presentAlert(on: self, title: "Error", message: error)
+                            self.cameraButton.isEnabled = true
                             return
                         }
                         guard let mail: Mail = mail else { return } //with mail, show popUp
                         let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
                         popUpVC.delegate = self
                         popUpVC.mail = mail
+                        popUpVC.mailImage = image
                         print("MAIL NAME = \(mail.name)")
                         self.addChild(popUpVC)
                         popUpVC.view.frame = self.view.frame
@@ -285,7 +288,7 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
 extension ScannerVC: ScannerMailProtocol {
     func didRetakeMail(mail: Mail) {
         cameraButton.isEnabled = true
-        deleteMail(objectId: mail.objectId) { (error) in
+        deleteMail(mail: mail) { (error) in
             if let error = error {
                 Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
             }
