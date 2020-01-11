@@ -135,7 +135,7 @@
                                             <constraint firstAttribute="width" secondItem="ieu-Fl-grL" secondAttribute="height" id="uya-2g-vd4"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-rs-5Mn">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-rs-5Mn">
                                         <rect key="frame" x="-75" y="117.5" width="300" height="41"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
                                         <color key="textColor" red="0.25882352939999997" green="0.40000000000000002" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
