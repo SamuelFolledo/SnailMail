@@ -5,7 +5,9 @@
 //  Created by Macbook Pro 15 on 1/7/20.
 //  Copyright © 2020 SamuelFolledo. All rights reserved.
 //
-import Foundation
+
+import UIKit
+import FirebaseStorage
 
 //MARK: Create Mail - Firebase
 func saveMail(values: [String: Any], completion: @escaping (_ mail: Mail?, _ error: String?) -> Void) {
@@ -109,4 +111,26 @@ func mailToDictionary(mail: Mail) -> NSDictionary {
     return NSDictionary(
         objects: [mail.objectId, createdAt, updatedAt, mail.scannedText, mail.name, mail.imageUrl],
                         forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying, kNAME as NSCopying, kIMAGEURL as NSCopying]) //how you create an NSDictionary
+}
+
+//MARK: Storage for Mail Images
+func getImageURL(imageView: UIImageView, compeltion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that grabs an image from a UIImageView, compress it as JPEG, store in Storage, and returning the URL if no error
+    let imageName = NSUUID().uuidString
+    let imageReference = Storage.storage().reference().child("avatar_images").child("0000\(imageName).png")
+    if let avatarImage = imageView.image, let uploadData = avatarImage.jpegData(compressionQuality: 0.35) { //compress the image to be uploaded
+        imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
+            if let error = error {
+                compeltion(nil, error.localizedDescription)
+            } else { //if no error, get the url
+                imageReference.downloadURL(completion: { (imageUrl, error) in
+                    if let error = error {
+                        compeltion(nil, error.localizedDescription)
+                    } else { //no error on downloading metadata URL
+                        guard let url = imageUrl?.absoluteString else { return }
+                        compeltion(url, nil)
+                    }
+                })
+            }
+        })
+    }
 }
