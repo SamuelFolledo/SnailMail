@@ -10,10 +10,11 @@ import UIKit
 
 class MailsTableVC: UIViewController {
 //MARK: Properties
-    var mails: [String: Mail] = [:]
+    var mails: [Mail]!
     
 //MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var deleteAllButton: UIBarButtonItem!
     
 //MARK: App Life Cycle
     override func viewDidLoad() {
@@ -32,6 +33,10 @@ class MailsTableVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func deleteAllButtonTapped(_ sender: Any) {
+        
+    }
+    
 //MARK: Helpers
     
 }
@@ -48,7 +53,8 @@ extension MailsTableVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MailCell = tableView.dequeueReusableCell(withIdentifier: "mailCell") as! MailCell
-//        cell.mail = mails
+        cell.mail = mails[indexPath.row]
+        cell.populateViews()
         return cell
     }
     
