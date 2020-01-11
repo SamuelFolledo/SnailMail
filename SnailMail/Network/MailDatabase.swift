@@ -74,33 +74,36 @@ func updateMail(mail: Mail, withBlock: @escaping(_ success: Bool) -> Void) { //w
 }
 
 //MARK: Mail Delete
-func deleteMail(objectId: String, completion: @escaping(_ error: Error?) -> Void) { //delete the current user
-    let mailRef = firDatabase.child(kMAIL).queryOrdered(byChild: kOBJECTID).queryEqual(toValue: objectId).queryLimited(toFirst: 1)
+func deleteMail(mail: Mail, completion: @escaping(_ error: Error?) -> Void) { //delete the current user from database, then storage, then UserDefaults
+    let mailRef = firDatabase.child(kMAIL).queryOrdered(byChild: kOBJECTID).queryEqual(toValue: mail.objectId).queryLimited(toFirst: 1)
     mailRef.observeSingleEvent(of: .value, with: { (snapshot) in //delete from Database
         if snapshot.exists() { //snapshot has uid and all its user's values
-            firDatabase.child(kMAIL).child(objectId).removeValue { (error, ref) in
+            firDatabase.child(kMAIL).child(mail.objectId).removeValue { (error, ref) in
                 if let error = error {
                     completion(error)
                 }
-                UserDefaults.standard.removeObject(forKey: objectId) //update our user in our UserDefaults because save might create a new instance of it
-                UserDefaults.standard.synchronize()
-                completion(nil)
+                deleteFromStorage(ref: mail.imageUrl) { (error) in
+                    if let error = error {
+                        completion(error)
+                    }
+                    UserDefaults.standard.removeObject(forKey: mail.objectId) //update our user in our UserDefaults because save might create a new instance of it
+                    UserDefaults.standard.synchronize()
+                    completion(nil)
+                }
             }
         }
     }, withCancel: nil)
 }
 
 func deleteAllMails(mails: [Mail], completion: @escaping(_ error: Error?) -> Void) { //delete all mails
-    let mailRef = firDatabase.child(kMAIL)
-    mailRef.removeValue { (error, ref) in
-        if let error = error {
-            completion(error)
+    for mail in mails { //delete them locally as well
+        deleteMail(mail: mail) { (error) in
+            if let error = error {
+                completion(error)
+            }
         }
-        for mail in mails { //delete them locally as well
-            UserDefaults.standard.removeObject(forKey: mail.objectId)
-            UserDefaults.standard.synchronize()
-        }
-        completion(nil)
+        UserDefaults.standard.removeObject(forKey: mail.objectId)
+        UserDefaults.standard.synchronize()
     }
 }
 
@@ -114,17 +117,17 @@ func mailToDictionary(mail: Mail) -> NSDictionary {
 }
 
 //MARK: Storage - Save Mail Images
-func getImageURL(imageView: UIImageView, compeletion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that grabs an image from a UIImageView, compress it as JPEG, store in Storage, and returning the URL if no error
+func getImageURL(imageView: UIImageView, compeletion: @escaping(_ imageURL: String?, _ error: Error?) -> Void) { //method that grabs an image from a UIImageView, compress it as JPEG, store in Storage, and returning the URL if no error
     let imageName = NSUUID().uuidString
     let imageReference = Storage.storage().reference().child("avatar_images").child("0000\(imageName).png")
     if let avatarImage = imageView.image, let uploadData = avatarImage.jpegData(compressionQuality: 0.35) { //compress the image to be uploaded
         imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
             if let error = error {
-                compeletion(nil, error.localizedDescription)
+                compeletion(nil, error)
             } else { //if no error, get the url
                 imageReference.downloadURL(completion: { (imageUrl, error) in
                     if let error = error {
-                        compeletion(nil, error.localizedDescription)
+                        compeletion(nil, error)
                     } else { //no error on downloading metadata URL
                         guard let url = imageUrl?.absoluteString else { return }
                         compeletion(url, nil)
@@ -135,17 +138,17 @@ func getImageURL(imageView: UIImageView, compeletion: @escaping(_ imageURL: Stri
     }
 }
 
-func getImageURL(image: UIImage, compeletion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returning the URL if no error
+func getImageURL(image: UIImage, compeletion: @escaping(_ imageURL: String?, _ error: Error?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returning the URL if no error
     let imageName = NSUUID().uuidString //unique string
     let imageReference = Storage.storage().reference().child("mail_images").child("0000\(imageName).png")
     if let uploadData = image.jpegData(compressionQuality: 0.35) { //compress the image to be uploaded
         imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
             if let error = error {
-                compeletion(nil, error.localizedDescription)
+                compeletion(nil, error)
             } else { //if no error, get the url
                 imageReference.downloadURL(completion: { (imageUrl, error) in
                     if let error = error {
-                        compeletion(nil, error.localizedDescription)
+                        compeletion(nil, error)
                     } else { //no error on downloading metadata URL
                         guard let url = imageUrl?.absoluteString else { return }
                         compeletion(url, nil)
@@ -157,11 +160,11 @@ func getImageURL(image: UIImage, compeletion: @escaping(_ imageURL: String?, _ e
 }
 
 //MARK: Storage - Delete Mail Images
-func deleteFromStorage(ref: String, compeletion: @escaping(_ error: String?) -> Void) { //takes a reference and deletes a file/image from the Storage
+func deleteFromStorage(ref: String, compeletion: @escaping(_ error: Error?) -> Void) { //takes a reference and deletes a file/image from the Storage
     let imageRef = Storage.storage().reference().child(ref)
     imageRef.delete { (error) in
         if let error = error {
-            compeletion(error.localizedDescription)
+            compeletion(error)
         } else {
             compeletion(nil)
         }
