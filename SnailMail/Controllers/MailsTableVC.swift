@@ -43,7 +43,9 @@ class MailsTableVC: UIViewController {
 
 //MARK: Extensions
 extension MailsTableVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
+    }
 }
 
 extension MailsTableVC: UITableViewDataSource {
