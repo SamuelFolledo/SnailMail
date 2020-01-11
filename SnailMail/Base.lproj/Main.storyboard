@@ -192,7 +192,7 @@
                         <outlet property="successImageView" destination="ieu-Fl-grL" id="vAL-18-wAP"/>
                         <outlet property="successLabel" destination="lQB-rs-5Mn" id="jNP-kU-N8t"/>
                         <outlet property="successView" destination="hUO-mX-8hl" id="EYH-ZY-NAY"/>
-                        <segue destination="4j1-pL-fPm" kind="presentation" identifier="toMailsTableVC" id="svQ-hN-1cU"/>
+                        <segue destination="D81-v0-RsK" kind="presentation" identifier="toMailsTableVC" id="sfI-2M-idh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pc-yb-9Fh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -207,6 +207,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI7-jz-xd5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="5d8-qf-wRv"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Scanned Mails" id="E8C-QA-z14">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Mtz-3l-cRc">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="D81-v0-RsK" id="HD2-NT-Mnd"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="trash" catalog="system" id="pez-pT-3aY">
+                                            <connections>
+                                                <action selector="deleteAllButtonTapped:" destination="D81-v0-RsK" id="LPW-wp-IoK"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aMh-JD-5Dd">
                                 <rect key="frame" x="0.0" y="56" width="375" height="591"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -250,27 +270,27 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="centerY" secondItem="XmK-zb-EiQ" secondAttribute="centerY" id="bTe-bf-TgA"/>
+                            <constraint firstItem="RI7-jz-xd5" firstAttribute="width" secondItem="fbL-L4-532" secondAttribute="width" id="B11-Nv-OIZ"/>
+                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="bottom" secondItem="XmK-zb-EiQ" secondAttribute="bottom" id="JzA-tl-tE8"/>
+                            <constraint firstItem="RI7-jz-xd5" firstAttribute="centerX" secondItem="fbL-L4-532" secondAttribute="centerX" id="KAk-sT-M4h"/>
                             <constraint firstItem="aMh-JD-5Dd" firstAttribute="width" secondItem="XmK-zb-EiQ" secondAttribute="width" id="bs9-I9-q37"/>
                             <constraint firstItem="aMh-JD-5Dd" firstAttribute="centerX" secondItem="XmK-zb-EiQ" secondAttribute="centerX" id="eRu-3v-XZL"/>
-                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="height" secondItem="XmK-zb-EiQ" secondAttribute="height" id="gMJ-dj-jyA"/>
+                            <constraint firstItem="RI7-jz-xd5" firstAttribute="top" secondItem="XmK-zb-EiQ" secondAttribute="top" id="gfz-0M-75P"/>
+                            <constraint firstItem="aMh-JD-5Dd" firstAttribute="top" secondItem="RI7-jz-xd5" secondAttribute="bottom" symbolic="YES" id="vsj-tq-Ote"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XmK-zb-EiQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="NUt-dK-t7e">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="fkI-On-aOW">
-                            <connections>
-                                <action selector="backButtonTapped:" destination="D81-v0-RsK" id="j2U-CB-TUH"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="fkI-On-aOW"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteAllButton" destination="pez-pT-3aY" id="71M-TQ-aIP"/>
                         <outlet property="tableView" destination="aMh-JD-5Dd" id="hc7-aE-s9M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2D-yl-OlG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4138.3999999999996" y="79.610194902548727"/>
+            <point key="canvasLocation" x="2937" y="80"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oJ8-Tc-DLT">
@@ -290,24 +310,6 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="79.6875"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="lLw-dt-wOj">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4j1-pL-fPm" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fFg-Nr-VNX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="D81-v0-RsK" kind="relationship" relationship="rootViewController" id="bNl-Fn-UxF"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2pZ-B5-7K8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3197.5999999999999" y="79.610194902548727"/>
-        </scene>
     </scenes>
     <resources>
         <image name="blueCircle" width="768" height="768"/>
@@ -318,6 +320,7 @@
         <image name="scanned-text" width="654" height="999"/>
         <image name="share" width="40" height="56"/>
         <image name="snailMailLogo" width="1024" height="1024"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
     </resources>
     <color key="tintColor" red="0.26010626549999999" green="0.39904129510000003" blue="0.69025290009999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
