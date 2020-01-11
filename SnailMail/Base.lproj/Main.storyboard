@@ -120,9 +120,9 @@
                                     <action selector="mailButtonTapped:" destination="yja-ZF-KDz" eventType="touchUpInside" id="0CB-G5-RdB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSc-gb-opk">
-                                <rect key="frame" x="330.5" y="7" width="24.5" height="25"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zSc-gb-opk">
+                                <rect key="frame" x="336" y="7" width="19" height="19.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -160,10 +160,10 @@
                             <constraint firstItem="zSc-gb-opk" firstAttribute="top" secondItem="JmZ-r7-wDy" secondAttribute="top" constant="2" id="1tc-fL-W97"/>
                             <constraint firstItem="Mea-CA-IpI" firstAttribute="bottom" secondItem="dlV-N3-NQm" secondAttribute="bottom" constant="50" id="1zh-ZY-TX2"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="centerX" secondItem="Mea-CA-IpI" secondAttribute="centerX" id="3EN-2k-edy"/>
-                            <constraint firstItem="zSc-gb-opk" firstAttribute="height" secondItem="JmZ-r7-wDy" secondAttribute="height" multiplier="0.45" id="59a-xF-iEE"/>
+                            <constraint firstItem="zSc-gb-opk" firstAttribute="height" secondItem="JmZ-r7-wDy" secondAttribute="height" multiplier="0.35" id="59a-xF-iEE"/>
                             <constraint firstItem="Bj2-KK-4d8" firstAttribute="top" secondItem="Mea-CA-IpI" secondAttribute="top" constant="20" id="CNx-r3-az8"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="height" secondItem="Mea-CA-IpI" secondAttribute="height" id="EtQ-7C-K49"/>
-                            <constraint firstItem="zSc-gb-opk" firstAttribute="width" secondItem="JmZ-r7-wDy" secondAttribute="width" multiplier="0.45" id="Pcy-40-inh"/>
+                            <constraint firstItem="zSc-gb-opk" firstAttribute="width" secondItem="JmZ-r7-wDy" secondAttribute="width" multiplier="0.35" id="Pcy-40-inh"/>
                             <constraint firstItem="zSc-gb-opk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bj2-KK-4d8" secondAttribute="trailing" constant="8" symbolic="YES" id="QVG-KL-E1e"/>
                             <constraint firstItem="Mea-CA-IpI" firstAttribute="trailing" secondItem="JmZ-r7-wDy" secondAttribute="trailing" constant="20" id="UGm-4e-jb6"/>
                             <constraint firstItem="dlV-N3-NQm" firstAttribute="centerX" secondItem="L95-ek-nyg" secondAttribute="centerX" id="Uqe-In-R6g"/>
