@@ -46,6 +46,15 @@ class ScannerVC: UIViewController {
         updateFirebaseObservers(shouldStart: false)
     }
     
+//MARK: Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMailsTableVC" {
+            let vc: MailsTableVC = segue.destination as! MailsTableVC
+            let mailsArr: [Mail] = Array(mails.values)
+            vc.mails = mailsArr
+        }
+    }
+    
 //MARK: Private Methods
     fileprivate func setupViews() {
         view.backgroundColor = .black
@@ -116,7 +125,7 @@ class ScannerVC: UIViewController {
         cameraImageOutput.capturePhoto(with: settings, delegate: self)
     }
     
-    func updateFirebaseObservers(shouldStart: Bool) { //childAdded, childRemoved, and remove observers for mails
+    fileprivate func updateFirebaseObservers(shouldStart: Bool) { //childAdded, childRemoved, and remove observers for mails
         if shouldStart {
             self.mails.removeAll()
             mailRef.observe(.childAdded, with: { (snapshot) in
