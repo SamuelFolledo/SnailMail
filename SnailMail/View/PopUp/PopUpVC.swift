@@ -20,7 +20,6 @@ class PopUpVC: UIViewController {
     var hasKeyboard: Bool = false
     var delegate: ScannerMailProtocol!
     var mail: Mail!
-    var mailImage: UIImage = kBLANKIMAGE
     var mailName: String = ""
     
 //MARK: IBOutlets
@@ -34,7 +33,7 @@ class PopUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        imageView.image = mailImage
+        imageView.image = mail.image
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -126,7 +125,7 @@ class PopUpVC: UIViewController {
     
 //MARK: Helpers
     @objc func handeImageViewTap(_ gesture: UITapGestureRecognizer) { //go to imageDetailVC
-        performSegue(withIdentifier: "toImageDetailVC", sender: mailImage)
+        performSegue(withIdentifier: "toImageDetailVC", sender: mail.image)
     }
     
     @objc func handlePopupViewTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard
