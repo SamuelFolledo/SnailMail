@@ -15,15 +15,15 @@ class Mail {
     let updatedAt: Date
     let scannedText: String
     var name: String
-    let image: UIImage
+    let imageUrl: String
     
-    init(_objectId: String, _createdAt: Date, _updatedAt: Date, _scannedText: String, _name: String = "", _image: UIImage) {
+    init(_objectId: String, _createdAt: Date, _updatedAt: Date, _scannedText: String, _name: String = "", _imageUrl: String) {
         objectId = _objectId
         createdAt = _createdAt
         updatedAt = _updatedAt
         scannedText = _scannedText
         name = _name
-        image = _image
+        imageUrl = _imageUrl
     }
     
     init(_dictionary: NSDictionary) { //in order to save something to our Firebase, we need to convert it to an NSDictionary which is a type JSON
@@ -46,10 +46,10 @@ class Mail {
         } else {
             self.name = ""
         }
-        if let image = _dictionary[kIMAGE] as? UIImage {
-            self.image = image
+        if let imageUrl = _dictionary[kIMAGEURL] as? String {
+            self.imageUrl = imageUrl
         } else {
-            self.image = kBLANKIMAGE
+            self.imageUrl = ""
         }
     }
     
