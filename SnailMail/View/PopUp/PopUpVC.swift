@@ -125,7 +125,7 @@ class PopUpVC: UIViewController {
     
 //MARK: Helpers
     @objc func handeImageViewTap(_ gesture: UITapGestureRecognizer) { //go to imageDetailVC
-        performSegue(withIdentifier: "toImageDetailVC", sender: mail.image)
+        performSegue(withIdentifier: "toImageDetailVC", sender: imageView.image)
     }
     
     @objc func handlePopupViewTap(_ gesture: UITapGestureRecognizer) { //if keyboard is up, dismiss keyboard
