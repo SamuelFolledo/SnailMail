@@ -37,7 +37,9 @@ class MailsTableVC: UIViewController {
         deleteAllMails(mails: mails) { (error) in
             if let error = error {
                 Service.presentAlert(on: self, title: "Error Deleting All Mails", message: error.localizedDescription)
+                return
             }
+            self.mails.removeAll()
             self.tableView.reloadData()
         }
     }
@@ -64,6 +66,4 @@ extension MailsTableVC: UITableViewDataSource {
         cell.populateViews()
         return cell
     }
-    
-    
 }
