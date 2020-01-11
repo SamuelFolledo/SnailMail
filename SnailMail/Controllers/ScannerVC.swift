@@ -252,8 +252,8 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan it properly
             displayDetectedText(image: rotatedImage!) { //scan the image's text
-                let mailText = self.getMailName(text: self.scannedText) //get the name from scannedText from image
-                let values: [String: Any] = [kNAME: mailText, kSCANNEDTEXT: self.scannedText]
+                let mailName = self.getMailName(text: self.scannedText) //get the name from scannedText from image
+                let values: [String: Any] = [kNAME: mailName, kSCANNEDTEXT: self.scannedText, kIMAGE: image]
                 saveMail(values: values) { (mail, error) in //with mail's name, save mail
                     if let error = error {
                         Service.presentAlert(on: self, title: "Error", message: error)
@@ -262,7 +262,6 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                     guard let mail: Mail = mail else { return } //with mail, show popUp
                     let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
                     popUpVC.delegate = self
-                    popUpVC.mailImage = image
                     popUpVC.mail = mail
                     print("MAIL NAME = \(mail.name)")
                     self.addChild(popUpVC)
