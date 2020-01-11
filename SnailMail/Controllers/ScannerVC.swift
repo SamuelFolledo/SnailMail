@@ -37,8 +37,8 @@ class ScannerVC: UIViewController {
         downloadMails()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         startCamera()
     }
     
@@ -130,21 +130,21 @@ class ScannerVC: UIViewController {
          3. if that word is either avenue, street, lane, etc. get the index of that line
          4. index - 1 should be the index of the line that has the name
          */
-        var name: String = ""
+        var lineName: String = ""
         let lines: [String] = text.lines //turns multi-line text(String) into an array of strings
 //        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased().filter(allAlphaNum.contains)) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
         for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers { //loop through lines in reversed() where line's firstWord is made up of all integers only
             for word in line.byWords where streetSuffix.contains(word.lowercased().filter(allAlphaNum.contains)) { //for each word in line where it contains in streetSuffix array...
                 print("1)\(line) in index \(index)::: \(word)")
-                var nameIndex: Int = lines.count - 1 - index - 1 //name will be the line on top of this line's index
-                name = lines[nameIndex]
-                while illegalNames.contains(name.lowercased().filter(allAlphaNum.contains)) && nameIndex >= 0 { //if name grabbed is one of the illegal names keep going up one line, or until it reaches the first/highest line
-                    print("1) \(name) is ILLEGAL ❌")
-                    nameIndex -= 1
-                    name = lines[nameIndex]
+                var lineNameIndex: Int = lines.count - 1 - index - 1 //lineName will be the line on top of this line's index
+                lineName = lines[lineNameIndex]
+                while illegalNames.contains(lineName.lowercased().filter(allAlphaNum.contains)) && lineNameIndex >= 0 { //if name grabbed is one of the illegal names keep going up one line, or until it reaches the first/highest line
+                    print("1) \(lineName) is ILLEGAL ❌")
+                    lineNameIndex -= 1
+                    lineName = lines[lineNameIndex]
                 }
-                print("1) \(name) is ALLOWED ✅")
-                return name
+                print("1) \(lineName) is ALLOWED ✅")
+                return lineName
 //                if impossibleNames.contains(name.lowercased().filter(allAlphaNum.contains)) { //if name is one of the illegal name, then skip and continue
 //                    print("1) \(name) is ILLEGAL ❌")
 //                    name = ""
@@ -155,7 +155,7 @@ class ScannerVC: UIViewController {
 //                }
             }
         }
-        return name
+        return lineName
     }
     
     fileprivate func sendSlackMessage(mail: Mail) {
@@ -164,14 +164,14 @@ class ScannerVC: UIViewController {
                 switch result {
                 case .success(let object):
                     print("didSend OBJECT = \(object)")
-                    guard let name = object[kNAME] as? String else { return }
+//                    guard let name = object[kNAME] as? String else { return }
                     //                guard let note = object[kNOTE] as? String else { return }
-                    //                guard let success = object[kSUCCESS] as? String else { return } //success = 1, fail = false
+                    guard let success = object[kSUCCESS] as? Int else { return }
                     //                guard let error = object[kERROR] as? String else { return }
                     //                guard let slackID = object[kSLACKID] as? String else { return }
                     //                print(name, note, success, error, slackID)
                     DispatchQueue.main.async {
-                        if name == "null" {
+                        if success == 0 {
                             self.showSuccessAlertView(success: false, message: "No User Found")
                         } else {
                             self.showSuccessAlertView(success: true, message: "Mail Sent!")
