@@ -33,13 +33,6 @@ class ScannerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        configureVideoOrientation()
-        downloadMails()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        startCamera()
     }
     
 //MARK: Private Methods
@@ -49,6 +42,9 @@ class ScannerVC: UIViewController {
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(viewPinched(recognizer:)))
         scannerView.addGestureRecognizer(pinch)
         successView.isHidden = true
+        configureVideoOrientation()
+        downloadMails()
+        startCamera()
     }
     
     fileprivate func displayDetectedText(image: UIImage, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
@@ -112,7 +108,6 @@ class ScannerVC: UIViewController {
     
     func downloadMails() {
         self.mails.removeAll()
-        let mailRef = firDatabase.child(kMAIL)
         mailRef.observe(.childAdded, with: { (snapshot) in
             if snapshot.exists() {
                 guard let mailDic = snapshot.value as? [String: Any] else { return }
