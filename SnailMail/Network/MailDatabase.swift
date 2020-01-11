@@ -134,3 +134,24 @@ func getImageURL(imageView: UIImageView, compeltion: @escaping(_ imageURL: Strin
         })
     }
 }
+
+func getImageURL(image: UIImage, compeltion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returning the URL if no error
+    let imageName = NSUUID().uuidString
+    let imageReference = Storage.storage().reference().child("avatar_images").child("0000\(imageName).png")
+    if let uploadData = image.jpegData(compressionQuality: 0.35) { //compress the image to be uploaded
+        imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
+            if let error = error {
+                compeltion(nil, error.localizedDescription)
+            } else { //if no error, get the url
+                imageReference.downloadURL(completion: { (imageUrl, error) in
+                    if let error = error {
+                        compeltion(nil, error.localizedDescription)
+                    } else { //no error on downloading metadata URL
+                        guard let url = imageUrl?.absoluteString else { return }
+                        compeltion(url, nil)
+                    }
+                })
+            }
+        })
+    }
+}
