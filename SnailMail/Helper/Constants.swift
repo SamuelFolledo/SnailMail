@@ -20,6 +20,7 @@ public let kUPDATEDAT: String = "updatedAt"
 public let kSCANNEDTEXT: String = "scannedText"
 public let kNAME: String = "name"
 public let kIMAGE: String = "image"
+public let kIMAGEURL: String = "imageUrl"
 
 //Service Constant
 public let dateFormat = "yyyyMMddHHmmss"
