@@ -83,17 +83,23 @@ func deleteMail(objectId: String, completion: @escaping(_ error: Error?) -> Void
                 if let error = error {
                     completion(error)
                 }
+                UserDefaults.standard.removeObject(forKey: objectId) //update our user in our UserDefaults because save might create a new instance of it
+                UserDefaults.standard.synchronize()
                 completion(nil)
             }
         }
     }, withCancel: nil)
 }
 
-func deleteAllMails(completion: @escaping(_ error: Error?) -> Void) { //delete all mails
+func deleteAllMails(mails: [Mail], completion: @escaping(_ error: Error?) -> Void) { //delete all mails
     let mailRef = firDatabase.child(kMAIL)
     mailRef.removeValue { (error, ref) in
         if let error = error {
             completion(error)
+        }
+        for mail in mails { //delete them locally as well
+            UserDefaults.standard.removeObject(forKey: mail.objectId)
+            UserDefaults.standard.synchronize()
         }
         completion(nil)
     }
