@@ -107,6 +107,6 @@ func mailToDictionary(mail: Mail) -> NSDictionary {
     let createdAt = Service.dateFormatter().string(from: mail.createdAt)
     let updatedAt = Service.dateFormatter().string(from: mail.updatedAt)
     return NSDictionary(
-        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText, mail.name, mail.image],
-                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying, kNAME as NSCopying, kIMAGE as NSCopying]) //how you create an NSDictionary
+        objects: [mail.objectId, createdAt, updatedAt, mail.scannedText, mail.name, mail.imageUrl],
+                        forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying, kNAME as NSCopying, kIMAGEURL as NSCopying]) //how you create an NSDictionary
 }
