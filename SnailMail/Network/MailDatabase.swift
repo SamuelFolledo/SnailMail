@@ -113,21 +113,21 @@ func mailToDictionary(mail: Mail) -> NSDictionary {
                         forKeys: [kOBJECTID as NSCopying, kCREATEDAT as NSCopying, kUPDATEDAT as NSCopying, kSCANNEDTEXT as NSCopying, kNAME as NSCopying, kIMAGEURL as NSCopying]) //how you create an NSDictionary
 }
 
-//MARK: Storage for Mail Images
-func getImageURL(imageView: UIImageView, compeltion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that grabs an image from a UIImageView, compress it as JPEG, store in Storage, and returning the URL if no error
+//MARK: Storage - Save Mail Images
+func getImageURL(imageView: UIImageView, compeletion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that grabs an image from a UIImageView, compress it as JPEG, store in Storage, and returning the URL if no error
     let imageName = NSUUID().uuidString
     let imageReference = Storage.storage().reference().child("avatar_images").child("0000\(imageName).png")
     if let avatarImage = imageView.image, let uploadData = avatarImage.jpegData(compressionQuality: 0.35) { //compress the image to be uploaded
         imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
             if let error = error {
-                compeltion(nil, error.localizedDescription)
+                compeletion(nil, error.localizedDescription)
             } else { //if no error, get the url
                 imageReference.downloadURL(completion: { (imageUrl, error) in
                     if let error = error {
-                        compeltion(nil, error.localizedDescription)
+                        compeletion(nil, error.localizedDescription)
                     } else { //no error on downloading metadata URL
                         guard let url = imageUrl?.absoluteString else { return }
-                        compeltion(url, nil)
+                        compeletion(url, nil)
                     }
                 })
             }
@@ -135,23 +135,35 @@ func getImageURL(imageView: UIImageView, compeltion: @escaping(_ imageURL: Strin
     }
 }
 
-func getImageURL(image: UIImage, compeltion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returning the URL if no error
+func getImageURL(image: UIImage, compeletion: @escaping(_ imageURL: String?, _ error: String?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returning the URL if no error
     let imageName = NSUUID().uuidString
     let imageReference = Storage.storage().reference().child("avatar_images").child("0000\(imageName).png")
     if let uploadData = image.jpegData(compressionQuality: 0.35) { //compress the image to be uploaded
         imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
             if let error = error {
-                compeltion(nil, error.localizedDescription)
+                compeletion(nil, error.localizedDescription)
             } else { //if no error, get the url
                 imageReference.downloadURL(completion: { (imageUrl, error) in
                     if let error = error {
-                        compeltion(nil, error.localizedDescription)
+                        compeletion(nil, error.localizedDescription)
                     } else { //no error on downloading metadata URL
                         guard let url = imageUrl?.absoluteString else { return }
-                        compeltion(url, nil)
+                        compeletion(url, nil)
                     }
                 })
             }
         })
+    }
+}
+
+//MARK: Storage - Delete Mail Images
+func deleteFromStorage(ref: String, compeletion: @escaping(_ error: String?) -> Void) { //takes a reference and deletes a file/image from the Storage
+    let imageRef = Storage.storage().reference().child(ref)
+    imageRef.delete { (error) in
+        if let error = error {
+            compeletion(error.localizedDescription)
+        } else {
+            compeletion(nil)
+        }
     }
 }
