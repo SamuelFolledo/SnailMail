@@ -34,7 +34,12 @@ class MailsTableVC: UIViewController {
     }
     
     @IBAction func deleteAllButtonTapped(_ sender: Any) {
-        
+        deleteAllMails { (error) in
+            if let error = error {
+                Service.presentAlert(on: self, title: "Error Deleting All Mails", message: error.localizedDescription)
+            }
+            self.tableView.reloadData()
+        }
     }
     
 //MARK: Helpers
