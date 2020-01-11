@@ -121,7 +121,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zSc-gb-opk">
-                                <rect key="frame" x="336" y="7" width="19" height="19.5"/>
+                                <rect key="frame" x="335" y="10" width="19" height="19.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -156,8 +156,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="zSc-gb-opk" firstAttribute="trailing" secondItem="JmZ-r7-wDy" secondAttribute="trailing" id="0eE-Go-dP4"/>
-                            <constraint firstItem="zSc-gb-opk" firstAttribute="top" secondItem="JmZ-r7-wDy" secondAttribute="top" constant="2" id="1tc-fL-W97"/>
+                            <constraint firstItem="zSc-gb-opk" firstAttribute="trailing" secondItem="JmZ-r7-wDy" secondAttribute="trailing" constant="-1" id="0eE-Go-dP4"/>
+                            <constraint firstItem="zSc-gb-opk" firstAttribute="top" secondItem="JmZ-r7-wDy" secondAttribute="top" constant="5" id="1tc-fL-W97"/>
                             <constraint firstItem="Mea-CA-IpI" firstAttribute="bottom" secondItem="dlV-N3-NQm" secondAttribute="bottom" constant="50" id="1zh-ZY-TX2"/>
                             <constraint firstItem="L95-ek-nyg" firstAttribute="centerX" secondItem="Mea-CA-IpI" secondAttribute="centerX" id="3EN-2k-edy"/>
                             <constraint firstItem="zSc-gb-opk" firstAttribute="height" secondItem="JmZ-r7-wDy" secondAttribute="height" multiplier="0.35" id="59a-xF-iEE"/>
