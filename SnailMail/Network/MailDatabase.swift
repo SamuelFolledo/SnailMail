@@ -89,6 +89,16 @@ func deleteMail(objectId: String, completion: @escaping(_ error: Error?) -> Void
     }, withCancel: nil)
 }
 
+func deleteAllMails(completion: @escaping(_ error: Error?) -> Void) { //delete all mails
+    let mailRef = firDatabase.child(kMAIL)
+    mailRef.removeValue { (error, ref) in
+        if let error = error {
+            completion(error)
+        }
+        completion(nil)
+    }
+}
+
 //MARK: Mail Helper - take a Mail class and returns NSDictionary
 func mailToDictionary(mail: Mail) -> NSDictionary {
     let createdAt = Service.dateFormatter().string(from: mail.createdAt)
