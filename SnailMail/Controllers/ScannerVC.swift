@@ -38,12 +38,12 @@ class ScannerVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        updateFirebaseObservers(shouldStart: false)
+        updateFirebaseObservers(shouldStart: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        mailRef.removeAllObservers()
+        updateFirebaseObservers(shouldStart: false)
     }
     
 //MARK: Private Methods
@@ -54,7 +54,6 @@ class ScannerVC: UIViewController {
         scannerView.addGestureRecognizer(pinch)
         successView.isHidden = true
         configureVideoOrientation()
-        updateFirebaseObservers(shouldStart: true)
         startCamera()
     }
     
@@ -117,7 +116,7 @@ class ScannerVC: UIViewController {
         cameraImageOutput.capturePhoto(with: settings, delegate: self)
     }
     
-    func updateFirebaseObservers(shouldStart: Bool) {
+    func updateFirebaseObservers(shouldStart: Bool) { //childAdded, childRemoved, and remove observers for mails
         if shouldStart {
             self.mails.removeAll()
             mailRef.observe(.childAdded, with: { (snapshot) in
@@ -128,6 +127,14 @@ class ScannerVC: UIViewController {
                 }
                 self.mailCountLabel.text = "\(self.mails.count)"
             }, withCancel: nil)
+            mailRef.observe(.childRemoved) { (snapshot) in //delete from mails
+                if snapshot.exists() {
+                    guard let mailDic = snapshot.value as? [String: Any] else { return }
+                    let mail: Mail = Mail(_dictionary: mailDic as NSDictionary)
+                    self.mails.removeValue(forKey: mail.objectId)
+                }
+                self.mailCountLabel.text = "\(self.mails.count)"
+            }
         } else {
             mailRef.removeAllObservers()
         }
