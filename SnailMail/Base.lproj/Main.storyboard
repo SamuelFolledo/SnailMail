@@ -107,7 +107,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bj2-KK-4d8">
                                 <rect key="frame" x="20" y="20" width="40" height="40"/>
-                                <state key="normal" image="menu"/>
+                                <state key="normal" image="menu1"/>
                                 <connections>
                                     <action selector="menuButtonTapped:" destination="yja-ZF-KDz" eventType="touchUpInside" id="v8a-zZ-pEn"/>
                                 </connections>
@@ -115,7 +115,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmZ-r7-wDy">
                                 <rect key="frame" x="300" y="5" width="55" height="55"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="Button" image="mail"/>
+                                <state key="normal" title="Button" image="snailMailLogo"/>
                                 <connections>
                                     <action selector="mailButtonTapped:" destination="yja-ZF-KDz" eventType="touchUpInside" id="0CB-G5-RdB"/>
                                 </connections>
@@ -136,8 +136,8 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail Sent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQB-rs-5Mn">
-                                        <rect key="frame" x="-75" y="117.5" width="300" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="34"/>
+                                        <rect key="frame" x="-75" y="117.5" width="300" height="43"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                                         <color key="textColor" red="0.25882352939999997" green="0.40000000000000002" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -313,10 +313,11 @@
         <image name="blueCircle" width="768" height="768"/>
         <image name="camera" width="58" height="46"/>
         <image name="correct" width="128" height="128"/>
-        <image name="mail" width="496" height="369"/>
         <image name="menu" width="128" height="128"/>
+        <image name="menu1" width="128" height="128"/>
         <image name="scanned-text" width="654" height="999"/>
         <image name="share" width="40" height="56"/>
+        <image name="snailMailLogo" width="1024" height="1024"/>
     </resources>
     <color key="tintColor" red="0.26010626549999999" green="0.39904129510000003" blue="0.69025290009999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
