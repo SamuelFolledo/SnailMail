@@ -12,3 +12,5 @@ An iOS app that notifies if you receive a mail or package. This app uses Machine
 - __Database and Storage__ - [Firebase](https://firebase.google.com/)
 - __Text Recognizer Machine Learning Kit__ [Firebase/MLVision](https://firebase.google.com/docs/ml-kit/ios/recognize-text)
 
+
+License under the [MIT License](LICENSE)
