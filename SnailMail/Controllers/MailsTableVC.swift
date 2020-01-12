@@ -26,6 +26,14 @@ class MailsTableVC: UIViewController {
     fileprivate func setupViews() {
         tableView.delegate = self
         tableView.dataSource = self
+        configureTableView()
+    }
+    
+    func configureTableView() {
+        // remove separators for empty cells
+        tableView.tableFooterView = UIView()
+        // remove separators from cells
+//        tableView.separatorStyle = .none
     }
     
 //MARK: IBActions
