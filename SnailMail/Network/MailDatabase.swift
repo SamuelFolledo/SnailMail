@@ -140,7 +140,7 @@ func getImageURL(imageView: UIImageView, compeletion: @escaping(_ imageURL: Stri
 func getImageURL(image: UIImage, compeletion: @escaping(_ imageURL: String?, _ error: Error?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returning the URL if no error
     let imageName = NSUUID().uuidString //unique string
     let imageReference = Storage.storage().reference().child("mail_images").child("0000\(imageName).png")
-    if let uploadData = image.jpegData(compressionQuality: 0.35) { //compress the image to be uploaded
+    if let uploadData = image.jpegData(compressionQuality: 0.1) { //compress the image to be uploaded
         imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
             if let error = error {
                 compeletion(nil, error)
