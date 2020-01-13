@@ -229,7 +229,7 @@ class ScannerVC: UIViewController {
         let nameArr: [String] = mail.name.byWords
         print("Mail name \(mail.name)")
         let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
-        return "https://ms-snailmail.herokuapp.com/api/\(nameQueryString)"
+        return "https://ms-snailmail.herokuapp.com/api/?name=\(nameQueryString)"
     }
     
     fileprivate func showSuccessAlertView(success: Bool, message: String) {
