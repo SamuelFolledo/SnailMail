@@ -37,13 +37,13 @@ class ScannerVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        updateFirebaseObservers(shouldStart: true)
+        super.viewDidAppear(animated)
+//        updateFirebaseObservers(shouldStart: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        updateFirebaseObservers(shouldStart: false)
+//        updateFirebaseObservers(shouldStart: false)
     }
     
 //MARK: Segue
@@ -149,28 +149,32 @@ class ScannerVC: UIViewController {
         }
     }
     
-    fileprivate func getMailName(text: String) -> String { //from scannedText, get the name
+    fileprivate func getMailName(text: String) -> (name:String, address: String) { //from scannedText, get the name
         /* ALGORITHM to find a name from the scanned text
          1. put string in an array of strings
          2. loop through each string, and starting from the end of the string, loop until it reaches a whitespace, and get that word
          3. if that word is either avenue, street, lane, etc. get the index of that line
          4. index - 1 should be the index of the line that has the name
          */
-        var lineName: String = ""
+        var nameAndAddress: (name: String, address: String) = (name: "", address: "")
+//        var lineName: String = ""
+//        var lineAddress: String = ""
         let lines: [String] = text.lines //turns multi-line text(String) into an array of strings
 //        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased().filter(allAlphaNum.contains)) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
         for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers { //loop through lines in reversed() where line's firstWord is made up of all integers only
-            for word in line.byWords where streetSuffix.contains(word.lowercased().filter(allAlphaNum.contains)) { //for each word in line where it contains in streetSuffix array...
+            for word in line.byWords where streetSuffix.contains(word.lowercased().filter(allAlphaNum.contains)) { //for each word in line where it contains one of streetSuffix...
                 print("1)\(line) in index \(index)::: \(word)")
-                var lineNameIndex: Int = lines.count - 1 - index - 1 //lineName will be the line on top of this line's index
-                lineName = lines[lineNameIndex]
-                while illegalNames.contains(lineName.lowercased().filter(allAlphaNum.contains)) && lineNameIndex >= 0 { //if name grabbed is one of the illegal names keep going up one line, or until it reaches the first/highest line
-                    print("1) \(lineName) is ILLEGAL ❌")
+                nameAndAddress.address = line //line that has a street suffix will be the address line
+                print("1) ADDRESS = \(nameAndAddress.address)")
+                var lineNameIndex: Int = lines.count - 1 - index - 1 //lineName will be the line on top of address line's index
+                nameAndAddress.name = lines[lineNameIndex]
+                while illegalNames.contains(nameAndAddress.name.lowercased().filter(allAlphaNum.contains)) && lineNameIndex >= 0 { //while name grabbed is one of the illegal names keep going up one line, or until it reaches the first/highest line
+                    print("1) \(nameAndAddress.name) name is ILLEGAL ❌")
                     lineNameIndex -= 1
-                    lineName = lines[lineNameIndex]
+                    nameAndAddress.name = lines[lineNameIndex]
                 }
-                print("1) \(lineName) is ALLOWED ✅")
-                return lineName
+                print("1) \(nameAndAddress.name) name is ALLOWED ✅")
+                return nameAndAddress
 //                if impossibleNames.contains(name.lowercased().filter(allAlphaNum.contains)) { //if name is one of the illegal name, then skip and continue
 //                    print("1) \(name) is ILLEGAL ❌")
 //                    name = ""
@@ -181,7 +185,7 @@ class ScannerVC: UIViewController {
 //                }
             }
         }
-        return lineName
+        return nameAndAddress
     }
     
     fileprivate func sendSlackMessage(mail: Mail) {
@@ -224,12 +228,25 @@ class ScannerVC: UIViewController {
         captureImage()
     }
     
+    //EYOOOOO
+    //Samuel P. Folledo
+    //555 Post St.
+    //San Francisco, CA
+    
+    
 //MARK: Helpers
     fileprivate func getURLFromMail(mail: Mail) -> String {
         let nameArr: [String] = mail.name.byWords
         print("Mail name \(mail.name)")
-        let nameQueryString: String = "\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
-        return "https://ms-snailmail.herokuapp.com/api/?name=\(nameQueryString)"
+        let streetAddressArray: [String] = mail.scannedText.byWords
+        var addressURL: String = ""
+        if streetAddressArray[0] != "" && streetAddressArray[1] != "" && streetAddressArray[2] != "" {
+            addressURL = "&addy=\(streetAddressArray[0])%20\(streetAddressArray[1])%20\(streetAddressArray[2])"
+        }
+        print("STREET ADDRESS for URL = \(mail.scannedText)")
+        let nameQueryString: String = "name=\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
+        
+        return "https://ms-snailmail.herokuapp.com/api/?\(nameQueryString)\(addressURL)"
     }
     
     fileprivate func showSuccessAlertView(success: Bool, message: String) {
@@ -258,8 +275,9 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                         self.cameraButton.isEnabled = true
                         return
                     }
-                    let mailName = self.getMailName(text: self.scannedText) //get the name from scannedText from image
-                    let values: [String: Any] = [kNAME: mailName, kSCANNEDTEXT: self.scannedText, kIMAGEURL: imageUrl!]
+                    let mailNameAndAddress: (name:String, address: String) = self.getMailName(text: self.scannedText) //get the name from scannedText from image
+                    self.scannedText = mailNameAndAddress.address //TEMPORARY ADDRESS Placeholder
+                    let values: [String: Any] = [kNAME: mailNameAndAddress.name, kSCANNEDTEXT: self.scannedText, kIMAGEURL: imageUrl!]
                     saveMail(values: values) { (mail, error) in //with mail's name, save mail
                         if let error = error {
                             Service.presentAlert(on: self, title: "Error", message: error)
