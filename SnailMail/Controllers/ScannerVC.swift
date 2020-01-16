@@ -312,7 +312,8 @@ extension ScannerVC: ScannerMailProtocol {
         cameraButton.isEnabled = true
         deleteMail(mail: mail) { (error) in
             if let error = error {
-                Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
+                self.handleMailError(mail: mail, errorMessage: error.localizedDescription)
+                return
             }
         }
     }
@@ -328,6 +329,7 @@ extension ScannerVC: ScannerMailProtocol {
         updateMail(mail: mail) { (error) in
             if let error = error {
                 self.handleMailError(mail: mail, errorMessage: error.localizedDescription)
+                return
             }
             self.mails[mail.objectId] = mail
             self.sendSlackMessage(mail: mail)
