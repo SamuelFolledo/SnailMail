@@ -26,7 +26,6 @@ class MailCell: UITableViewCell {
     }
     
     func populateViews() {
-        print("IMAGE URL = \(mail.imageUrl)")
         mailImageView.downloaded(fromLink: mail.imageUrl)
         nameLabel.text = mail.name
     }
