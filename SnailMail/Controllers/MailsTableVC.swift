@@ -26,10 +26,11 @@ class MailsTableVC: UIViewController {
     fileprivate func setupViews() {
         tableView.delegate = self
         tableView.dataSource = self
+        updateDeleteButton()
         configureTableView()
     }
     
-    func configureTableView() {
+    fileprivate func configureTableView() {
         // remove separators for empty cells
         tableView.tableFooterView = UIView()
         // remove separators from cells
@@ -49,9 +50,12 @@ class MailsTableVC: UIViewController {
                     Service.presentAlert(on: self, title: "Error Deleting All Mails", message: error.localizedDescription)
                     return
                 }
-                self.mails.removeAll() //removeAll mails
-                self.tableView.reloadData()
-                self.dismiss(animated: true, completion: nil) //dismiss MailsTableVC
+                DispatchQueue.main.async {
+                    self.mails.removeAll() //removeAll mails
+                    self.tableView.reloadData()
+                    self.updateDeleteButton()
+                    alertVC.dismiss(animated: true, completion: nil) //dismiss MailsTableVC
+                }
             }
         }
         let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in //dismisses the alertVC
@@ -63,7 +67,9 @@ class MailsTableVC: UIViewController {
     }
     
 //MARK: Helpers
-    
+    fileprivate func updateDeleteButton() {
+        deleteAllButton.isEnabled = mails.count > 0 ? true : false
+    }
 }
 
 //MARK: Extensions
@@ -80,8 +86,11 @@ extension MailsTableVC: UITableViewDelegate {
                     Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
                     return
                 }
-                self.mails.remove(at: indexPath.row) //remove from list, and cell row
-                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                DispatchQueue.main.async {
+                    self.mails.remove(at: indexPath.row) //remove from list, and cell row
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.updateDeleteButton()
+                }
             }
         }
     }
