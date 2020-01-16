@@ -66,12 +66,12 @@ class ScannerVC: UIViewController {
         startCamera()
     }
     
-    fileprivate func displayDetectedText(image: UIImage, completion: (() -> Void)? = nil) { //method that takes in the UIImageView and a callback so that you know when it's done
+    fileprivate func getDetectedText(image: UIImage, completion: @escaping (_ text: String) -> Void) {//method that takes in the UIImageView and a callback so that you know when it's done
         processor.processImage(image) { text in
             if self.scannedText != text { //to avoid duplicates
                 self.scannedText = text
             }
-            completion?()
+            completion(text)
         }
     }
     
