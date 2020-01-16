@@ -38,12 +38,12 @@ class ScannerVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        updateFirebaseObservers(shouldStart: true)
+        updateFirebaseObservers(shouldStart: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-//        updateFirebaseObservers(shouldStart: false)
+        updateFirebaseObservers(shouldStart: false)
     }
     
 //MARK: Segue
