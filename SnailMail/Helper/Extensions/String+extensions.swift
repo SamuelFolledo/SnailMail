@@ -41,6 +41,19 @@ extension String {
         return byWords.last ?? ""
     }
     
+    var asStorageUrl: String { //I realized this was not needed to delete an image from Storage
+        var imageUrl: String = ""
+        if let beginningRange = self.range(of: "/b/") { //characters after /b/ will have the link to the imageURL PLUS extra characters which still needs to be removed
+            let imageUrlWithExtras = self[beginningRange.upperBound...]
+            let imageUrlArray: [String] = imageUrlWithExtras.components(separatedBy: "?alt") //splits the string by "?alt"
+            let imageURL: String = imageUrlArray[0] //string before ?alt contains the imageUrl
+            imageUrl = "gs://\(imageURL)"
+            imageUrl = imageUrl.replacingOccurrences(of: "/o", with: "") //"/o" in imageUrl also needs to be removed
+            imageUrl = imageUrl.replacingOccurrences(of: "%2F", with: "/") //"/" gets replaced to %2F when you store them in the database, thus we need to reverse it
+        }
+        return imageUrl
+    }
+    
     func trimmedString() -> String { //method that removes string's left and right white spaces and new lines
         let newWord: String = self.trimmingCharacters(in: .whitespacesAndNewlines)
         return newWord
