@@ -157,8 +157,6 @@ class ScannerVC: UIViewController {
          4. index - 1 should be the index of the line that has the name
          */
         var nameAndAddress: (name: String, address: String) = (name: "", address: "")
-//        var lineName: String = ""
-//        var lineAddress: String = ""
         let lines: [String] = text.lines //turns multi-line text(String) into an array of strings
 //        for (index, line) in lines.reversed().enumerated() where streetSuffix.contains(line.lastWord.lowercased().filter(allAlphaNum.contains)) { //loop through streetSuffix array in reversed() where line's lastWord is in streetSuffix array //lastWord is lowercased() to ignore cases
         for (index, line) in lines.reversed().enumerated() where line.firstWord.isAllNumbers { //loop through lines in reversed() where line's firstWord is made up of all integers only
@@ -175,14 +173,6 @@ class ScannerVC: UIViewController {
                 }
                 print("1) \(nameAndAddress.name) name is ALLOWED ✅")
                 return nameAndAddress
-//                if impossibleNames.contains(name.lowercased().filter(allAlphaNum.contains)) { //if name is one of the illegal name, then skip and continue
-//                    print("1) \(name) is ILLEGAL ❌")
-//                    name = ""
-//                    continue
-//                } else { //if not an illegal name
-//                    print("1) \(name) is ALLOWED ✅")
-//                    return name
-//                }
             }
         }
         return nameAndAddress
@@ -228,12 +218,6 @@ class ScannerVC: UIViewController {
         captureImage()
     }
     
-    //EYOOOOO
-    //Samuel P. Folledo
-    //555 Post St.
-    //San Francisco, CA
-    
-    
 //MARK: Helpers
     fileprivate func getURLFromMail(mail: Mail) -> String {
         let nameArr: [String] = mail.name.byWords
@@ -269,10 +253,6 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan it properly
             getDetectedText(image: rotatedImage!) { scannedText in //scan the image's text
-                
-                
-                //CORRECT FLOW: - this should be after getting scannedText, getMailName, then saveMail to Database, then store image to Storage, if there is error then delete the mail reference in database, remove observers.
-                
                 let mailNameAndAddress: (name:String, address: String) = self.getMailName(text: scannedText) //get the name from scannedText from image
                 self.scannedText = mailNameAndAddress.address //TEMPORARY ADDRESS Placeholder
                 let values: [String: Any] = [kNAME: mailNameAndAddress.name, kSCANNEDTEXT: mailNameAndAddress.address, kIMAGEURL: ""]

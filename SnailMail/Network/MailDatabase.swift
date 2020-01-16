@@ -58,8 +58,6 @@ func fetchMailWith(mailId: String, completion: @escaping (_ mail: Mail?) -> Void
 
 //MARK: Update Mail
 func updateMail(mail: Mail, withBlock: @escaping(_ error: Error?) -> Void) { //will pass a dictionary with an Any value, with running a background thread escaping, pass success type boolean, so we can return if user was updated successfully, no return here so void
-//    if UserDefaults.standard.object(forKey: mail.objectId) != nil {
-//        guard let mailDictionary: [String: Any] = mailToDictionary(mail: mail) as? [String : Any] else { print("update mail could not convert to dictionary"); return }
     guard let mailDictionary: [String: Any] = mailToDictionary(mail: mail) as? [String : Any] else { print("update mail could not convert to dictionary"); return }
     let ref = firDatabase.child(kMAIL).child(mail.objectId)
     ref.updateChildValues(mailDictionary) { (error, ref) in
@@ -70,7 +68,6 @@ func updateMail(mail: Mail, withBlock: @escaping(_ error: Error?) -> Void) { //w
         UserDefaults.standard.synchronize()
         withBlock(nil)
     }
-//    }
 }
 
 //MARK: Mail Delete
@@ -144,7 +141,6 @@ func getImageURL(mail: Mail, image: UIImage, compeletion: @escaping(_ imageURL: 
     metaData.contentType = "image/jpg" //set its type
 //    let imageUniqueName = NSUUID().uuidString //unique string
     let imageReference = Storage.storage().reference().child("mail").child("shippingLabels").child("\(mail.objectId)")
-    //    if let uploadData = image.jpegData(compressionQuality: 0.1) { //compress the image to be uploaded
     imageReference.putData(imageData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
         if let error = error {
             compeletion(nil, error)
@@ -159,7 +155,6 @@ func getImageURL(mail: Mail, image: UIImage, compeletion: @escaping(_ imageURL: 
             })
         }
     })
-    //    }
 }
 
 //MARK: Storage - Delete Mail Images
