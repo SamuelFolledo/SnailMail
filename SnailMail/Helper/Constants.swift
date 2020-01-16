@@ -21,6 +21,8 @@ public let kSCANNEDTEXT: String = "scannedText"
 public let kNAME: String = "name"
 public let kIMAGE: String = "image"
 public let kIMAGEURL: String = "imageUrl"
+public let kADDRESS: String = "address"
+public let kSHIPPINGLABEL: String = "shippingLabel"
 
 //Service Constant
 public let dateFormat = "yyyyMMddHHmmss"
