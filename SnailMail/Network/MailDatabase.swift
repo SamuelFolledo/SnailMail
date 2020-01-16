@@ -137,25 +137,28 @@ func getImageURL(imageView: UIImageView, compeletion: @escaping(_ imageURL: Stri
     }
 }
 
-func getImageURL(image: UIImage, compeletion: @escaping(_ imageURL: String?, _ error: Error?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returning the URL if no error
-    let imageName = NSUUID().uuidString //unique string
-    let imageReference = Storage.storage().reference().child("mail_images").child("0000\(imageName).png")
-    if let uploadData = image.jpegData(compressionQuality: 0.1) { //compress the image to be uploaded
-        imageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
-            if let error = error {
-                compeletion(nil, error)
-            } else { //if no error, get the url
-                imageReference.downloadURL(completion: { (imageUrl, error) in
-                    if let error = error {
-                        compeletion(nil, error)
-                    } else { //no error on downloading metadata URL
-                        guard let url = imageUrl?.absoluteString else { return }
-                        compeletion(url, nil)
-                    }
-                })
-            }
-        })
-    }
+func getImageURL(mail: Mail, image: UIImage, compeletion: @escaping(_ imageURL: String?, _ error: Error?) -> Void) { //method that takes an image, compress it as JPEG, store in Storage, and returns the URL path of the image
+    guard let imageData = image.jpegData(compressionQuality: 0.1) else { return } //turn UIImage into compressed image data
+    let metaData: StorageMetadata = StorageMetadata()
+    metaData.contentType = "image/jpg" //set its type
+//    let imageUniqueName = NSUUID().uuidString //unique string
+    let imageReference = Storage.storage().reference().child("mail").child("shippingLabels").child("\(mail.objectId)")
+    //    if let uploadData = image.jpegData(compressionQuality: 0.1) { //compress the image to be uploaded
+    imageReference.putData(imageData, metadata: nil, completion: { (metadata, error) in //putData = Asynchronously uploads data to the reference
+        if let error = error {
+            compeletion(nil, error)
+        } else { //if no error, get the url
+            imageReference.downloadURL(completion: { (imageUrl, error) in
+                if let error = error {
+                    compeletion(nil, error)
+                } else { //no error on downloading metadata URL
+                    guard let url = imageUrl?.absoluteString else { return }
+                    compeletion(url, nil)
+                }
+            })
+        }
+    })
+    //    }
 }
 
 //MARK: Storage - Delete Mail Images
