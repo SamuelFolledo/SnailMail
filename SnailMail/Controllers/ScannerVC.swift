@@ -238,6 +238,20 @@ class ScannerVC: UIViewController {
         successLabel.text = message
         successView.enlargeThenShrinkAnimation()
     }
+    
+    fileprivate func handleMailError(mail: Mail?, errorMessage: String) {
+        cameraButton.isEnabled = true
+        if let mail = mail { //remove mail from mails
+            mails.removeValue(forKey: mail.objectId)
+            deleteMail(mail: mail) { (error) in
+                if let error = error {
+                    Service.presentAlert(on: self, title: "Error Deleting Mail", message: error.localizedDescription)
+                    return
+                }
+            }
+        }
+        Service.presentAlert(on: self, title: "Error", message: errorMessage)
+    }
 }
 
 //MARK: Extensions
@@ -258,22 +272,20 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
                 let values: [String: Any] = [kNAME: mailNameAndAddress.name, kSCANNEDTEXT: mailNameAndAddress.address, kIMAGEURL: ""]
                 saveMail(values: values) { (mail, error) in //with mail's name, save mail
                     if let error = error {
-                        Service.presentAlert(on: self, title: "Error", message: error)
-                        self.cameraButton.isEnabled = true
+                        self.handleMailError(mail: mail, errorMessage: error)
                         return
                     }
                     guard let mail: Mail = mail else { return } //with mail, show popUp
                     getImageURL(mail: mail, image: image) { (imageUrl, error) in //store the image scanned and get image url
                         if let error = error {
-                            Service.presentAlert(on: self, title: "Error Storing Image", message: error.localizedDescription)
-                            self.cameraButton.isEnabled = true
+                            self.handleMailError(mail: mail, errorMessage: error.localizedDescription)
                             return
                         }
                         mail.imageUrl = imageUrl! //update
+                        self.mails[mail.objectId] = mail //add mail to mails
                         updateMail(mail: mail) { (error) in
                             if let error = error {
-                                Service.presentAlert(on: self, title: "Error Storing Image", message: error.localizedDescription)
-                                self.cameraButton.isEnabled = true
+                                self.handleMailError(mail: mail, errorMessage: error.localizedDescription)
                                 return
                             }
                             let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
