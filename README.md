@@ -14,13 +14,14 @@ iOS app that sends Slack notifications when mail is delivered. Designed to impro
 
 ### Demo 1: User exist
 - This demo shows how the app captures an image and using Machine Learning and name finder algorithm I wrote, displays the name found from the mail. It also shows a Slack message received with the address written on the mail.
+<img src="https://github.com/SamuelFolledo/SnailMail/blob/master/static/gif/demo1.gif" width="563" height="1000">
 
 ### Demo 2: Update mail's recipient
 - This demo shows how the app works with any type of mail or shipping labels and how the name can be updated if for some reason, the name it captures is wrong. It also demonstrates in the Slack message's address matches the mail's address.
-
+<img src="https://github.com/SamuelFolledo/SnailMail/blob/master/static/gif/demo2.gif" width="563" height="1000">
 
 ### Demo 3: Swipe to delete, and delete all mails
 - This demo shows secondary screens like larger image and list of all mails scanned which can be swiped to delete, or delete all with animations. 
-
+<img src="https://github.com/SamuelFolledo/SnailMail/blob/master/static/gif/demo3.gif" width="563" height="1000">
 
 License under the [MIT License](LICENSE)
