@@ -4,13 +4,16 @@ iOS app that sends Slack notifications when mail is delivered. Designed to impro
   <img width="460" height="460" src="https://github.com/SamuelFolledo/SnailMail/blob/master/SnailMail/Assets.xcassets/AppIcon.appiconset/1024.png">
 </p>
 
+### How it works
+- With an image of a mail or shipping label captured by the camera, this app uses Firebase's [VisionTextRecognizer](https://firebase.google.com/docs/ml-kit/ios/recognize-text) API to return all texts found from the still image. With an algorithm I wrote, the app will show the name it predicts on a text field to allow editing. Once the user confirms the name is correct and clicks send, the app will request a GET to SnailMail's backend developed by Genji to find the name given and send a Slack message.
+
 ### Tools Used
 - __UI/UX Programming Language__ - [Swift](https://swift.org/)
 - __Backend Programming Language__ - [Python](https://www.python.org/)
 - __API Framework__ - [Flask](https://www.fullstackpython.com/flask.html)
 - __Slack Bot__ - [SlackBot API](https://slack.com/help/articles/202026038-An-introduction-to-Slackbot)
 - __Database and Storage__ - [Firebase](https://firebase.google.com/)
-- __Text Recognizer Machine Learning Kit__ [Firebase/MLVision](https://firebase.google.com/docs/ml-kit/ios/recognize-text)
+- __Firebase's Text Recognizer__ [Firebase/VisionTextRecognizer](https://firebase.google.com/docs/ml-kit/ios/recognize-text)
 
 ### Demo 1: User exist
 - This demo shows how the app captures an image and using Machine Learning and name finder algorithm I wrote, displays the name found from the mail. It also shows a Slack message received with the address written on the mail.
