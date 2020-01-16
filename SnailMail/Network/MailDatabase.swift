@@ -98,9 +98,8 @@ func deleteAllMails(mails: [Mail], completion: @escaping(_ error: Error?) -> Voi
             if let error = error {
                 completion(error)
             }
+            completion(nil)
         }
-        UserDefaults.standard.removeObject(forKey: mail.objectId)
-        UserDefaults.standard.synchronize()
     }
 }
 
