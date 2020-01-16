@@ -58,18 +58,19 @@ func fetchMailWith(mailId: String, completion: @escaping (_ mail: Mail?) -> Void
 
 //MARK: Update Mail
 func updateMail(mail: Mail, withBlock: @escaping(_ error: Error?) -> Void) { //will pass a dictionary with an Any value, with running a background thread escaping, pass success type boolean, so we can return if user was updated successfully, no return here so void
-    if UserDefaults.standard.object(forKey: mail.objectId) != nil {
-        guard let mailDictionary: [String: Any] = mailToDictionary(mail: mail) as? [String : Any] else { print("update mail could not convert to dictionary"); return }
-        let ref = firDatabase.child(kMAIL).child(mail.objectId)
-        ref.updateChildValues(mailDictionary) { (error, ref) in
-            if let error = error {
-                withBlock(error)
-            }
-            UserDefaults.standard.set(mailDictionary, forKey: mail.objectId) //update our user in our UserDefaults because save might create a new instance of it
-            UserDefaults.standard.synchronize()
-            withBlock(nil)
+//    if UserDefaults.standard.object(forKey: mail.objectId) != nil {
+//        guard let mailDictionary: [String: Any] = mailToDictionary(mail: mail) as? [String : Any] else { print("update mail could not convert to dictionary"); return }
+    guard let mailDictionary: [String: Any] = mailToDictionary(mail: mail) as? [String : Any] else { print("update mail could not convert to dictionary"); return }
+    let ref = firDatabase.child(kMAIL).child(mail.objectId)
+    ref.updateChildValues(mailDictionary) { (error, ref) in
+        if let error = error {
+            withBlock(error)
         }
+        UserDefaults.standard.set(mailDictionary, forKey: mail.objectId) //update our user in our UserDefaults because save might create a new instance of it
+        UserDefaults.standard.synchronize()
+        withBlock(nil)
     }
+//    }
 }
 
 //MARK: Mail Delete
