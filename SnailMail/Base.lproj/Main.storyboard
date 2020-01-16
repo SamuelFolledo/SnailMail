@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yja-ZF-KDz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yja-ZF-KDz">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -219,7 +219,7 @@
                                                 <action selector="backButtonTapped:" destination="D81-v0-RsK" id="HD2-NT-Mnd"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" image="trash" catalog="system" id="pez-pT-3aY">
+                                        <barButtonItem key="rightBarButtonItem" title="Delete All" id="pez-pT-3aY">
                                             <connections>
                                                 <action selector="deleteAllButtonTapped:" destination="D81-v0-RsK" id="LPW-wp-IoK"/>
                                             </connections>
@@ -320,7 +320,6 @@
         <image name="scanned-text" width="654" height="999"/>
         <image name="share" width="40" height="56"/>
         <image name="snailMailLogo" width="1024" height="1024"/>
-        <image name="trash" catalog="system" width="60" height="64"/>
     </resources>
     <color key="tintColor" red="0.26010626549999999" green="0.39904129510000003" blue="0.69025290009999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
