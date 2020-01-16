@@ -263,37 +263,49 @@ extension ScannerVC: AVCapturePhotoCaptureDelegate {
             Service.presentAlert(on: self, title: "Error", message: error.localizedDescription)
         }
         if let dataImage = photo.fileDataRepresentation() {
-//            print(UIImage(data: dataImage)?.size as Any)
+            //            print(UIImage(data: dataImage)?.size as Any)
             let dataProvider = CGDataProvider(data: dataImage as CFData)
             let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImage.Orientation.right)
             let rotatedImage = image.rotate(radians: 0) //turn the image into .up for Firebase to scan it properly
-            displayDetectedText(image: rotatedImage!) { //scan the image's text
-                getImageURL(image: image) { (imageUrl, error) in //storage the image scanned
+            getDetectedText(image: rotatedImage!) { scannedText in //scan the image's text
+                
+                
+                //CORRECT FLOW: - this should be after getting scannedText, getMailName, then saveMail to Database, then store image to Storage, if there is error then delete the mail reference in database, remove observers.
+                
+                let mailNameAndAddress: (name:String, address: String) = self.getMailName(text: scannedText) //get the name from scannedText from image
+                self.scannedText = mailNameAndAddress.address //TEMPORARY ADDRESS Placeholder
+                let values: [String: Any] = [kNAME: mailNameAndAddress.name, kSCANNEDTEXT: mailNameAndAddress.address, kIMAGEURL: ""]
+                saveMail(values: values) { (mail, error) in //with mail's name, save mail
                     if let error = error {
-                        Service.presentAlert(on: self, title: "Error Storing Image", message: error.localizedDescription)
+                        Service.presentAlert(on: self, title: "Error", message: error)
                         self.cameraButton.isEnabled = true
                         return
                     }
-                    let mailNameAndAddress: (name:String, address: String) = self.getMailName(text: self.scannedText) //get the name from scannedText from image
-                    self.scannedText = mailNameAndAddress.address //TEMPORARY ADDRESS Placeholder
-                    let values: [String: Any] = [kNAME: mailNameAndAddress.name, kSCANNEDTEXT: self.scannedText, kIMAGEURL: imageUrl!]
-                    saveMail(values: values) { (mail, error) in //with mail's name, save mail
+                    guard let mail: Mail = mail else { return } //with mail, show popUp
+                    getImageURL(mail: mail, image: image) { (imageUrl, error) in //store the image scanned and get image url
                         if let error = error {
-                            Service.presentAlert(on: self, title: "Error", message: error)
+                            Service.presentAlert(on: self, title: "Error Storing Image", message: error.localizedDescription)
                             self.cameraButton.isEnabled = true
                             return
                         }
-                        guard let mail: Mail = mail else { return } //with mail, show popUp
-                        let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
-                        popUpVC.delegate = self
-                        popUpVC.mail = mail
-                        popUpVC.mailImage = image
-                        print("MAIL NAME = \(mail.name)")
-                        self.addChild(popUpVC)
-                        popUpVC.view.frame = self.view.frame
-                        self.view.addSubview(popUpVC.view)
-                        popUpVC.didMove(toParent: self)
+                        mail.imageUrl = imageUrl! //update
+                        updateMail(mail: mail) { (error) in
+                            if let error = error {
+                                Service.presentAlert(on: self, title: "Error Storing Image", message: error.localizedDescription)
+                                self.cameraButton.isEnabled = true
+                                return
+                            }
+                            let popUpVC: PopUpVC = UIStoryboard(name: "PopUp", bundle: nil).instantiateViewController(withIdentifier: "mailPopUpView") as! PopUpVC
+                            popUpVC.delegate = self
+                            popUpVC.mail = mail
+                            popUpVC.mailImage = image
+                            print("MAIL NAME = \(mail.name)")
+                            self.addChild(popUpVC)
+                            popUpVC.view.frame = self.view.frame
+                            self.view.addSubview(popUpVC.view)
+                            popUpVC.didMove(toParent: self)
+                        }
                     }
                 }
             }
