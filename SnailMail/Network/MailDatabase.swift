@@ -79,8 +79,8 @@ func deleteMail(mail: Mail, completion: @escaping(_ error: Error?) -> Void) { //
                 if let error = error {
                     completion(error)
                 }
-                deleteFromStorage(ref: mail.imageUrl) { (error) in //delete from Storage
-                    if let error = error {
+                deleteImageFromStorage(mail: mail) { (error) in //delete from Storage
+                    if let error = error {                        
                         completion(error)
                     }
                     UserDefaults.standard.removeObject(forKey: mail.objectId) //update our user in our UserDefaults because save might create a new instance of it
@@ -101,6 +101,18 @@ func deleteAllMails(mails: [Mail], completion: @escaping(_ error: Error?) -> Voi
         }
         UserDefaults.standard.removeObject(forKey: mail.objectId)
         UserDefaults.standard.synchronize()
+    }
+}
+
+//MARK: Storage - Delete Mail Images
+func deleteImageFromStorage(mail: Mail, compeletion: @escaping(_ error: Error?) -> Void) { //takes a reference and deletes a file/image from the Storage
+    let imageRef = Storage.storage().reference().child(kMAIL).child(kSHIPPINGLABEL).child("\(mail.objectId).jpg")
+    imageRef.delete { (error) in
+        if let error = error {
+            compeletion(error)
+        } else {
+            compeletion(nil)
+        }
     }
 }
 
