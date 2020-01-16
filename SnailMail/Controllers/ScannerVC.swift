@@ -327,9 +327,9 @@ extension ScannerVC: ScannerMailProtocol {
         print("updated mail's name to \(mail.name)")
         updateMail(mail: mail) { (error) in
             if let error = error {
-                Service.presentAlert(on: self, title: "Error", message: error.localizedDescription)
-                return
+                self.handleMailError(mail: mail, errorMessage: error.localizedDescription)
             }
+            self.mails[mail.objectId] = mail
             self.sendSlackMessage(mail: mail)
         }
     }
