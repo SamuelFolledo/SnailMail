@@ -15,7 +15,7 @@ class Mail {
     let updatedAt: Date
     let scannedText: String
     var name: String
-    let imageUrl: String
+    var imageUrl: String
     
     init(_objectId: String, _createdAt: Date, _updatedAt: Date, _scannedText: String, _name: String = "", _imageUrl: String) {
         objectId = _objectId
