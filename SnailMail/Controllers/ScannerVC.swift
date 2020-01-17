@@ -50,7 +50,7 @@ class ScannerVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMailsTableVC" {
             let vc: MailsTableVC = segue.destination as! MailsTableVC
-            let mailsArr: [Mail] = Array(mails.values)
+            let mailsArr: [Mail] = Array(mails.values).reversed() //reversed to put newest at the top
             vc.mails = mailsArr
         }
     }
@@ -206,7 +206,7 @@ class ScannerVC: UIViewController {
     
 //MARK: IBActions
     @IBAction func mailButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "toMailsTableVC", sender: mails)
+        performSegue(withIdentifier: "toMailsTableVC", sender: nil)
     }
     
     @IBAction func menuButtonTapped(_ sender: Any) {
