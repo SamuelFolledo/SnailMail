@@ -224,8 +224,10 @@ class ScannerVC: UIViewController {
         print("Mail name \(mail.name)")
         let streetAddressArray: [String] = mail.scannedText.byWords
         var addressURL: String = ""
-        if streetAddressArray[0] != "" && streetAddressArray[1] != "" && streetAddressArray[2] != "" {
-            addressURL = "&addy=\(streetAddressArray[0])%20\(streetAddressArray[1])%20\(streetAddressArray[2])"
+        if streetAddressArray.count > 2 {
+            if streetAddressArray[0] != "" && streetAddressArray[1] != "" && streetAddressArray[2] != "" {
+                addressURL = "&addy=\(streetAddressArray[0])%20\(streetAddressArray[1])%20\(streetAddressArray[2])"
+            }
         }
         print("STREET ADDRESS for URL = \(mail.scannedText)")
         let nameQueryString: String = "name=\(nameArr.first ?? "")%20\(nameArr.last ?? "")"
